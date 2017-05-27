@@ -9,6 +9,7 @@ A source file consists of, __in order__:
 1. Package Statement
 2. Import statements
 3. Exactly one top-level class
+
 Exactly __one blank line__ separates each section that is present
 ###		2.1 Import statements: No wildcard imports
 Wildcard imports __are not used__ .
