@@ -25,7 +25,7 @@ these appear sequentially, with no other code in between.
 Braces are not used with _if_ , _else_, _for_, _do_ and _while_ statements
 when the body is empty or contains a single statement
 ###			3.1.2 Nonempty blocks
-* Linebreak before the opening brace
+* No linebreak before the opening brace
 * Linebreak after the opening brace
 * Linebreak before the closing brace
 * Linebreak after the closing brace, _only if_ that brace terminates a statement,
@@ -33,18 +33,14 @@ or terminates the body of a method, constructor or named class. For example
 there is _no_ linebreak after the brace if it is followed by else.
 Example:
 ```java
-			public void MyClass
-			{
-				public void method()
-				{
+			public void MyClass{
+				public void method(){
 					if (condition()){
 						try{
 							something();
-						}catch (ProblemException e)
-						{
+						}catch (ProblemException e){
 							recover();
-					}else
-					{
+					}else{
 						lastThing();
 					}
 				}
