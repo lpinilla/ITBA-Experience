@@ -6,9 +6,9 @@ The source file name consists of the case-sensitive name of the top-level class 
 (of which there is exactly one), plus the .java extension.
 ## 2. Source file structure
 A source file consists of, __in order__:
-	1. Package Statement
-	2. Import statements
-	3. Exactly one top-level class
+1. Package Statement
+2. Import statements
+3. Exactly one top-level class
 Exactly __one blank line__ separates each section that is present
 ###		2.1 Import statements: No wildcard imports
 Wildcard imports __are not used__ .
