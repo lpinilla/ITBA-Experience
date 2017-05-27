@@ -58,11 +58,13 @@ to both code and comments throughout the block.
 Each statement is followed by a linebreak
 ###		3.4 Column limit: 80
 Code has a column limit of 80 characters, except in the cases of package and import statements.
-###		3.5 Whitespace
-###			3.5.1 Vertical Whitespace
+###		3.5 Lines limit per method: 20
+Every method must have less than 20 lines.
+###		3.6 Whitespace
+###			3.6.1 Vertical Whitespace
 A single blank line appears between different types of blocks: 
 Variables definition, static methods, instance methods.
-###			3.5.2 Horizontal whitespace
+###			3.6.2 Horizontal whitespace
 A single ASCII space appears when:
 1. Separating any reserved word such as _if_, _for_ or _catch_
 	from an open parenthesis on that line
@@ -71,8 +73,8 @@ A single ASCII space appears when:
 3. On both sides of any binary or ternary opeartor.
 4. On both sides of the double slash ( // ) that begins and end-of-line comment.
 5. Between the type and variable of a declaration
-###		3.6 Specific constructs
-###			3.6.1 Variable declarations
+###		3.7 Specific constructs
+###			3.7.1 Variable declarations
 Every variable declaration declares only one variable: declarations such as _int a, b;_ are not used.
 ##	4. Naming
 ###		4.1. Rules common to all identifiers
