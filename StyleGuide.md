@@ -64,7 +64,7 @@ A single blank line appears between different types of blocks:
 Variables definition, static methods, instance methods.
 ###			3.5.2 Horizontal whitespace
 A single ASCII space appears when:
-1. Separating any reserved word such asif, for or catch 
+1. Separating any reserved word such as _if_, _for_ or _catch_
 	from an open parenthesis on that line
 2. Separating any reserved word, such as else or catch, 
 	from a closing curly brace that precedes it on that line.
