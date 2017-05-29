@@ -82,7 +82,7 @@ Package names are all lowercase, with consecutive words simply concatenated toge
 Class names are written in **UpperCamelCase**. Test classes are named starting with the name of the
 class they are testing, and ending with Test.
 ###			4.2.3 Method names
-Method names are written in **lowerCamelCase**
+Method names are written in **lowerCamelCase**. Test methods are named starting with what its testing and ending with Test. 
 ###			4.2.4 Constant names
 Constant names use CONSTANT_CASE : all uppercase letters, with words separated by underscores.
 ###			4.2.5 Non-constant field names
