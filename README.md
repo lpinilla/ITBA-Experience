@@ -1,15 +1,7 @@
 # ITBA-Experience
-Trabajo Práctico de POO: Juego estilo RPG ambientado en el ITBA
+  ITBA Experience: Hell Week is an RPG styled game set in college (Specifically in Instituto Tecnológico de Buenos Aires-ITBA) done for a college project. Our goal was to create a game in Java using the Object Oriented paradigm.
 
-El objetivo del Trabajo Práctico es que nos evalúen la modelización del juego sobre el paradigma orientado a objetos.
+  The main character is a student trying to survive a week full of exams, in which they have to _fight_ against the professors
+of each subject in order to pass them.
 
-El juego es del género RPG y pretende ser ambientado en el ITBA. Los propios alumnos los protagonistas de la
-historia que tomaría su lugar en la semana de parciales, teniendo que preparase que rendir (batallar) contra los
-profesores de las materias que cursan.
-
-El sistema de combate se asemeja al que tiene la saga de juegos de Final Fantasy, en la que, un "equipo" (alumnos)
-lucha contra otro(profesores) en turnos. En cada turno cada integrante del grupo tendrá la opción de usar cada una
-de sus habilidades (si las tiene).
-
-Para finalizar, el juego también va a contener un simple sistema de inventario y un sistema de progresión de los
-personajes principales.
+  The battle system is similar to the Final Fantasy saga, where a _party_ (the alumni) fights against another (professors) in a turned based fight. In each turn, every member of the party will be able to use one of his special abilities (if he has any).
