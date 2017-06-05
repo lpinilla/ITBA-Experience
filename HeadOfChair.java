@@ -1,7 +1,9 @@
 package model;
+import java.util.Collection;
 
-public class Professor extends Enemy {
-	private float rewardExp;
+public class HeadOfChair extends Enemy {
+	Collection<Professor> party;
+	Ability specialAbility;
 	private int hp;
     private int currentHp;
     private int willPower;
@@ -9,19 +11,18 @@ public class Professor extends Enemy {
     private int attack;
     private int defense;
     private int level;
-    
-    
-    public Professor(int hp, int willPower, int attack, int defense, float rewardExp)
-    {
-    	this.hp = hp;
-        currentHp = hp;
-        this.willPower = willPower;
-        currentWillPower = willPower;
-        this.attack = attack;
-        this.defense = defense;
-        this.rewardExp = rewardExp;
-    }
-    public int getHp(){
+
+	public HeadOfChair(Ability specialAbility, int hp, int willPower, int attack, int defense, int level){
+	    this.hp = hp;
+	    this.currentHp = hp;
+	    this.willPower = willPower;
+	    currentWillPower = willPower;
+	    this.attack = attack;
+	    this.defense = defense;
+	    this.level = level;
+	    this.specialAbility = specialAbilty;
+	}
+	public int getHp(){
         return hp;
     }
 
@@ -103,4 +104,8 @@ public class Professor extends Enemy {
     	return rewardExp;
     }
     
+    public Ability getSpecialAbility(){
+    	return specialAbility;
+    }
 }
+

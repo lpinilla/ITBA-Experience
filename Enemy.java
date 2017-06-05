@@ -1,6 +1,6 @@
 package model;
 
-public class Professor extends Enemy {
+public abstract class Enemy extends Fighter{
 	private float rewardExp;
 	private int hp;
     private int currentHp;
@@ -9,18 +9,17 @@ public class Professor extends Enemy {
     private int attack;
     private int defense;
     private int level;
-    
-    
-    public Professor(int hp, int willPower, int attack, int defense, float rewardExp)
-    {
-    	this.hp = hp;
-        currentHp = hp;
-        this.willPower = willPower;
-        currentWillPower = willPower;
-        this.attack = attack;
-        this.defense = defense;
-        this.rewardExp = rewardExp;
-    }
+
+    public Enemy(int hp, int willPower, int attack, int defense, float rewardExp)
+	{
+		this.hp = hp;
+    	currentHp = hp;
+    	this.willPower = willPower;
+    	currentWillPower = willPower;
+    	this.attack = attack;
+    	this.defense = defense;
+    	this.rewardExp = rewardExp;
+	}
     public int getHp(){
         return hp;
     }
@@ -28,6 +27,7 @@ public class Professor extends Enemy {
     public void setHp(int value){
         if(value < getHp())
             throw new InvalidHpValueException("El valor deberia ser mayor al hp."); 
+            //Podríamos hacer InvalidValueException para que sea más gral y podamos reutilizarla (*)
         else {
             hp = value;
             setCurrentHp(value);
@@ -61,6 +61,7 @@ public class Professor extends Enemy {
     public void setWillPower(int value){
         if(value < getWillPower())
             throw new InvalidWillPowerValueException("El valor deberia ser mayor al willPower.");
+            //(*)Acá lo podríamos reutilizar por ejemplo
         else {
             willPower = value;
             setCurrentWillPower(value);
@@ -95,6 +96,7 @@ public class Professor extends Enemy {
             defense = value;
     }
 
+    //falta testear cuando se implemente en el levelUp
     public boolean isKnockedDown(){
         return getCurrentHp() == 0;
     }
@@ -102,5 +104,4 @@ public class Professor extends Enemy {
     public float getRewardExpirience(){
     	return rewardExp;
     }
-    
 }
