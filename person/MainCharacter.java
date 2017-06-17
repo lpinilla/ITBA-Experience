@@ -61,9 +61,6 @@ public class MainCharacter extends Hero{
         party.add(h);
     }
     
-    public void addMeToParty(){
-    	party.add(this);
-    }
 
     /**
      * Adds a new special ability for the MainCharacter to use

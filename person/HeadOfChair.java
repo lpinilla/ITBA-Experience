@@ -55,9 +55,6 @@ public class HeadOfChair extends Enemy {
         party.add(prof);
     }
     
-    public void addMeToParty(){
-    	party.add(this);
-    }
 
     public CircularList<Enemy> getParty() {
         return party;
