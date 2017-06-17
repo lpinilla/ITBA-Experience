@@ -1,3 +1,7 @@
+/**
+* @autor: lpinilla
+*/
+
 public class Model{
 
 	private ViewController vc;
@@ -20,20 +24,31 @@ public class Model{
 		this.br = null;
 	}
 
+	
 	public void setUpViewController(ViewController vc){
 		this.vc = vc;
 	}
 
+	/**
+	* Method to start the factory that creates all the People
+	*/
 	public void activatePersonFactory(){
 		PersonFactory pFactory = new PersonFactory();
 		pFactory.generatePeople(persons);
 	}
-
+	
+	/**
+	* Method to start the factory that creates all the Abilities
+	*/
 	public void activateAbilityFactory(){
 		AbilityFactory aFactory = new AbilityFactory();
 		aFactory.generateAbilities(abilities);
 	}
 
+	/**
+	* This method was created so that the MainCharacter and
+	* the HeadOfChair could be added to their own partys
+	*/
 	public void setUpParties(){
 		Person mainC = getPersonByClass(MainCharacter, 0);
 		mainC.addHeroToParty(mainC);
@@ -43,6 +58,13 @@ public class Model{
 		}
 	}
 
+	/*
+	* This method is an auxiliary method used by the method above
+	* so that it can find a Person given its Class
+	* @param class: class of the Person
+	* @ignoreNumber: The number of People it has to ignore if
+	* there are multiple instances of a same class
+	*/
 	private Person getPersonByClass(Class class, int ignoreNumber){
 		int auxIgnore = 0;
 		for(Person p : persons){
@@ -64,15 +86,23 @@ public class Model{
 		return this.combatsWon;
 	}
 
+	/*
+	* Method that assigns the file where the Maps are stored
+	* @param f, The FileReader given by the Game
+	*/
 	public void loadMaps(FileReader f){
 		this.mapsFile(f);
-		this.br = new BufferedReader(f);
+		this.br = new BufferedReader(mapsFile);
 	}
 
+	/*
+	* Method that reads how many maps are in the file and calls
+	* that many times a method to read a Map from the file
+	*/
 	public void generateMaps(){
 		Integer mapCount;
 		try{
-			mapCount = Integer.valueOf(br.readLine()); //cantidad de mapas en el archivo
+			mapCount = Integer.valueOf(br.readLine());
 			for(int i = 0; i < mapCount; i++){
 				readMap(br);								
 			}
@@ -81,6 +111,12 @@ public class Model{
 		}
 	}
 
+	/*
+	* Method that reads the map from the file and creates
+	* the rawData of them and calls the MapHandler to create
+	* the maps, finally it stores the rawData in the Map
+	* @param br: BufferredReader given by the method above
+	*/
 	private void readMap(BufferedReader br){
 		String mapName = br.readLine();
 		int width = br.readLine();		
