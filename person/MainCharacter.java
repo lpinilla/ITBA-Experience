@@ -1,15 +1,12 @@
 package person;
 
 import map.Position2D;
-import org.w3c.dom.css.CSSImportRule;
 
 import java.util.LinkedList;
 
 public class MainCharacter extends Hero{
-
-
-
-    public static final int PARTY_MAX = 5;
+    
+    public static final int PARTY_MAX = 3;
 
     private CircularList<Hero> party;
     private LinkedList<Abilities> specialAbilities;
@@ -38,7 +35,7 @@ public class MainCharacter extends Hero{
      * @return boolean, true or false.
      */
     public Boolean isPartyFull() {
-        return party.size() == PARTY_MAX; // tiene que compararse con una constante, que va a ser 3 --> 3 o 5?
+        return party.size() == PARTY_MAX;
     }
 
     /**
