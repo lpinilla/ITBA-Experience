@@ -1,7 +1,6 @@
 package combat;
 
 import person.*;
-
 import java.util.ArrayList;
 
 /**
@@ -65,8 +64,6 @@ public class Combat {
 		return this.hoc;
 	}
 
-	//al methods below are not tested
-
 	/**
 	 * MainCharacter or a hero in his party attacks an enemy
 	 * @param h the one attacking
@@ -88,7 +85,7 @@ public class Combat {
 	}
 
 	// ??
-	public void partyAbility(Fighter f, Abilities a) { //TODO
+	public void partyAbility(Fighter f, PartyAbilitie a) { //TODO
 		Fighter fig;
 		if (playerTurn) { //medio imperativo, es para saber sobre que party se efectua
 			for (int i = 0; i < this.mc.getPartySize(); i++) {
