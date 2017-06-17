@@ -1,0 +1,12 @@
+1
+mapa principal 
+3
+2
+101
+011
+pasillo
+3
+3
+111
+101
+111
