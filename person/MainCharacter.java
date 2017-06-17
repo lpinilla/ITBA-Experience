@@ -1,3 +1,4 @@
+
 package person;
 
 import map.Position2D;
@@ -59,6 +60,10 @@ public class MainCharacter extends Hero{
         if (isPartyFull()) throw new FullPartyException("Your party is full, can't add");
         party.add(h);
     }
+    
+    public void addMeToParty(){
+    	party.add(this);
+    }
 
     /**
      * Adds a new special ability for the MainCharacter to use
@@ -93,5 +98,4 @@ public class MainCharacter extends Hero{
             partyIndex=0;
         return party.get(partyIndex++);
     }
-
 }

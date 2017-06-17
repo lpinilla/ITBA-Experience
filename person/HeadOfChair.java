@@ -29,7 +29,7 @@ public class HeadOfChair extends Enemy {
 
         super(name, hp, willPower, attack, defense, position, type, level, rewardExp);
         this.specialAbility = specialAbility;
-        party = new CircularList<>();
+        party = new CircularList<Enemy>();
         partyIndex=0;
     }
 
@@ -54,7 +54,10 @@ public class HeadOfChair extends Enemy {
         if (isPartyFull()) throw new FullPartyException("Party full, can't add");
         party.add(prof);
     }
-
+    
+    public void addMeToParty(){
+    	party.add(this);
+    }
 
     public CircularList<Enemy> getParty() {
         return party;

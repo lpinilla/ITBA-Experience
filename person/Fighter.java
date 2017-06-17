@@ -130,8 +130,8 @@ public class Fighter extends Person {
     }
 
     public void modifyCurrentWillPower(int value){
-        if(currentWillPower + value <= 0)
-            currentWillPower = 0; //debería tirar un "You don't have enough willpower"
+        if(currentWillPower + value < 0)
+            throw new NotEnoughWillPowerException("No hay suficiente Will Power");
         else if(currentWillPower + value >= willPower)
             currentWillPower = willPower;
         else
