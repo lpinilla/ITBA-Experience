@@ -10,7 +10,6 @@ public class Combat {
 	private MainCharacter mc;
 	private HeadOfChair hoc; //si hacemos alumnos, se cambia aca
 	private boolean playerTurn, combatActive;
-	private int heroePartyIndex, enemyPartyIndex;
 
 	/**
 	 * Creates a new Combat between mainC and HoC
@@ -20,7 +19,6 @@ public class Combat {
 	public Combat(MainCharacter mainC, HeadOfChair hoc) {
 		this.mc = mainC;
 		this.hoc = hoc;
-		heroePartyIndex = enemyPartyIndex = 0;
 		this.playerTurn = combatActive = true;
 	}
 
@@ -70,7 +68,7 @@ public class Combat {
 	 * @param e the one getting attacked
 	 * @param a ability being used
 	 */
-	public void playerAttack(Hero h, Enemy e, Abilities a) {
+	public void playerAttack(Hero h, Enemy e, Ability a) {
 		e.receiveDamage(a.getDamage()); // o hacemos e.recieveDamage(h,a)?
 		h.modifyCurrentWillPower(-a.getWillCost());
 	}
@@ -85,7 +83,7 @@ public class Combat {
 	}
 
 	// ??
-	public void partyAbility(Fighter f, PartyAbilitie a) { //TODO
+	public void partyAbility(Fighter f, PartyAbility a) { //TODO
 		Fighter fig;
 		if (playerTurn) { //medio imperativo, es para saber sobre que party se efectua
 			for (int i = 0; i < this.mc.getPartySize(); i++) {
