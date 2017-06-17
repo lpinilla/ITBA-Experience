@@ -1,3 +1,9 @@
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.util.HashMap;
+import java.util.ArrayList;
+
 /**
 * @autor: lpinilla
 */
@@ -6,17 +12,17 @@ public class Model{
 
 	private ViewController vc;
 	private MapHandler mh;
-	private Map<String, Integer[][]> mapsRawData;
+	private HashMap<String, Integer[][]> mapsRawData;
 	private ArrayList<Person> persons;
 	private ArrayList<Ability> abilities;
 	private int combatsWon;
 	private FileReader mapsFile;
 	BufferedReader br;
 
-	public class Model(){
+	public Model(){
 		this.vc = null;
 		this.mh = new MapHandler();
-		this.mapsRawData = new HashMap<String, int[][]>();
+		this.mapsRawData = new HashMap<String, Integer[][]>();
 		this.combatsWon = 0;
 		this.persons = new ArrayList<Person>();
 		this.abilities = new ArrayList<Ability>();
@@ -65,10 +71,10 @@ public class Model{
 	* @ignoreNumber: The number of People it has to ignore if
 	* there are multiple instances of a same class
 	*/
-	private Person getPersonByClass(Class class, int ignoreNumber){
+	private Person getPersonByClass(Class objClass, int ignoreNumber){
 		int auxIgnore = 0;
 		for(Person p : persons){
-			if(p.getClass() == class){
+			if(p.getClass() == objClass.class){
 				if(auxIgnore == ignoreNumber){
 					return p;				
 				}else{
@@ -91,7 +97,7 @@ public class Model{
 	* @param f, The FileReader given by the Game
 	*/
 	public void loadMaps(FileReader f){
-		this.mapsFile(f);
+		this.mapsFile = f;
 		this.br = new BufferedReader(mapsFile);
 	}
 
@@ -119,8 +125,8 @@ public class Model{
 	*/
 	private void readMap(BufferedReader br){
 		String mapName = br.readLine();
-		int width = br.readLine();		
-		int height = br.readLine();
+		Integer width = Integer.valueOf(br.readLine());		
+		Integer height = Integer.valueOf(br.readLine());
 		char c; // \n
 		Integer[][] mapRawData = new Integer[width][height];
 		for(int i = 0; i < height; i++){
