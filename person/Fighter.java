@@ -2,6 +2,7 @@ package person;
 
 import map.Position2D;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 
 /**

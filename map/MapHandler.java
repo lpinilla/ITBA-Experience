@@ -32,13 +32,13 @@ public class MapHandler {
     * @param width
     * @param mapData: array of ints that indicate what object has to be
     * created in that specific position.
-    * @throws InvalidArgumentException if mapData is null or height or 
+    * @throws IllegalArgumentException if mapData is null or height or
     * width are 0
     */
     public void createParticularMap(String name, int height,
-                                    int width, int[][] mapData) throws IllegalArgumentException{
+                                    int width, Integer[][] mapData) throws IllegalArgumentException{
         if(mapData == null || name == null || height == 0 || width == 0){
-            throws new IllegalArgumentException();   
+            throw new IllegalArgumentException();
         }
         GameMap map = new GameMap(name, height, width);
         for(int i = 0; i < map.getHeight(); i++){ //era al revez height y width?
@@ -80,7 +80,7 @@ public class MapHandler {
     public void removeMaps(ArrayList<String> mapNames) throws RuntimeException{ //cambiar
         if(!isEmpty()){
             for(int i = 0; i < mapNames.size(); i++){
-                if(!maps.containsKey(mapNames[i])){
+                if(!maps.containsKey(mapNames.get(i))){
                     throw new RuntimeException("No such map in the Collection"); //crear nueva excepcion?
                 }else{
                     maps.remove(mapNames.get(i));
@@ -100,11 +100,11 @@ public class MapHandler {
      * Changes current working map
      * @param mapName
      */
-    public void setCurrentMap(String name) throws IllegalArgumentException{
-        if(name == null || !maps.containsKey(name)){
+    public void setCurrentMap(String mapName) throws IllegalArgumentException{
+        if(mapName == null || !maps.containsKey(mapName)){
             throw new IllegalArgumentException();   
         }
-        this.currentMap = this.maps.get(name);
+        this.currentMap = this.maps.get(mapName);
     }
 
     public int getSize(){

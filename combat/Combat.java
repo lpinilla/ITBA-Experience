@@ -68,9 +68,9 @@ public class Combat {
 	 * @param f2 the one being attacked
 	 * @param a ability being used
 	 */	
-	public void fighterAttack(Fighter f1, Fighter f2, Ability a){
-		f1.attackTo(f2);
+	public void fighterAttack(Fighter f1, Fighter f2, Abilities a){
 		f1.modifyCurrentWillPower(-a.getWillCost());
+		f1.attackTo(f2, a.getDamage());
 	}
 	
 
@@ -84,7 +84,7 @@ public class Combat {
 	}
 
 	// ??
-	public void partyAbility(Fighter f, PartyAbility a) { //TODO
+	public void partyAbility(Fighter f, MultiTargetAbility a) { //TODO
 		Fighter fig;
 		if (playerTurn) { //medio imperativo, es para saber sobre que party se efectua
 			for (int i = 0; i < this.mc.getPartySize(); i++) {
