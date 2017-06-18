@@ -27,7 +27,7 @@ public class Position2D {
     }
 
     public int hashCode(){
-        return (int)Math.pow(2, getX()) + (int)Math.pow(3, getY());
+        return (int)Math.pow(2, getX()) * (int)Math.pow(3, getY());
     }
 
     public boolean equals(Object o){
