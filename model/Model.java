@@ -20,19 +20,40 @@ public class Model{
 	private HashMap<String, Integer[][]> mapsRawData;
 	private ArrayList<Person> persons;
 	private ArrayList<Abilities> abilities;
-	private int combatsWon;
+	private boolean[] bossWon;
 	private FileReader mapsFile;
-	BufferedReader br;
+	private BufferedReader br;
 
 	public Model(){
 		this.vc = null;
 		this.mh = new MapHandler();
 		this.mapsRawData = new HashMap<String, Integer[][]>();
-		this.combatsWon = 0;
 		this.persons = new ArrayList<Person>();
 		this.abilities = new ArrayList<Abilities>();
 		this.mapsFile = null;
 		this.br = null;
+		this.bossWon = new boolean[] { false, false, false};
+	}
+
+	public Model(MainCharacter mc,  boolean[] bossWon, String currentMap){
+		this.vc = null;
+		this.mh = new MapHandler();
+		this.mapsRawData = new HashMap<String, Integer[][]>();		
+		this.persons = new ArrayList<Person>();
+		replaceMainC(mc);
+		this.abilities = new ArrayList<Abilities>();
+		this.mapsFile = null;
+		this.br = null;
+		this.bossWon = bossWon;
+		mh.setCurrentMap(currentMap);
+	}
+
+	private void replaceMainC(MainCharacter mc){
+		for( Person p : this.persons){
+			if(p.equals(mc)){
+				p = mc;
+			}
+		}
 	}
 
 	
@@ -87,15 +108,11 @@ public class Model{
 				}			
 			}
 		}
-		throw new PersonNotFoundException("Person of said class was not found");
+		throw new PersonNotFoundException("Person of given class was not found");
 	}
 
-	public void winCombat(){
-		this.combatsWon++;
-	}
-
-	public int getCombatsWon(){
-		return this.combatsWon;
+	public boolean[] getBossWon(){
+		return this.bossWon;
 	}
 
 	/*
@@ -146,6 +163,10 @@ public class Model{
 		}
 		mh.createParticularMap(mapName, height, width, mapRawData);
 		mapsRawData.put(mapName, mapRawData);
+	}
+
+	public MapHandler getMapHandler(){
+		return this.mh;
 	}
 
 
