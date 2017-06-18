@@ -61,12 +61,14 @@ public class CombatTest {
 	@Test
 	//ver si el primer parametro de combate es el Main Character -> siempre va a ser el MainCharacter, test necesario?
 	public void isMainCharacterTest() {
-		assertEquals(this.combat.getPlayer().getClass(), mc.getClass());
+		assertEquals(this.combat.getMainCharacter().getClass(),
+				mc.getClass());
 	}
 
 	@Test //por ahora solo se pelean con HOC
 	public void isHeadOfChairTest() {
-		assertEquals(combat.getEnemy().getClass(), hoc.getClass());
+		assertEquals(combat.getHeadOfChair().getClass(),
+				hoc.getClass());
 	}
 
 	@Test
@@ -95,8 +97,8 @@ public class CombatTest {
 
 	@Test //copy del test de arriba
 	public void willPowerCostTest() { //player tiene que heredar de heroe
-		hr = this.combat.getPlayer().getHero();
-		pf = this.combat.getEnemy().getEnemy();
+		hr = this.combat.getMainCharacter().getHero();
+		pf = this.combat.getHeadOfChair().getEnemy();
 		combat.fighterAttack(hr, pf);
 		assertEquals(50, hr.getWillPower() - hr.getCurrentWillPower());
 	}
@@ -121,7 +123,7 @@ public class CombatTest {
 		hr = this.combat.getNextHero(); //agarrar al primer heroe
 		hr = this.combat.getNextHero(); //agarrar al segundo heroe
 		hr = this.combat.getNextHero(); //agarrar al player de nuevo
-		assertTrue(hr.equals(combat.getPlayer()));
+		assertTrue(hr.equals(combat.getMainCharacter()));
 	}
 
 	@Test
@@ -130,7 +132,7 @@ public class CombatTest {
 		pf = this.combat.getNextSubEnemy(); //agarrar al primer subEnemy(Professor)
 		pf = this.combat.getNextSubEnemy(); //agarrar al segundo subEnemy
 		pf = this.combat.getNextSubEnemy(); //agarrar al enemy de nuevo
-		assertTrue(pf.equals(combat.getEnemy()));
+		assertTrue(pf.equals(combat.getHeadOfChair()));
 	}
 
 	@Test
@@ -141,14 +143,14 @@ public class CombatTest {
 	@Test
 	public void attackDoesntKnockOutTest() {
 		hr = this.combat.getNextHero();
-		pf = this.combat.getEnemy().getEnemy();
+		pf = this.combat.getHeadOfChair().getEnemy();
 		combat.fighterAttack(hr, pf);
 		assertEquals(50, pf.getHP() - pf.getCurrentHP());
 	}
 
 	@Test
 	public void attackKnocksOutTest(){
-		pf = this.combat.getEnemy().getEnemy();
+		pf = this.combat.getHeadOfChair().getEnemy();
 		Abilities miscAbility2 = new SingleTargetAbility("Testing",pf.getHP(),50,2);
 		mc = new MainCharacter("lpinilla", INITHP, INITWP, 20, 20,
 				new Position2D(0, 0), new Type("CS"), miscAbility2);
@@ -160,8 +162,8 @@ public class CombatTest {
 
 	@Test
 	public void DamagedFighterHealTest(){
-		hr = this.combat.getPlayer().getHero();
-		pf = this.combat.getEnemy().getEnemy();
+		hr = this.combat.getMainCharacter().getHero();
+		pf = this.combat.getHeadOfChair().getEnemy();
 		combat.fighterAttack(hr, pf);
 
 		combat.fighterHeal(hr, hr.getAbility().getDamage());

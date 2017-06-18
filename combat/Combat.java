@@ -68,15 +68,24 @@ public class Combat {
 	 * Method to link the attack from one Fighter to another
 	 * @param f1 the one attacking
 	 * @param f2 the one being attacked
-	 * @param a ability being used
 	 */	
-	public void fighterAttack(Fighter f1, Fighter f2, Abilities a){
-		a.use(f1, f2);
+	public void fighterAttack(Fighter f1, Fighter f2){
+		f1.modifyCurrentWillPower(-f1.getAbility().getWillCost());
+		f1.attackTo(f2, f1.getAbility().getDamage());
 	}
-	public void fighterAttack(Fighter f1, CircularList<Fighter> f2, Abilities a) { //TODO
-		a.use(f1, f2);
+
+	/**
+	 * How the AI chooses who to attack
+	 * @param e1 Who is attacking
+	 * @param heroParty
+	 */
+	public void AiAttack(Enemy e1, ArrayList<Fighter> heroParty){
+		int index=(int)(Math.random() * (heroParty.size()));
+		//número de 0 a heroParty.size() sin incluir
+
+		e1.attackTo(heroParty.get(index), e1.getAbility().getDamage());
+
 	}
-	
 	/**
 	 * is called if an ally casts a spell to heal or drinks a potion
 	 * @param f fighter being healed
@@ -85,7 +94,6 @@ public class Combat {
 	public void fighterHeal(Fighter f, int amount) {
 		f.healCharacter(amount);
 	}
-	// ??
 
 	/**
 	 * Changes turn
