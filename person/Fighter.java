@@ -2,6 +2,9 @@ package person;
 
 import map.Position2D;
 
+import java.io.FileInputStream;
+import java.util.ArrayList;
+
 /**
  * @author ividaurreta, aizaguirre
  */
@@ -9,7 +12,6 @@ import map.Position2D;
 public class Fighter extends Person {
     public static final int MIN_ATTACK = 0;
     public static final int MIN_DEFENSE = 0;
-    public static final float EXP_PERCENTAGE = 0.25f;
     public static final int HP_PER_LEVEL = 200;
     public static final int WP_PER_LEVEL = 200;
     private int hp;
@@ -18,11 +20,9 @@ public class Fighter extends Person {
     private int currentWillPower;
     private int attack;
     private int defense;
-    private float exp;
-    private int level;
-    private float expToNextLevel;
     private Type type;
     private Position2D position;
+    private Abilities ability;
 
     /**
      * Creates a new character
@@ -34,9 +34,10 @@ public class Fighter extends Person {
      * @param defense   Defense damage
      * @param position  Determines character's position in the map
      * @param type      Character's type (Computer Science, Physics, Mathematics)
+     * @param ability   Fighter's attack
      */
     public Fighter(String name, int hp, int willPower, int attack, int defense
-            , Position2D position, Type type) {
+            , Position2D position, Type type, Abilities ability) {
         super(name);
         this.hp = hp;
         this.currentHP = hp;
@@ -44,11 +45,9 @@ public class Fighter extends Person {
         this.currentWillPower = willPower;
         this.attack = attack;
         this.defense = defense;
-        this.exp = 0.0f;
-        this.level = 1;
         this.type = type;
         this.position = position;
-        this.expToNextLevel = 1000;
+        this.ability = ability;
     }
 
 
@@ -171,57 +170,12 @@ public class Fighter extends Person {
             defense += value;
     }
 
-    public float getExp() {
-        return exp;
-    }
 
-    /**
-     * The character earns experience. If he gains enough, he levels up until
-     * he doesn't have enough to level up.
-     *
-     * @param exp
-     */
-    public void addExp(float exp) {
-        if(exp <= 0)
-            throw new InvalidValueException("No se puede ganar experiencia negativa o cero");
-        else {
-            this.exp += exp;
-            while (this.exp >= getExpToNextLevel()) {
-                levelUp();
-            }
-        }
-    }
 
-    /**
-     * Called by addExp: boosts Attack, Defense, willPower, HP and heals the character
-     */
-    private void levelUp() {
-        level++;
-        modifyAttack(10);
-        modifyDefense(10);
-        setWillPower(getWillPower() + WP_PER_LEVEL);
-        modifyCurrentWillPower(getWillPower());//WillPower fullfills after level up
-        setHP(getHP() + HP_PER_LEVEL);
-        modifyCurrentHP(getHP());//currentHP fullfils after level up
-        healCharacter(getHP());
-        setExpToNextLevel(getExpToNextLevel() + getExpToNextLevel() * EXP_PERCENTAGE);
 
-    }
-
-    public int getLevel() {
-        return level;
-    }
 
     public String getType() {
         return type.getName();
-    }
-
-    public float getExpToNextLevel() {
-        return expToNextLevel;
-    }
-
-    private void setExpToNextLevel(float expToNextLevel) {
-        this.expToNextLevel = expToNextLevel;
     }
 
     public boolean isKnockedOut() {
@@ -234,5 +188,13 @@ public class Fighter extends Person {
 
     public void setPosition(Position2D pos){
         position=pos;
+    }
+
+    public void attackTo(Fighter foe, int damage){
+        foe.receiveDamage(damage);
+    }
+
+    public Abilities getAbility(){
+        return ability;
     }
 }

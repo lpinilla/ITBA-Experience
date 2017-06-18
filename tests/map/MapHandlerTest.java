@@ -13,15 +13,15 @@ public class MapHandlerTest {
 
     private MapHandler dorasMap, foxMap; //I'm the map I'm the map..
     private GameMap smallRoom, inverseSmallRoom;
-    private int[][] smallRoomData, inverseSmallRoomData;
-    private ArrayList<int[][]> mapList;
+    private Integer[][] smallRoomData, inverseSmallRoomData;
+    private ArrayList<Integer[][]> mapList;
     private ArrayList<String> mapListNames;
 
     @Before
     public void before(){
         this.dorasMap = new MapHandler();
         this.foxMap = new MapHandler(); //to test multiple creation of maps
-        this.smallRoomData = inverseSmallRoomData = new int[3][3];
+        this.smallRoomData = inverseSmallRoomData = new Integer[3][3];
         //smallMap
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
@@ -47,7 +47,7 @@ public class MapHandlerTest {
         }
         this.dorasMap.createParticularMap("inverseSmallRoom", 3,
                 3, inverseSmallRoomData);
-        this.mapList = new ArrayList<int[][]>();
+        this.mapList = new ArrayList<Integer[][]>();
         this.mapListNames = new ArrayList<String>();
         this.mapList.add(smallRoomData);
         this.mapListNames.add("smallRoom");
@@ -55,7 +55,7 @@ public class MapHandlerTest {
         this.mapListNames.add("InverseSmallRoom");
 
 
-        this.foxMap.createMaps(this.mapList, this.mapListNames);
+        //this.foxMap.createMaps(this.mapList, this.mapListNames);
     }
 
     @Test
@@ -99,11 +99,12 @@ public class MapHandlerTest {
 
     @Test
     public void eraseSeveralMapsTest(){
-        ArrayList<String> names = new ArrayList<String>(); //esta mal ponerlo aca, no?
-        // Habra que hablarlo con agus porque la verdad que es muy borderline, yo no lo pondría acá
-        // pero a la vez inicializarlo para todos los tests cuando sólo lo usas en 1 es medio gede
+        ArrayList<String> names = new ArrayList<String>();
         names.add("smallRoom");
         names.add("inverseSmallRoom");
+        this.foxMap.createParticularMap("smallRoom", 3, 3, smallRoomData);
+        this.foxMap.createParticularMap("inverseSmallRoom",
+                3, 3, inverseSmallRoomData);
         this.foxMap.removeMaps(names);
         assertTrue(this.foxMap.isEmpty());
     }

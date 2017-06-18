@@ -1,3 +1,8 @@
+package model;
+import map.*;
+import person.*;
+
+
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -14,7 +19,7 @@ public class Model{
 	private MapHandler mh;
 	private HashMap<String, Integer[][]> mapsRawData;
 	private ArrayList<Person> persons;
-	private ArrayList<Ability> abilities;
+	private ArrayList<Abilities> abilities;
 	private int combatsWon;
 	private FileReader mapsFile;
 	BufferedReader br;
@@ -25,7 +30,7 @@ public class Model{
 		this.mapsRawData = new HashMap<String, Integer[][]>();
 		this.combatsWon = 0;
 		this.persons = new ArrayList<Person>();
-		this.abilities = new ArrayList<Ability>();
+		this.abilities = new ArrayList<Abilities>();
 		this.mapsFile = null;
 		this.br = null;
 	}
@@ -38,43 +43,43 @@ public class Model{
 	/**
 	* Method to start the factory that creates all the People
 	*/
-	public void activatePersonFactory(){
+/*	public void activatePersonFactory(){
 		PersonFactory pFactory = new PersonFactory();
 		pFactory.generatePeople(persons);
 	}
-	
+*/
 	/**
 	* Method to start the factory that creates all the Abilities
 	*/
-	public void activateAbilityFactory(){
+/*	public void activateAbilityFactory(){
 		AbilityFactory aFactory = new AbilityFactory();
 		aFactory.generateAbilities(abilities);
 	}
-
+*/
 	/**
 	* This method was created so that the MainCharacter and
 	* the HeadOfChair could be added to their own partys
 	*/
 	public void setUpParties(){
 		Person mainC = getPersonByClass("MainCharacter", 0);
-		mainC.addHeroToParty(mainC);
+		((MainCharacter)mainC).addHeroToParty((Hero)mainC);
 		for(int i = 0; i < 3; i++){
 			Person hoC = getPersonByClass("HeadOfChair", i);	
-			hoC.addProfessorToParty(hoC);
+			((HeadOfChair)mainC).addProfessorToParty((Enemy)hoC);
 		}
 	}
 
 	/*
 	* This method is an auxiliary method used by the method above
 	* so that it can find a Person given its Class
-	* @param class: class of the Person
-	* @ignoreNumber: The number of People it has to ignore if
+	* @param objClass: class of the Person
+	* @param ignoreNumber: The number of People it has to ignore if
 	* there are multiple instances of a same class
 	*/
 	private Person getPersonByClass(String objClass, int ignoreNumber){
 		int auxIgnore = 0;
 		for(Person p : persons){
-			if(p.getClass().toString == objClass){
+			if(p.getClass().toString() == objClass){
 				if(auxIgnore == ignoreNumber){
 					return p;				
 				}else{
@@ -82,6 +87,7 @@ public class Model{
 				}			
 			}
 		}
+		throw new PersonNotFoundException("Person of said class was not found");
 	}
 
 	public void winCombat(){
@@ -105,7 +111,7 @@ public class Model{
 	* Method that reads how many maps are in the file and calls
 	* that many times a method to read a Map from the file
 	*/
-	public void generateMaps(){
+	public void generateMaps() throws IOException {
 		Integer mapCount;
 		try{
 			mapCount = Integer.valueOf(br.readLine());
@@ -123,14 +129,17 @@ public class Model{
 	* the maps, finally it stores the rawData in the Map
 	* @param br: BufferredReader given by the method above
 	*/
-	private void readMap(BufferedReader br){
+	private void readMap(BufferedReader br) throws IOException {
 		String mapName = br.readLine();
-		Integer width = Integer.valueOf(br.readLine());		
+		Integer width = Integer.valueOf(br.readLine());
 		Integer height = Integer.valueOf(br.readLine());
 		char c; // \n
 		Integer[][] mapRawData = new Integer[width][height];
 		for(int i = 0; i < height; i++){
-			for(int j = 0; j < width; j++){ //se podria verificar si hay algun caracter no permitido
+			for(int j = 0; j < width; j++){
+				if(Character.isLetter(c = (char) br.read())){
+					throw new IOException("Game Data Corrupted");
+				}
 				mapRawData[i][j] = Integer.valueOf((char) br.read()) - '0';
 			}
 			c = (char) br.read();

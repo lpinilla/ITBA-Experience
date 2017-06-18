@@ -14,15 +14,16 @@ public class MainCharacterTest{
 
     @Before
     public void before(){
-        pj = new MainCharacter("Tomas",200, 300,
-                30, 40, new Position2D(0,0), new Type("CS"));
         ab = new SingleTargetAbility("Super smash",10, 200 ,1);
+        pj = new MainCharacter("Tomas",200, 300,
+                30, 40, new Position2D(0,0), new Type("CS"),ab);
+
     }
 
     @Test //Que no tire excepcion
     public void addingHeroToPartyTest(){
-        pj.addHeroToParty(new Hero("SuperHero", 200, 300,
-                40, 60, new Position2D(10,10), new Type("Physics")));
+        pj.addHeroToParty(new Hero("DiazStudent", 200, 300,
+                40, 60, new Position2D(10,10), new Type("Physics"), ab));
     }
 
     @Test(expected=WrongHeroException.class)
@@ -38,22 +39,14 @@ public class MainCharacterTest{
     @Test
     public void isPartyFullTrueTest(){
         Hero ch1 = new Hero("Ignacio", 200, 300,
-                30, 40, new Position2D(1,0), new Type("CS"));
+                30, 40, new Position2D(1,0), new Type("CS"), ab);
         Hero ch2 = new Hero("Lautaro", 200, 300,
-                30, 40, new Position2D(1,0), new Type("CS"));
+                30, 40, new Position2D(1,0), new Type("CS"), ab);
         Hero ch3 = new Hero("Matías", 200, 300,
-                30, 40, new Position2D(1,0), new Type("CS"));
-        Hero ch4 = new Hero("Agustín", 200, 300,
-                30, 40, new Position2D(1,0), new Type("CS"));
-        Hero ch5 = new Hero("RandomDude", 200, 300,
-                30, 40, new Position2D(1,0), new Type("CS"));
-
+                30, 40, new Position2D(1,0), new Type("CS"), ab);
         pj.addHeroToParty(ch1);
         pj.addHeroToParty(ch2);
         pj.addHeroToParty(ch3);
-        pj.addHeroToParty(ch4);
-        pj.addHeroToParty(ch5);
-
 
         assertEquals(true, pj.isPartyFull());
     }
@@ -94,7 +87,7 @@ public class MainCharacterTest{
     @Test
     public void removeHeroFromPartyValidTest(){
         Hero ch1 = new Hero("RandomDude", 200, 300,
-                30, 40, new Position2D(1,0), new Type("CS"));
+                30, 40, new Position2D(1,0), new Type("CS"), ab);
 
         pj.addHeroToParty(ch1);
     	assertEquals(true, pj.removeHeroFromParty(ch1));
@@ -102,7 +95,7 @@ public class MainCharacterTest{
     @Test
     public void removeHeroFromPartyInvalidTest(){
         Hero ch1 = new Hero("RandomDude", 200, 300,
-                30, 40, new Position2D(1,0), new Type("CS"));
+                30, 40, new Position2D(1,0), new Type("CS"), ab);
         assertEquals(false, pj.removeHeroFromParty(ch1));
 
     }

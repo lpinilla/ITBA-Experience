@@ -29,17 +29,25 @@ public class CombatTest {
 
 	@Before
 	public void before() {
-		mc = new MainCharacter("lpinilla", INITHP, INITWP, 20, 20, new Position2D(0, 0), new Type("CS"));
+		Abilities miscAbility = new SingleTargetAbility("Testing",50,50,2);
+		mc = new MainCharacter("lpinilla", INITHP, INITWP, 20, 20,
+				new Position2D(0, 0), new Type("CS"), miscAbility);
+
 		hoc = new HeadOfChair("sbermudez", INITHP, INITWP, 30, 30,
-				new Position2D(1, 0), new Type("CS"), 3, 500, null);
-		hr = new Hero("nacho",INITHP,INITWP,3,3,
-				new Position2D(0,0), new Type("cs"));
+				new Position2D(1, 0), new Type("CS"), 3, 500, miscAbility);
+		hr = new Hero("nacho",INITHP,INITWP,50,
+				3,
+				new Position2D(0,0), new Type("cs"), miscAbility);
+
 		hr2 = new Hero("agus",INITHP,INITWP,3,3,
-				new Position2D(0,0), new Type("cs"));
+				new Position2D(0,0), new Type("cs"), miscAbility);
+
 		pf = new Professor("Santi",INITHP,INITWP,3,3,
-				new Position2D(0,0), new Type("cs"),3,200);
+				new Position2D(0,0), new Type("cs"),3,200, miscAbility);
+
 		pf2 = new Professor("Augusto",INITHP,INITWP,3,3,
-				new Position2D(0,0), new Type("cs"),3,200);
+				new Position2D(0,0), new Type("cs"),3,200, miscAbility);
+
 		mc.addHeroToParty(mc); //Se agrega a sí mismo
 		mc.addHeroToParty(hr); //agrega a la party del MainCharacter
 		mc.addHeroToParty(hr2);
@@ -89,9 +97,8 @@ public class CombatTest {
 	public void willPowerCostTest() { //player tiene que heredar de heroe
 		hr = this.combat.getPlayer().getHero();
 		pf = this.combat.getEnemy().getEnemy();
-		combat.playerAttack(hr, pf, new SingleTargetAbility("Bola de sabiduria", 20,
-				20, 11));
-		assertEquals(20, hr.getWillPower() - hr.getCurrentWillPower());
+		combat.fighterAttack(hr, pf);
+		assertEquals(50, hr.getWillPower() - hr.getCurrentWillPower());
 	}
 
 	@Test
@@ -133,19 +140,20 @@ public class CombatTest {
 
 	@Test
 	public void attackDoesntKnockOutTest() {
-		hr = this.combat.getPlayer().getHero();
+		hr = this.combat.getNextHero();
 		pf = this.combat.getEnemy().getEnemy();
-		combat.playerAttack(hr, pf, new SingleTargetAbility("Bola de sabiduria", INITHP - 50,
-				200, 11));
+		combat.fighterAttack(hr, pf);
 		assertEquals(50, pf.getHP() - pf.getCurrentHP());
 	}
 
 	@Test
 	public void attackKnocksOutTest(){
-		hr = this.combat.getPlayer().getHero();
 		pf = this.combat.getEnemy().getEnemy();
-		combat.playerAttack(hr, pf, new SingleTargetAbility("Bola de sabiduria", INITHP + 20,
-				200, 11));
+		Abilities miscAbility2 = new SingleTargetAbility("Testing",pf.getHP(),50,2);
+		mc = new MainCharacter("lpinilla", INITHP, INITWP, 20, 20,
+				new Position2D(0, 0), new Type("CS"), miscAbility2);
+
+		combat.fighterAttack(mc, pf);
 		assertEquals(0, pf.getCurrentHP());
 
 	}
@@ -154,11 +162,9 @@ public class CombatTest {
 	public void DamagedFighterHealTest(){
 		hr = this.combat.getPlayer().getHero();
 		pf = this.combat.getEnemy().getEnemy();
-		combat.playerAttack(hr, pf, new SingleTargetAbility("Bola de sabiduria", INITHP - 50,
-				200, 11));
-		assertEquals(50, pf.getHP() - pf.getCurrentHP());
+		combat.fighterAttack(hr, pf);
 
-		combat.fighterHeal(hr, 50);
+		combat.fighterHeal(hr, hr.getAbility().getDamage());
 		assertEquals(hr.getHP(),hr.getCurrentHP());
 
 	}

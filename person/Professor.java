@@ -18,8 +18,8 @@ public class Professor extends Enemy {
      */
     public Professor(String name, int hp, int willPower,
                        int attack, int defense, Position2D position,
-                       Type type, int level, float rewardExp){
-        super(name, hp, willPower, attack, defense, position, type, level, rewardExp);
+                       Type type, int level, float rewardExp, Abilities ability){
+        super(name, hp, willPower, attack, defense, position, type, level, rewardExp, ability);
 
     }
 }

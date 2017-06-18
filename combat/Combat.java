@@ -66,11 +66,18 @@ public class Combat {
 	 * Method to link the attack from one Fighter to another
 	 * @param f1 the one attacking
 	 * @param f2 the one being attacked
-	 * @param a ability being used
 	 */	
-	public void fighterAttack(Fighter f1, Fighter f2, Ability a){
-		f1.attackTo(f2);
-		f1.modifyCurrentWillPower(-a.getWillCost());
+	public void fighterAttack(Fighter f1, Fighter f2){
+		f1.modifyCurrentWillPower(-f1.getAbility().getWillCost());
+		f1.attackTo(f2, f1.getAbility().getDamage());
+	}
+
+	public void AiAttack(Enemy e1, ArrayList<Fighter> heroParty){
+		int index=(int)(Math.random() * (heroParty.size()));
+		//número de 0 a heroParty.size() sin incluir
+
+		e1.attackTo(heroParty.get(index), e1.getAbility().getDamage());
+
 	}
 	
 
@@ -84,7 +91,7 @@ public class Combat {
 	}
 
 	// ??
-	public void partyAbility(Fighter f, PartyAbility a) { //TODO
+	public void partyAbility(Fighter f, MultiTargetAbility a) { //TODO
 		Fighter fig;
 		if (playerTurn) { //medio imperativo, es para saber sobre que party se efectua
 			for (int i = 0; i < this.mc.getPartySize(); i++) {
