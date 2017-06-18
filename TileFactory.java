@@ -1,7 +1,7 @@
 public class TileFactory{
 
 	public static enum Tiles {
-		ground, wall, furniture, passenger, combat, library:
+		ground, wall, furniture, passenger, combat, library;
 	}
 	
 	public static Tile createTile(Tiles tTile){
