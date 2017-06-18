@@ -53,7 +53,7 @@ public class ModelTest{
 
 	@Test
 	public void winCombatTest(){
-		
+
 	}
 
 	@Test
