@@ -6,6 +6,8 @@ import static org.junit.Assert.assertFalse;
 import java.util.ArrayList;
 import map.GameMap;
 import map.MapHandler;
+import map.MapNotFoundException;
+import map.MapsCollectionEmptyException;
 import org.junit.*;
 
 
@@ -20,7 +22,7 @@ public class MapHandlerTest {
     @Before
     public void before(){
         this.dorasMap = new MapHandler();
-        this.foxMap = new MapHandler(); //to test multiple creation of maps
+        this.foxMap = new MapHandler(); //Empty
         this.smallRoomData = inverseSmallRoomData = new Integer[3][3];
         //smallMap
         for(int i = 0; i < 3; i++){
@@ -53,9 +55,6 @@ public class MapHandlerTest {
         this.mapListNames.add("smallRoom");
         this.mapList.add(inverseSmallRoomData);
         this.mapListNames.add("InverseSmallRoom");
-
-
-        //this.foxMap.createMaps(this.mapList, this.mapListNames);
     }
 
     @Test
@@ -75,6 +74,7 @@ public class MapHandlerTest {
         assertEquals(3, this.dorasMap.getSize());
     }
 
+    @Deprecated //No deberíamos eliminarlo?
     @Test
     public void createMultipleMapsTest(){
         //TODO
@@ -92,13 +92,23 @@ public class MapHandlerTest {
     }
 
     @Test
-    public void eraseMapTest(){
+    public void removeExistingMapTest(){
         this.dorasMap.removeMap("inverseSmallRoom");
         assertEquals(1, this.dorasMap.getSize());
     }
 
+    @Test (expected = MapNotFoundException.class)
+    public void removeNotExistingMapTest(){
+        this.dorasMap.removeMap("I don't exist");
+    }
+
+    @Test (expected = MapsCollectionEmptyException.class)
+    public void removeFromEmptyArrayTest(){
+        this.foxMap.removeMap("Im Empty!");
+    }
+
     @Test
-    public void eraseSeveralMapsTest(){
+    public void removeSeveralExistingMapsTest(){
         ArrayList<String> names = new ArrayList<String>();
         names.add("smallRoom");
         names.add("inverseSmallRoom");
@@ -107,5 +117,24 @@ public class MapHandlerTest {
                 3, 3, inverseSmallRoomData);
         this.foxMap.removeMaps(names);
         assertTrue(this.foxMap.isEmpty());
+    }
+
+    @Test (expected = MapNotFoundException.class)
+    public void removeSeveralNotExistingMapsTest(){
+        ArrayList<String> names = new ArrayList<String>();
+        names.add("smallRoom");
+        names.add("He exists, i don't!");
+        this.foxMap.createParticularMap("smallRoom", 3, 3, smallRoomData);
+        this.foxMap.createParticularMap("inverseSmallRoom",
+                3, 3, inverseSmallRoomData);
+        this.foxMap.removeMaps(names);
+    }
+
+    @Test (expected = MapsCollectionEmptyException.class)
+    public void removeSeveralMapsFromEmptyArrayTest(){
+        ArrayList<String> names = new ArrayList<String>();
+        names.add("smallRoom");
+        names.add("inverseSmallRoom");
+        this.foxMap.removeMaps(names);
     }
 }
