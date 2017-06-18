@@ -55,7 +55,7 @@ public class MapHandlerTest {
         this.mapListNames.add("InverseSmallRoom");
 
 
-        this.foxMap.createMaps(this.mapList, this.mapListNames);
+        //this.foxMap.createMaps(this.mapList, this.mapListNames);
     }
 
     @Test
@@ -99,11 +99,12 @@ public class MapHandlerTest {
 
     @Test
     public void eraseSeveralMapsTest(){
-        ArrayList<String> names = new ArrayList<String>(); //esta mal ponerlo aca, no?
-        // Habra que hablarlo con agus porque la verdad que es muy borderline, yo no lo pondría acá
-        // pero a la vez inicializarlo para todos los tests cuando sólo lo usas en 1 es medio gede
+        ArrayList<String> names = new ArrayList<String>();
         names.add("smallRoom");
         names.add("inverseSmallRoom");
+        this.foxMap.createParticularMap("smallRoom", 3, 3, smallRoomData);
+        this.foxMap.createParticularMap("inverseSmallRoom",
+                3, 3, inverseSmallRoomData);
         this.foxMap.removeMaps(names);
         assertTrue(this.foxMap.isEmpty());
     }
