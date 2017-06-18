@@ -7,7 +7,6 @@ public class HeadOfChair extends Enemy {
 
     public static int PARTY_MAX = 3;
     private CircularList<Enemy> party;
-    Abilities specialAbility;
     private int partyIndex;
 
     /**
@@ -21,21 +20,16 @@ public class HeadOfChair extends Enemy {
      * @param type  Specifies what type the enemy is
      * @param level Specifies enemy's level
      * @param rewardExp How much experience beating this enemy will it reward
-     * @param specialAbility What special ability this enemy has
      */
     public HeadOfChair(String name, int hp, int willPower,
                  int attack, int defense, Position2D position,
-                 Type type, int level, float rewardExp, Abilities specialAbility){
+                 Type type, int level, float rewardExp, Abilities ability){
 
-        super(name, hp, willPower, attack, defense, position, type, level, rewardExp);
-        this.specialAbility = specialAbility;
+        super(name, hp, willPower, attack, defense, position, type, level, rewardExp, ability);
         party = new CircularList<Enemy>();
         partyIndex=0;
     }
 
-    public Abilities getSpecialAbility(){
-        return specialAbility;
-    }
 
     /**
      * Checks if the enemy party is full or not
@@ -55,6 +49,9 @@ public class HeadOfChair extends Enemy {
         party.add(prof);
     }
     
+    public void addMeToParty(){
+    	party.add(this);
+    }
 
     public CircularList<Enemy> getParty() {
         return party;
