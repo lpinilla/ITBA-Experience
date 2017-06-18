@@ -56,10 +56,10 @@ public class Model{
 	* the HeadOfChair could be added to their own partys
 	*/
 	public void setUpParties(){
-		Person mainC = getPersonByClass(MainCharacter, 0);
+		Person mainC = getPersonByClass("MainCharacter", 0);
 		mainC.addHeroToParty(mainC);
 		for(int i = 0; i < 3; i++){
-			Person hoC = getPersonByClass(HeadOfChair, i);	
+			Person hoC = getPersonByClass("HeadOfChair", i);	
 			hoC.addProfessorToParty(hoC);
 		}
 	}
@@ -71,10 +71,10 @@ public class Model{
 	* @ignoreNumber: The number of People it has to ignore if
 	* there are multiple instances of a same class
 	*/
-	private Person getPersonByClass(Class objClass, int ignoreNumber){
+	private Person getPersonByClass(String objClass, int ignoreNumber){
 		int auxIgnore = 0;
 		for(Person p : persons){
-			if(p.getClass() == objClass.class){
+			if(p.getClass().toString == objClass){
 				if(auxIgnore == ignoreNumber){
 					return p;				
 				}else{
