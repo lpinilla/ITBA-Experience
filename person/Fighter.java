@@ -1,12 +1,13 @@
 package person;
 
 import map.Position2D;
+import java.io.Serializable
 
 /**
  * @author ividaurreta, aizaguirre
  */
 
-public class Fighter extends Person {
+public class Fighter extends Person implements Serializable {
     public static final int MIN_ATTACK = 0;
     public static final int MIN_DEFENSE = 0;
     public static final int HP_PER_LEVEL = 200;
