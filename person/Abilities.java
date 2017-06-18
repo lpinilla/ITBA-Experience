@@ -1,6 +1,8 @@
 package person;
+
+import java.io.Serializable;
 //Cuando Lauti suba el update de combat del método que falta testear lo vuelvo a ver - Nacho
-public abstract class Abilities {
+public abstract class Abilities implements Serializable {
 
     private String name;
     private int damage;
