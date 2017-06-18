@@ -2,9 +2,6 @@ package person;
 
 import map.Position2D;
 
-import java.io.FileInputStream;
-import java.util.ArrayList;
-
 /**
  * @author ividaurreta, aizaguirre
  */
@@ -21,7 +18,6 @@ public class Fighter extends Person {
     private int attack;
     private int defense;
     private Type type;
-    private Position2D position;
     private Abilities ability;
 
     /**
@@ -38,7 +34,7 @@ public class Fighter extends Person {
      */
     public Fighter(String name, int hp, int willPower, int attack, int defense
             , Position2D position, Type type, Abilities ability) {
-        super(name);
+        super(name, position);
         this.hp = hp;
         this.currentHP = hp;
         this.willPower = willPower;
@@ -46,7 +42,6 @@ public class Fighter extends Person {
         this.attack = attack;
         this.defense = defense;
         this.type = type;
-        this.position = position;
         this.ability = ability;
     }
 
@@ -171,23 +166,12 @@ public class Fighter extends Person {
     }
 
 
-
-
-
     public String getType() {
         return type.getName();
     }
 
     public boolean isKnockedOut() {
         return getCurrentHP() == 0;
-    }
-
-    public Position2D getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position2D pos){
-        position=pos;
     }
 
     public void attackTo(Fighter foe, int damage){
