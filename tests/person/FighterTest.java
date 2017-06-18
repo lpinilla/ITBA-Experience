@@ -18,21 +18,14 @@ public class FighterTest {
     @Before
     public void before() {
         dummy = new Fighter("Fighter", INITHP, INITWP,
-                INITATTACK, INITDEFENSE, new Position2D(0, 0), new Type("CS"));
-        expLeft = dummy.getExpToNextLevel() - dummy.getExp();
+                INITATTACK, INITDEFENSE, new Position2D(0, 0),
+                new Type("CS"), new SingleTargetAbility("Crunch",
+                200,20,10));
     }
 
     @Test
     public void getHpTest() {
         assertEquals("Debería devolver 20", INITHP, dummy.getHP());
-    }
-
-    @Test
-    public void getHpLevelUpTest() {
-        dummy.addExp(expLeft);
-        assertEquals("Debería aumentar en " + Fighter.HP_PER_LEVEL+ " la HP por el level Up",
-                INITHP + Fighter.HP_PER_LEVEL, dummy.getHP());
-        // TODO ver cómo sacar el wildcard 100
     }
 
     @Test
@@ -52,18 +45,6 @@ public class FighterTest {
     public void getCurrentHpTest(){
         assertEquals("Como no recibió daño, debería recibir la HP inicial: "
                 + INITHP, INITHP,dummy.getCurrentHP());
-    }
-
-    @Test
-    public void getCurrentHPAfterLevelUpTest(){
-        dummy.addExp(expLeft);
-        assertEquals("Debería devolver lo mismo que el hp", dummy.getHP(),dummy.getCurrentHP());
-    }
-
-    @Test
-    public void getCurrentHpLevelUpTest(){
-        dummy.addExp(expLeft+ Fighter.EXP_PERCENTAGE*dummy.getExpToNextLevel());
-        assertEquals("Debería tener tanta vida como el maximo",dummy.getHP(), dummy.getCurrentHP());
     }
 
     @Test
@@ -124,12 +105,7 @@ public class FighterTest {
                 INITWP, dummy.getWillPower());
     }
 
-    @Test
-    public void getWillPowerAfterLevelUpTest() {
-        int willP = dummy.getWillPower();
-        dummy.addExp(expLeft);
-        assertEquals("El will Power deberia aumentar cuando se sube de nivel", true, dummy.getWillPower() > willP);
-    }
+
 
     @Test
     public void setWillPowerGoodValueTest(){
@@ -147,12 +123,6 @@ public class FighterTest {
     @Test
     public void getCurrentWillPowerTest(){
         assertEquals("Current willPower deberia ser" + INITWP, INITWP, dummy.getCurrentWillPower());
-    }
-
-    @Test
-    public void getCurrentWillPowerAfterLevelUpTest(){
-        dummy.addExp(expLeft);
-        assertEquals("Deberia devolver lo mismo que el WillPower", dummy.getWillPower(),dummy.getCurrentWillPower());
     }
 
     @Test
@@ -184,13 +154,6 @@ public class FighterTest {
         assertEquals("Attack deberia ser " + INITATTACK,INITATTACK,dummy.getAttack());
     }
 
-    @Test
-    public void getAttackAfterLevelUpTest() {
-        int attack = dummy.getAttack();
-        dummy.addExp(expLeft);;
-        assertEquals("Attack deberia ser mayor cuando se sube de nivel",true,dummy.getAttack() > attack);
-
-    }
 
     @Test
     public  void modifyAttackAddNormalValueTest(){
@@ -212,13 +175,6 @@ public class FighterTest {
 
 
     @Test
-    public void getDefenseAfterLevelUpTest() {
-        int defense = dummy.getAttack();
-        dummy.addExp(expLeft);;
-        assertEquals("Defense deberia ser mayor cuando se sube de nivel",true,dummy.getDefense() > defense);
-    }
-
-    @Test
     public  void modifyDefenseAddNormalValueTest(){
         dummy.modifyDefense(50);
         assertEquals("Defense debería aumentar en 50",INITDEFENSE + 50,dummy.getDefense());
@@ -228,62 +184,6 @@ public class FighterTest {
     public void modifyDefenseDecreaseToMinValueTest(){
         dummy.modifyDefense(-100);
         assertEquals("Defense no deberia poder disminuir de un mínimo prefijado" ,dummy.MIN_DEFENSE, dummy.getDefense());
-    }
-
-    @Test
-    public void getLevelTest(){
-        assertEquals("Level debería ser 1", 1 , dummy.getLevel());
-    }
-
-    @Test
-    public void getLevelAfterLevelUpTest() {
-        dummy.addExp(expLeft);
-        assertEquals("Level deberia ser 2", 2 , dummy.getLevel());
-    }
-
-    @Test
-    public void getExperienceTest(){
-        assertEquals("La experiencia deberia ser 0",0,dummy.getExp(),0.001);
-    }
-
-    @Test
-    public void addExperienceLessThanNextLevelTest() {
-        dummy.addExp(10);
-        assertEquals("Deberia ser 10 la experiencia", 10, dummy.getExp(), 0.0001);
-    }
-
-    @Test
-    public void addExperienceLevelUpTest() {
-        dummy.addExp(expLeft);
-        assertEquals("Deberia haber subido de nivel", 2, dummy.getLevel());
-    }
-
-    @Test
-    public void earnExperienceTwoLevelUpTest() {
-        dummy.addExp(expLeft + dummy.EXP_PERCENTAGE * dummy.getExpToNextLevel());
-        assertEquals("Deberia haber subido de nivel", 3,dummy.getLevel());
-    }
-
-    @Test(expected = InvalidValueException.class)
-    public void addExperienceZeroValueTest(){
-        dummy.addExp(0);
-    }
-
-    @Test(expected = InvalidValueException.class)
-    public void earnExperienceNegativeValueTest(){
-        dummy.addExp(-10);
-    }
-
-    @Test
-    public void getExperienceToNextLevelTest(){
-        assertEquals("La experiencia para el proximo level deberia ser 1000",1000,dummy.getExpToNextLevel(),0.0001);
-    }
-
-    @Test
-    public void getExperienceToNextLevelAfterLevelUpTest(){
-        float exp = dummy.getExpToNextLevel();
-        dummy.addExp(expLeft);
-        assertEquals("La experiencia para el proximo nivel deberia aumentar cuando se sube de nivel",true,dummy.getExpToNextLevel()>exp);
     }
 
     @Test
