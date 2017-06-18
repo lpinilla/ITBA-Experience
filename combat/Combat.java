@@ -29,7 +29,24 @@ public class Combat {
 	public boolean isPlayerTurn() {
 		return this.playerTurn;
 	}
-
+	
+	/**
+	 * Gets the MainCharacter
+	 * @return MainCharacter
+	 */
+	
+	public MainCharacter getMainCharacter(){
+		return this.mc;
+	}
+	
+	/**
+	 * Gets te Head of Chair
+	 * @return HeadOfChair
+	 */
+	
+	public HeadOfChair getHeadOfChair(){
+		return this.hoc;
+	}
 	/**
 	 * Changes to next hero
 	 * @return
@@ -46,41 +63,20 @@ public class Combat {
 		return hoc.getEnemy();
 	}
 
-	/**
-	 * Gets the MainCharacter
-	 * @return MainCharacter
-	 */
-	public MainCharacter getPlayer() {
-		return this.mc;
-	}
-
-	/**
-	 * Gets te Head of Chair
-	 * @return HeadOfChair
-	 */
-	public HeadOfChair getEnemy() {
-		return this.hoc;
-	}
 
 	/**
 	 * Method to link the attack from one Fighter to another
 	 * @param f1 the one attacking
 	 * @param f2 the one being attacked
+	 * @param a ability being used
 	 */	
-	public void fighterAttack(Fighter f1, Fighter f2){
-		f1.modifyCurrentWillPower(-f1.getAbility().getWillCost());
-		f1.attackTo(f2, f1.getAbility().getDamage());
+	public void fighterAttack(Fighter f1, Fighter f2, Abilities a){
+		a.use(f1, f2);
 	}
-
-	public void AiAttack(Enemy e1, ArrayList<Fighter> heroParty){
-		int index=(int)(Math.random() * (heroParty.size()));
-		//número de 0 a heroParty.size() sin incluir
-
-		e1.attackTo(heroParty.get(index), e1.getAbility().getDamage());
-
+	public void fighterAttack(Fighter f1, CircularList<Fighter> f2, Abilities a) { //TODO
+		a.use(f1, f2);
 	}
 	
-
 	/**
 	 * is called if an ally casts a spell to heal or drinks a potion
 	 * @param f fighter being healed
@@ -89,22 +85,7 @@ public class Combat {
 	public void fighterHeal(Fighter f, int amount) {
 		f.healCharacter(amount);
 	}
-
 	// ??
-	public void partyAbility(Fighter f, MultiTargetAbility a) { //TODO
-		Fighter fig;
-		if (playerTurn) { //medio imperativo, es para saber sobre que party se efectua
-			for (int i = 0; i < this.mc.getPartySize(); i++) {
-				fig = mc.getHero();
-				//fig.useAbility(a); TODO Use ability?
-			}
-		} else {
-			for (int i = 0; i < this.hoc.getPartySize(); i++) {
-				fig = hoc.getEnemy();
-				//fig.useAbility(a); TODO
-			}
-		}
-	}
 
 	/**
 	 * Changes turn
@@ -127,6 +108,5 @@ public class Combat {
 	public void endCombat() {
 		this.combatActive = false;
 	}
-
 
 }
