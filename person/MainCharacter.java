@@ -2,10 +2,10 @@
 package person;
 
 import map.Position2D;
-
 import java.util.LinkedList;
+import java.io.Serializable:
 
-public class MainCharacter extends Hero{
+public class MainCharacter extends Hero implements Serializable{
     
     public static final int PARTY_MAX = 3;
 
