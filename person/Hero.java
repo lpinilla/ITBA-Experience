@@ -1,8 +1,9 @@
 package person;
 
 import map.Position2D;
+import java.io.Serializable;
 
-public class Hero extends Fighter{
+public class Hero extends Fighter implements Serializable{
     private int level;
     private float exp;
     private float expToNextLevel;
