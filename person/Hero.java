@@ -3,7 +3,7 @@ package person;
 import map.Position2D;
 
 public class Hero extends Fighter{
-    int level;
+    private int level;
     private float exp;
     private float expToNextLevel;
     public static final float EXP_PERCENTAGE = 0.25f;
