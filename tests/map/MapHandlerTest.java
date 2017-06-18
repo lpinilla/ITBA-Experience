@@ -13,15 +13,15 @@ public class MapHandlerTest {
 
     private MapHandler dorasMap, foxMap; //I'm the map I'm the map..
     private GameMap smallRoom, inverseSmallRoom;
-    private int[][] smallRoomData, inverseSmallRoomData;
-    private ArrayList<int[][]> mapList;
+    private Integer[][] smallRoomData, inverseSmallRoomData;
+    private ArrayList<Integer[][]> mapList;
     private ArrayList<String> mapListNames;
 
     @Before
     public void before(){
         this.dorasMap = new MapHandler();
         this.foxMap = new MapHandler(); //to test multiple creation of maps
-        this.smallRoomData = inverseSmallRoomData = new int[3][3];
+        this.smallRoomData = inverseSmallRoomData = new Integer[3][3];
         //smallMap
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
@@ -47,7 +47,7 @@ public class MapHandlerTest {
         }
         this.dorasMap.createParticularMap("inverseSmallRoom", 3,
                 3, inverseSmallRoomData);
-        this.mapList = new ArrayList<int[][]>();
+        this.mapList = new ArrayList<Integer[][]>();
         this.mapListNames = new ArrayList<String>();
         this.mapList.add(smallRoomData);
         this.mapListNames.add("smallRoom");
