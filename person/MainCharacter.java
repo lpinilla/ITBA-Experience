@@ -10,7 +10,7 @@ public class MainCharacter extends Hero{
     public static final int PARTY_MAX = 3;
 
     private CircularList<Hero> party;
-    private LinkedList<Abilities> specialAbilities;
+    private LinkedList<Abilities> abilities;
     private int partyIndex;
 
     /**
@@ -24,10 +24,10 @@ public class MainCharacter extends Hero{
      * @param type
      */
     public MainCharacter(String name, int HP, int willPower, int attack, int defense
-            , Position2D position, Type type){
-        super(name, HP, willPower, attack, defense, position, type);
+            , Position2D position, Type type, Abilities specialAbility){
+        super(name, HP, willPower, attack, defense, position, type, specialAbility);
         party = new CircularList<Hero>();
-        specialAbilities = new LinkedList<Abilities>(); //Cuantos lugares? -> va a ser una constante
+        abilities = new LinkedList<Abilities>(); //Cuantos lugares? -> va a ser una constante
         partyIndex=0;
     }
 
@@ -45,7 +45,7 @@ public class MainCharacter extends Hero{
      */
     public Boolean isAbilitesFull() {
         //Supongo que abilities funciona como party, tiene maximo 5 abilities
-        return specialAbilities.size() == 5;
+        return abilities.size() == 5;
     }
 
     /**
@@ -61,6 +61,9 @@ public class MainCharacter extends Hero{
         party.add(h);
     }
     
+    public void addMeToParty(){
+    	party.add(this);
+    }
 
     /**
      * Adds a new special ability for the MainCharacter to use
@@ -69,7 +72,7 @@ public class MainCharacter extends Hero{
      */
     public void addSpecialAbility(Abilities ability) {
         if ( ability == null ) throw new WrongAbilityException("Ability is null");
-        specialAbilities.add(ability);
+        abilities.add(ability);
     }
 
     /**

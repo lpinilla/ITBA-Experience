@@ -8,9 +8,9 @@ public abstract class Enemy extends Fighter{
 
     public Enemy(String name, int hp, int willPower,
                  int attack, int defense, Position2D position,
-                 Type type, int level, float rewardExp)
+                 Type type, int level, float rewardExp, Abilities ability)
     {
-        super(name, hp, willPower, attack, defense, position, type);
+        super(name, hp, willPower, attack, defense, position, type, ability);
         this.rewardExp = rewardExp;
         this.level = level;
     }
