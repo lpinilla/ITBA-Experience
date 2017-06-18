@@ -130,7 +130,10 @@ public class Model{
 		char c; // \n
 		Integer[][] mapRawData = new Integer[width][height];
 		for(int i = 0; i < height; i++){
-			for(int j = 0; j < width; j++){ //se podria verificar si hay algun caracter no permitido
+			for(int j = 0; j < width; j++){
+				if(Character.isLetter(c = (char) br.read())){
+					throw new IOException("Game Data Corrupted");
+				}
 				mapRawData[i][j] = Integer.valueOf((char) br.read()) - '0';
 			}
 			c = (char) br.read();
