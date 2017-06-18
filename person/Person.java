@@ -1,8 +1,9 @@
 package person;
 
 import map.Position2D;
+import java.io.Serializable;
 
-public abstract class Person {
+public abstract class Person implements Serializable {
     private String name;
     private Position2D position;
 
