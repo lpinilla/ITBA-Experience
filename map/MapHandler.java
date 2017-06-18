@@ -66,7 +66,7 @@ public class MapHandler {
             throw new MapsCollectionEmptyException("There is no map loaded to remove!");
         }
         if(!maps.containsKey(mapName)){
-            throw new RuntimeException("No such map in collection"); // nueva exception?             
+            throw new MapNotFoundException("No such map in collection");
         }else{
               maps.remove(mapName);
         }
@@ -77,11 +77,11 @@ public class MapHandler {
      * Same as removeMap only that removes an ArrayList of maps
      * @param mapNames
      */
-    public void removeMaps(ArrayList<String> mapNames) throws RuntimeException{ //cambiar
+    public void removeMaps(ArrayList<String> mapNames){
         if(!isEmpty()){
             for(int i = 0; i < mapNames.size(); i++){
                 if(!maps.containsKey(mapNames.get(i))){
-                    throw new RuntimeException("No such map in the Collection"); //crear nueva excepcion?
+                    throw new MapNotFoundException("No such map in the Collection");
                 }else{
                     maps.remove(mapNames.get(i));
                 }
