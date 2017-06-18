@@ -1,37 +1,38 @@
+package person;
+
+/**
+ * Created by lautaro on 18/06/17.
+ */
 public class AbilityFactory{
-	
-	public static enum Ability{
-		bolaDeSabiduria, induccion, h1, h2, h3;
-	}
 
-	public static Ability createAbility(Ability a){
-		switch(a){
-			case bolaDeSabiduria:
-				return new BolaDeSabiduria();
-			case induccion:
-				return new Induccion();			
-			case h1:
+    public static enum Ability{
+        bolaDeSabiduria, induccion, h1, h2, h3;
+    }
 
-			case h2:
+    public static Abilities createAbility(Ability a){
+        switch(a){
+            case bolaDeSabiduria:
+                return new BolaDeSabiduria();
+            case induccion:
+                return new Induccion();
+        }
+        return null;
+    }
 
-			case h3:
-		}
-	}
+    //Cambiar valores
+    private static class BolaDeSabiduria extends Abilities{
 
-	//Cambiar valores
-	private class BolaDeSabiduria extends Abilities{
+        public BolaDeSabiduria(){
+            super("Bola de Sabiduria", 10, 10);
+        }
 
-		public BolaDeSabiduria(){
-			super("Bola de Sabiduria", 10, 10, 0);
-		}
+    }
 
-	}
-
-	private class Induccion extends Abilities{
-		public class Induccion(){
-			super("Induccion", 10,10,0);
-		}
-	}
+    private static class Induccion extends Abilities{
+        public Induccion(){
+            super("Induccion", 10,10);
+        }
+    }
 
 
 
