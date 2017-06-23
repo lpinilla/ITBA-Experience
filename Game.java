@@ -88,12 +88,13 @@ public class Game{
 		String currentMap = null;
 		MainCharacter mc = null;
 		try{
-			mc = Game.readData(in, currentMap);
+			Game aux = new Game();
+			mc = aux.readData(in, currentMap);
 		}catch(IOException e){
 			e.getMessage();
 		}
 		in.close();
-		Game g = new Game(mc, bossWon, currentMap);
+		Game g = new Game(mc, bossWon, currentMap); //se retorna?
 	}
 
 	private MainCharacter readData(ObjectInputStream in, String currentMap)
@@ -105,8 +106,4 @@ public class Game{
 		currentMap = (String) in.readObject();
 		return mc;
 	}
-
-
-
-
 }
