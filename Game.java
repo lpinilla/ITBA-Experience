@@ -1,10 +1,17 @@
 import model.Model;
 import model.ViewController;
+import person.MainCharacter;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.FileInputStream;
+import java.io.BufferedInputStream;
 
 public class Game{
 
@@ -13,6 +20,7 @@ public class Game{
 	private File mapsFile;
 	private FileWriter fw;
 	private FileReader fr;
+	private boolean[] bossWon;
 	
 	public Game() throws IOException {
 		this.fw = null;
@@ -26,10 +34,11 @@ public class Game{
 			throw new IOException("Game File Missing, Game Corrupted");
 		}
 		this.model.loadMaps(new FileReader(mapsFile));
-		this.model.generateMaps();		
+		this.model.generateMaps();
+		this.bossWon = new boolean[3];
 	}
 
-	private Game(MainCharacter mc, boolean[] bossWon, String currentMap){ //from Load game
+	public Game(MainCharacter mc, boolean[] bossWon, String currentMap) throws IOException{ //from Load game
 		this.fw = null;
 		this.fr = null;
 		this.model = new Model(mc, bossWon, currentMap);
@@ -45,51 +54,54 @@ public class Game{
 	}
 
 	public void saveGame() throws IOException{
+		ObjectOutputStream file = null;
 		try{
-		ObjectOutputStream file = new ObjectOutputStream(
+		 file = new ObjectOutputStream(
 			new BufferedOutputStream(new FileOutputStream(
 				"./savedGame.txt")));
-		MainCharacter mc = this.model.getPersonByClass("MainCharacter",0);
+		MainCharacter mc = (MainCharacter) this.model.getPersonByClass("MainCharacter",0);
 		file.writeObject(mc);		
 		}catch(IOException e){
 			e.getMessage(); //cambiar
 		}
-		file.flush(); //necesario?
-		file.close();
+		if(file != null) {
+			file.flush(); //necesario?
+			file.close();
+		}
 	}
 
 	private void writeObject(ObjectOutputStream out) throws IOException{
 		out.defaultWriteObject();		
-		boolean[] boosWon = this.model.getBossWon();
+		this.bossWon = this.model.getBossWon();
 		String currentMap = 
 		this.model.getMapHandler().getCurrentMap().getName();
-		out.writeObject(levelsPassed);
 		out.writeObject(bossWon[0]);
 		out.writeObject(bossWon[1]);
 		out.writeObject(bossWon[2]);
 	}
 
-	public static void loadGame()throws IOException{
+	public static void loadGame()throws IOException, ClassNotFoundException{
 		ObjectInputStream in = new ObjectInputStream(
 			new BufferedInputStream(new FileInputStream(
 				"./savedGame.txt")));
 		boolean[] bossWon = new boolean[3];
-		String currentMap;
-		MainCharacter mc;
+		String currentMap = null;
+		MainCharacter mc = null;
 		try{
-			mc = in.readObject(in, bossWon, currentMap);
+			mc = Game.readData(in, currentMap);
 		}catch(IOException e){
 			e.getMessage();
 		}
 		in.close();
-		this.Game(mc, bossWon, currentMap);
+		Game g = new Game(mc, bossWon, currentMap);
 	}
 
-	private MainCharacter readObject(ObjectInputStream in, boolean[] bossWon,String currentMap) throws IOException{
-		MainCharacter mc = in.defaultReadObject();
-		bossWon[0] = in.readBoolean();
-		bossWon[1] = in.readBoolean();
-		bossWon[2] = in.readBoolean();
+	private MainCharacter readData(ObjectInputStream in, String currentMap)
+			throws IOException, ClassNotFoundException{
+		MainCharacter mc = (MainCharacter) in.readObject();
+		this.bossWon[0] = in.readBoolean();
+		this.bossWon[1] = in.readBoolean();
+		this.bossWon[2] = in.readBoolean();
 		currentMap = (String) in.readObject();
 		return mc;
 	}
