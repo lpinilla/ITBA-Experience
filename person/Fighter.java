@@ -1,7 +1,7 @@
 package person;
 
 import map.Position2D;
-import java.io.Serializable
+import java.io.Serializable;
 
 /**
  * @author ividaurreta, aizaguirre
