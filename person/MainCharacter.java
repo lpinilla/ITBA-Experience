@@ -3,7 +3,7 @@ package person;
 
 import map.Position2D;
 import java.util.LinkedList;
-import java.io.Serializable:
+import java.io.Serializable;
 
 public class MainCharacter extends Hero implements Serializable{
     
