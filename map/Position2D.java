@@ -3,7 +3,7 @@ package map;
  *@author: lpinilla
  */
 import java.lang.Math;
-import java.io.Serializable
+import java.io.Serializable;
 
 public class Position2D implements Serializable {
 
