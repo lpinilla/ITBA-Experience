@@ -1,4 +1,4 @@
-package controllerView;
+package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -31,12 +31,12 @@ public class MainMenuScreen implements Screen {
         this.game = game;
         loadGameActive = new Texture("loadGameActive.png");
         loadGameInactive = new Texture("loadGameInactive.png");
-        exitActive = new Texture("exitActive.png");
-        exitInactive = new Texture("exitInactive.png");
+        exitActive = new Texture("exitGameActive.png");
+        exitInactive = new Texture("exitGameInactive.png");
         playActive = new Texture("newGameActive.png");
         playInactive = new Texture("newGameInactive.png");
         batch = new SpriteBatch();
-        title = new Texture("title.png");
+        title = new Texture("menuFondo.png");
         floor = new Texture("floor.jpg");
     }
 
@@ -59,39 +59,44 @@ public class MainMenuScreen implements Screen {
             }
         }
         batch.draw(title, 0, 0, WIDTH,HEIGHT);
+        
         if(Gdx.input.getX() >= WIDTH/2 - BUTTONWIDTH/2 && Gdx.input.getX() <= WIDTH/3 - BUTTONWIDTH/3 + BUTTONWIDTH
                 && HEIGHT - Gdx.input.getY() >= HEIGHT/30 &&   HEIGHT - Gdx.input.getY() <=  BUTTONHEIGHT) {
-            batch.draw(exitActive, WIDTH / 2 - BUTTONWIDTH / 2, HEIGHT/30, BUTTONWIDTH, BUTTONHEIGHT);
+            batch.draw(exitActive, WIDTH / 2 - BUTTONWIDTH / 2, HEIGHT/20, BUTTONWIDTH, BUTTONHEIGHT);
             if(Gdx.input.isTouched()){
                 Gdx.app.exit();
             }
         }
         else{
-            batch.draw(exitInactive, WIDTH / 2 - BUTTONWIDTH / 2, HEIGHT/30, BUTTONWIDTH, BUTTONHEIGHT);
+            batch.draw(exitInactive, WIDTH / 2 - BUTTONWIDTH / 2, HEIGHT/20, BUTTONWIDTH, BUTTONHEIGHT);
         }
 
+        
         if(Gdx.input.getX() >= WIDTH/2 - BUTTONWIDTH/2 && Gdx.input.getX() <= WIDTH/2 - BUTTONWIDTH/2 + BUTTONWIDTH
                 && Gdx.input.getY() <=  HEIGHT - 5*(HEIGHT/20) && Gdx.input.getY() >=  HEIGHT - (5*(HEIGHT/20) + BUTTONHEIGHT-HEIGHT/30)){
             batch.draw(loadGameActive, WIDTH / 2 - BUTTONWIDTH / 2, 5*(HEIGHT/20), BUTTONWIDTH, BUTTONHEIGHT);
             if(Gdx.input.isTouched()){
                 dispose();
-                game.setExplorerScreen();//deberia ser load.
+//                game.setExplorerScreen();//deberia ser load.
+                game.setCombatScreen();
             }
         }
         else{
             batch.draw(loadGameInactive, WIDTH / 2 - BUTTONWIDTH / 2, 5*(HEIGHT/20), BUTTONWIDTH, BUTTONHEIGHT);
         }
 
+        
         if(Gdx.input.getX() >= WIDTH/2 - BUTTONWIDTH/2 && Gdx.input.getX() <= WIDTH/2 - BUTTONWIDTH/2 + BUTTONWIDTH
-                && Gdx.input.getY() <=  HEIGHT - 12*(HEIGHT/30) && Gdx.input.getY() >= HEIGHT - (12*(HEIGHT/30) + BUTTONHEIGHT-(HEIGHT/30))){
-            batch.draw(playActive, WIDTH / 2 - BUTTONWIDTH / 2, 12*(HEIGHT/30), BUTTONWIDTH, BUTTONHEIGHT);
+                && Gdx.input.getY() <=  HEIGHT - 9*(HEIGHT/20) && Gdx.input.getY() >= HEIGHT - (9*(HEIGHT/20) + BUTTONHEIGHT-(HEIGHT/30))){
+            batch.draw(playActive, WIDTH / 2 - BUTTONWIDTH / 2, 9*(HEIGHT/20), BUTTONWIDTH, BUTTONHEIGHT);
             if(Gdx.input.isTouched()){
                 dispose();
-                game.setExplorerScreen();
+//                game.setExplorerScreen();
+                game.setCombatScreen();
             }
         }
         else{
-            batch.draw(playInactive, WIDTH /2 - BUTTONWIDTH / 2, 12*(HEIGHT/30), BUTTONWIDTH, BUTTONHEIGHT);
+            batch.draw(playInactive, WIDTH /2 - BUTTONWIDTH / 2, 9*(HEIGHT/20), BUTTONWIDTH, BUTTONHEIGHT);
         }
         batch.end();
     }
