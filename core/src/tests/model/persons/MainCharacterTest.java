@@ -2,6 +2,7 @@ package tests.model.persons;
 import static org.junit.Assert.assertEquals;
 
 import model.abilities.Abilities;
+import model.abilities.AbilityFactory;
 import model.map.Position2D;
 import model.persons.Hero;
 import model.persons.MainCharacter;
@@ -18,7 +19,7 @@ public class MainCharacterTest{
 
     @Before
     public void before(){
-        ab = new SingleTargetAbility("Super smash",10, 200 ,1);
+        ab =  AbilityFactory.createAbility(AbilityFactory.Ability.mateEnClase);
         pj = new MainCharacter("Tomas",200, 300,
                 30, 40, new Position2D(0,0), new Type("CS"),ab);
 
@@ -73,10 +74,10 @@ public class MainCharacterTest{
 
     @Test
     public void isAbilitiesFullTrueTest(){
-        Abilities ab2 = new SingleTargetAbility("Super smash",10, 200 ,1);
-        Abilities ab3 = new SingleTargetAbility("Super smash",10, 200 ,1);
-        Abilities ab4 = new SingleTargetAbility("Super smash",10, 200 ,1);
-        Abilities ab5 = new SingleTargetAbility("Super smash",10, 200 ,1);
+        Abilities ab2 = AbilityFactory.createAbility(AbilityFactory.Ability.mateEnClase);
+        Abilities ab3 = AbilityFactory.createAbility(AbilityFactory.Ability.mateEnClase);
+        Abilities ab4 = AbilityFactory.createAbility(AbilityFactory.Ability.mateEnClase);
+        Abilities ab5 = AbilityFactory.createAbility(AbilityFactory.Ability.mateEnClase);
 
         pj.addSpecialAbility(ab);
         pj.addSpecialAbility(ab2);

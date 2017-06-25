@@ -169,7 +169,7 @@ public class MapHandler {
                 t1, 1, 50, ab);
         Tile t = m.get(new Position2D(18,18));
         ((CombatType)(t.getType())).setHoc(hoc);
-        t = m.get(new Position2D(18,2));
+        t = m.get(new Position2D(18,1));
         ((CombatType)(t.getType())).setHoc(hoc);
         t = m.get(new Position2D(1,12));
         ((CombatType)(t.getType())).setHoc(hoc);

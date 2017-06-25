@@ -72,7 +72,7 @@ public class MapTest {
 
     @Test
     public void floorTypeTest(){
-        assertEquals("CommonGround", this.map.get(oneOne).getType().getName());
+        assertEquals("Piso", this.map.get(oneOne).getType().getName());
     }
 
     @Test

@@ -60,6 +60,7 @@ public class Fighter extends Person implements Serializable {
             throw new InvalidValueException("El HP debe ser mayor a cero.");
         }
         this.hp = hp;
+        this.currentHP=hp;
     }
 
     public int getCurrentHP() {

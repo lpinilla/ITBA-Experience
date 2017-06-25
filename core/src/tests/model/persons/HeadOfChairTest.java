@@ -1,6 +1,7 @@
 package tests.model.persons;
 
 import model.abilities.Abilities;
+import model.abilities.AbilityFactory;
 import model.map.Position2D;
 import model.persons.HeadOfChair;
 import model.persons.Hero;
@@ -15,11 +16,11 @@ public class HeadOfChairTest {
     Abilities miscAbility;
     @Before
     public void before() {
-        miscAbility = new SingleTargetAbility("Testing",50,50,2);
+        miscAbility =  AbilityFactory.createAbility(AbilityFactory.Ability.mateEnClase);
         f = new HeadOfChair("Santi",20, 10,
                 10,1, new Position2D(2,0),
                 new Type("CS"), 2, 300f,
-                new SingleTargetAbility("Ejer1", 1000, 400, 1));
+                AbilityFactory.createAbility(AbilityFactory.Ability.mateEnClase));
     }
 
 
@@ -64,7 +65,7 @@ public class HeadOfChairTest {
 
     @Test
     public void getSpecialAbilityTest(){
-        assertEquals("Ejer1",f.getAbility().getName());
+        assertEquals("Tomar mate en clase",f.getAbility().getName());
     }
 
     @Test

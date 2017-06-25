@@ -2,6 +2,7 @@ package tests.model.persons;
 
 import static org.junit.Assert.assertEquals;
 
+import model.abilities.AbilityFactory;
 import model.map.Position2D;
 import model.persons.Fighter;
 import model.persons.InvalidValueException;
@@ -22,8 +23,8 @@ public class FighterTest {
     public void before() {
         dummy = new Fighter("Fighter", INITHP, INITWP,
                 INITATTACK, INITDEFENSE, new Position2D(0, 0),
-                new Type("CS"), new SingleTargetAbility("Crunch",
-                200,20,10));
+                new Type("CS"),
+                AbilityFactory.createAbility(AbilityFactory.Ability.mateEnClase));
     }
 
     @Test
@@ -39,9 +40,7 @@ public class FighterTest {
         assertEquals("Debería devolver 200", 200, dummy.getHP());
     }
 
-    @Test(expected = InvalidValueExcep/**
- * Created by Nacho on 17/06/17.
- */tion.class)
+    @Test(expected = InvalidValueException.class)
     public void setHPNegativeValueTest() {
         dummy.setHP(-1);
     }

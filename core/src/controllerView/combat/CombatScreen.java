@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package controllerView.combat;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -26,6 +26,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import controllerView.ControllerView;
+import model.abilities.Abilities;
+import model.combat.Combat;
+import model.map.Position2D;
+import model.persons.*;
 
 import java.util.ArrayList;
 import java.util.IllegalFormatWidthException;

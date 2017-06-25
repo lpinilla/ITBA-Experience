@@ -1,5 +1,6 @@
 package tests.model.persons;
 
+import model.abilities.AbilityFactory;
 import model.map.Position2D;
 import model.persons.Fighter;
 import model.persons.Hero;
@@ -24,8 +25,8 @@ public class HeroTest {
     public void before() {
         dummy = new Hero("DummyHero", INITHP, INITWP,
                 INITATTACK, INITDEFENSE, new Position2D(0, 0),
-                new Type("CS"), new SingleTargetAbility("Crunch",
-                200,20,10));
+                new Type("Informatico"),
+                AbilityFactory.createAbility(AbilityFactory.Ability.mateEnClase));
         expLeft = dummy.getExpToNextLevel() - dummy.getExp();
     }
 

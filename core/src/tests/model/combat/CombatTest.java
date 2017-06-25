@@ -7,6 +7,7 @@ import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import model.abilities.Abilities;
+import model.abilities.AbilityFactory;
 import model.combat.Combat;
 import model.map.Position2D;
 import model.persons.Enemy;
@@ -18,10 +19,6 @@ import model.persons.Type;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-
-
-import java.util.ArrayList;
 
 public class CombatTest {
 
@@ -35,7 +32,7 @@ public class CombatTest {
 
 	@Before
 	public void before() {
-		Abilities miscAbility = new SingleTargetAbility("Testing",50,50,2);
+		Abilities miscAbility =  AbilityFactory.createAbility(AbilityFactory.Ability.mateEnClase);
 		mc = new MainCharacter("lpinilla", INITHP, INITWP, 20, 20,
 				new Position2D(0, 0), new Type("CS"), miscAbility);
 
@@ -105,8 +102,9 @@ public class CombatTest {
 	public void willPowerCostTest() { //player tiene que heredar de heroe
 		hr = this.combat.getMainCharacter().getHero();
 		pf = this.combat.getHeadOfChair().getEnemy();
-		combat.fighterAttack(hr, pf);
-		assertEquals(50, hr.getWillPower() - hr.getCurrentWillPower());
+		combat.fighterAttack(hr, pf, hr.getAbility());
+		assertEquals(INITWP - hr.getAbility().getWillCost()
+				,hr.getCurrentWillPower());
 	}
 
 	@Test
@@ -150,18 +148,20 @@ public class CombatTest {
 	public void attackDoesntKnockOutTest() {
 		hr = this.combat.getNextHero();
 		pf = this.combat.getHeadOfChair().getEnemy();
-		combat.fighterAttack(hr, pf);
-		assertEquals(50, pf.getHP() - pf.getCurrentHP());
+		combat.fighterAttack(hr, pf, hr.getAbility());
+		assertEquals(hr.getHP() - hr.getAbility().getDamage()
+				, pf.getCurrentHP());
 	}
 
 	@Test
 	public void attackKnocksOutTest(){
 		pf = this.combat.getHeadOfChair().getEnemy();
-		Abilities miscAbility2 = new SingleTargetAbility("Testing",pf.getHP(),50,2);
+		Abilities miscAbility2 = AbilityFactory.createAbility(AbilityFactory.Ability.mateEnClase);
+		pf.setHP(miscAbility2.getDamage());
 		mc = new MainCharacter("lpinilla", INITHP, INITWP, 20, 20,
 				new Position2D(0, 0), new Type("CS"), miscAbility2);
 
-		combat.fighterAttack(mc, pf);
+		combat.fighterAttack(mc, pf, mc.getAbility());
 		assertEquals(0, pf.getCurrentHP());
 
 	}
@@ -170,7 +170,7 @@ public class CombatTest {
 	public void DamagedFighterHealTest(){
 		hr = this.combat.getMainCharacter().getHero();
 		pf = this.combat.getHeadOfChair().getEnemy();
-		combat.fighterAttack(hr, pf);
+		combat.fighterAttack(hr, pf, hr.getAbility());
 
 		combat.fighterHeal(hr, hr.getAbility().getDamage());
 		assertEquals(hr.getHP(),hr.getCurrentHP());

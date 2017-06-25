@@ -10,6 +10,8 @@ import model.persons.MainCharacter;
 import model.persons.Person;
 import model.persons.PersonFactory;
 import model.persons.PersonNotFoundException;
+import sun.applet.Main;
+
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -72,12 +74,19 @@ public class Model{
      * Method to start the factory that creates all the People
      */
     public void activatePersonFactory(){
-        PersonFactory pFactory = new PersonFactory();
         int i=0;
         for(PersonFactory.People p: PersonFactory.People.values()) {
             persons.add(i, PersonFactory.createPerson(p));
             i += 1;
         }
+    }
+
+    /**
+     * for testing purpose, to check "activatePersonFactory"'s correct functionality
+     * @return
+     */
+    public ArrayList<Person> getCreatedCharacters(){
+        return persons;
     }
 
     /**
@@ -93,11 +102,11 @@ public class Model{
      * the HeadOfChair could be added to their own partys
      */
     public void setUpParties(){
-        Person mainC = getPersonByClass("MainCharacter", 0);
+        Person mainC = getPersonByClass(MainCharacter.class.toString(), 0);
         ((MainCharacter)mainC).addHeroToParty((Hero) mainC);
         for(int i = 0; i < 3; i++){
-            Person hoC = getPersonByClass("HeadOfChair", i);
-            ((HeadOfChair)mainC).addProfessorToParty((Enemy)hoC);
+            Person hoC = getPersonByClass(HeadOfChair.class.toString(), i);
+            ((HeadOfChair)hoC).addProfessorToParty((Enemy)hoC);
         }
     }
 
@@ -111,7 +120,7 @@ public class Model{
     public Person getPersonByClass(String objClass, int ignoreNumber){
         int auxIgnore = 0;
         for(Person p : persons){
-            if(p.getClass().toString() == objClass){
+            if(p.getClass().toString().equals(objClass)){
                 if(auxIgnore == ignoreNumber){
                     return p;
                 }else{

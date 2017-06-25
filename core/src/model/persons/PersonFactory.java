@@ -9,10 +9,10 @@ import model.map.Position2D;
  */
 public class PersonFactory {
     public static enum People{
-        mainC, h1,h2, hoC1, pF1, pF2, hoC2, pF3, pF4, hoC3, pF5, pF6;
+        mainC, h1,h2, hoC1, pF1, pF2, hoC2, pF3, pF4, hoC3, pF5, pF6
+        //Important!, changing this order will probably break ModelTest
     }
 
-    //Cambiar todas las positions y las Abilities por las que corresponden
     public static Person createPerson(People p){
         switch(p){
             case mainC:
