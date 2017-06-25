@@ -102,4 +102,7 @@ public class MainCharacter extends Hero implements Serializable {
     public LinkedList<Abilities> getAbilities(){
         return this.abilities;
     }
+     public int getPartyIndex(){
+        return partyIndex;
+    }
 }
