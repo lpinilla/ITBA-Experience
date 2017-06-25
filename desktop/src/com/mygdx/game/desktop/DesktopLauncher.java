@@ -3,8 +3,8 @@ package com.mygdx.game.desktop;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.mygdx.game.ControllerView;
-import com.mygdx.game.Map;
+import controllerView.ControllerView;
+import model.map.Map;
 import com.mygdx.game.Prueba;
 
 import java.io.IOException;
