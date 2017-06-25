@@ -128,7 +128,7 @@ public class Combat {
                 this.stillAliveEnemy = true;
             }
         }
-        return (this.stillAliveEnemy && this.stillAliveHero);
+        return (!this.stillAliveEnemy || !this.stillAliveHero);
     }
 
     public void machineAttack(){
