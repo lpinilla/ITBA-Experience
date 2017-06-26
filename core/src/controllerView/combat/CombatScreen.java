@@ -31,136 +31,131 @@ import model.abilities.Abilities;
 import model.combat.Combat;
 import model.map.Position2D;
 import model.persons.*;
+import sun.applet.Main;
 
 import java.util.ArrayList;
 import java.util.IllegalFormatWidthException;
 //public class CombatScreen{
 public class CombatScreen implements Screen {
     private SpriteBatch batch;
-    private Texture floor;
-    private Animation walks [];
-    private TextureRegion spriteSheet[][];
+    private Texture background;
+    //private Animation walks [];
+    //private TextureRegion spriteSheet[][];
     private Texture buttonFleeInactive;
     private Texture buttonFleeActive;
     private Texture buttonHab1 = new Texture("habButton.png");
-    private TextureRegion walkSheet[][];
+    //private TextureRegion walkSheet[][];
     private float timepassed;
     //private static final int GAME_WIDTH = 30*20;
     //private static final int GAME_HEIGHT = 30*20;
-    private static final int GAME_WIDTH = 800;
+    private static final int GAME_WIDTH = 1000;
    // private static final int GAME_HEIGHT = 1000;
-   private static final int GAME_HEIGHT = 800;
+   private static final int GAME_HEIGHT = 1000;
 
     public static final int WIDTH = GAME_WIDTH/20;
     private static final int HEIGHT = GAME_HEIGHT/20;
-    public static final int WIDTH2 = 800; //800
-    public static final int HEIGHT2 = 800; //600
+    public static final int WIDTH2 = 1000; //800
+    public static final int HEIGHT2 = 1000; //600
     private static final int BUTTONWIDTH = 160;
     private static final int BUTTONHEIGHT = 60;
-    private float x;
-    private float y;
     private ControllerView cont;
     private Texture buttonFondo;
     private Texture buttonHab3;
     private Texture buttonHab2;
     private Texture buttonHab4;
     private Texture attack;
-    private Texture Hoc1;
-    private Texture Hoc2;
-    private Texture Hoc3;
+    private Texture hocSprite;
+    private Texture prof1Sprite;
+    private Texture prof2Sprite;
+    private Texture mainCSprite;
+    private Texture hero1Sprite;
+    private Texture hero2Sprite;
     private float turntime;
+    private int auxXConstant;
+    private int auxYConstant;
 
     public CombatScreen (ControllerView cont){
         this.cont = cont;
-        Hoc1 = new Texture("diaz.png"); //harcoded
-        Hoc2 = new Texture("laura.png");
-        Hoc3 = new Texture("santi.png");
-        attack = new Texture("attack.png");
         timepassed = 0;
         turntime = 0;
-        x = 5.f;
-        y = 10.f;
         batch = new SpriteBatch();
-        floor = new Texture("fightingBackground.png");
-        spriteSheet = TextureRegion.split(new Texture("character.png"),64,64);
-        walkSheet = new TextureRegion[4][9];
-        walks = new Animation[5];
-        for(int i=0;i<4;i++){
-            for(int j=0;j<9;j++){
-                walkSheet[i][j] = spriteSheet[8+i][j];
-
-            }
-        }
-
-
-        //arriba abajo izquierda derecha
-        walks[0] = new Animation(0.1f,walkSheet[0]);
-        walks[1] = new Animation(0.1f,walkSheet[2]);
-        walks[2] = new Animation(0.1f,walkSheet[1]);
-        walks[3] = new Animation(0.1f,walkSheet[3]);
-
+        this.mainCSprite = new Texture(
+                this.cont.getCurrentCombat().getMainCharacter().getName() + ".png");
+        this.hero1Sprite = new Texture(
+                this.cont.getCurrentCombat().getMainCharacter().getParty().get(1).getName() + ".png");
+        this.hero2Sprite = new Texture(
+                this.cont.getCurrentCombat().getMainCharacter().getParty().get(2).getName() + ".png");
+        this.hocSprite = new Texture(
+                this.cont.getCurrentCombat().getHeadOfChair().getName() + ".png");
+        attack = new Texture("attack.png");
+        background = new Texture("fightingBackground.png");
         buttonFleeInactive = new Texture("fleeInac.png");
         buttonFleeActive = new Texture("fleeActiv.png");
         buttonFondo = new Texture("recuadro.png");
-        buttonHab1 = new Texture("habButton.png");
-        buttonHab2 = new Texture("habButton.png");
-        buttonHab3 = new Texture("habButton.png");
-        buttonHab4 = new Texture("habButton.png");
+        if(this.cont.getCurrentCombat().getMainCharacter().getAbilities().size() > 0){
+            //buttonHab1 = new Texture("habButton.png");
+            buttonHab1 = new Texture(
+                    this.cont.getCurrentCombat().getMainCharacter().getAbilities().get(0).getName() + ".png");
 
-
+        }if(this.cont.getCurrentCombat().getMainCharacter().getAbilities().size() > 1){
+            //buttonHab2 = new Texture("habButton.png");
+            buttonHab2 = new Texture(
+                    this.cont.getCurrentCombat().getMainCharacter().getAbilities().get(1).getName() + ".png");
+        }if(this.cont.getCurrentCombat().getMainCharacter().getAbilities().size() > 2){
+            //buttonHab3 = new Texture("habButton.png");
+            buttonHab3 = new Texture(
+                    this.cont.getCurrentCombat().getMainCharacter().getAbilities().get(2).getName() + ".png");
+        }
+        if(this.cont.getCurrentCombat().getMainCharacter().getAbilities().size() > 3) {
+            //buttonHab4 = new Texture("habButton.png");
+            buttonHab4 = new Texture(
+                    this.cont.getCurrentCombat().getMainCharacter().getAbilities().get(3).getName() + ".png");
+        }
     }
 
 
     public void drawingHabButtons(){
-        batch.draw(buttonFondo, 10, 10, 300, 80);
-        //if(cont.getCurrentCombat().getMainCharacter().getAbilities().contains()){
-        batch.draw(buttonHab1, 18, 13, 105, 30);
-        //}
-        //if(cont.getCurrentCombat().getMainCharacter().getAbilities().contains()){
-        batch.draw(buttonHab2, 200, 13, 105, 30);
-        //}
-        //if(cont.getCurrentCombat().getMainCharacter().getAbilities().contains()){
-        batch.draw(buttonHab3, 18, 53, 105, 30);
-        //}
-        //if(cont.getCurrentCombat().getMainCharacter().getAbilities().contains()){
-        batch.draw(buttonHab4, 200, 53, 105, 30);
-        //}
-
-    /*public void drawingHabButtons(){
-        batch.draw(buttonFondo, 10, 10, 300, 80);
-        batch.draw(buttonHab1, 18, 13, 105, 30);
-        if(cont.getCurrentCombat().getMainCharacter().getAbilities().contains(cont.getListAbilities().get(0))){
-            batch.draw(buttonHab2, 200, 13, 105, 30);
+        auxXConstant = 500;
+        auxYConstant = 100;
+        //System.out.println(cont.getCurrentCombat().getMainCharacter().getAbilities().size());
+        batch.draw(buttonFondo, 10 + auxXConstant, 10 + auxYConstant, 400, 150);
+        /*if(Gdx.input.isKeyJustPressed(Keys.T)){
+            this.cont.getCurrentCombat().getMainCharacter().addSpecialAbility(
+                    AbilityFactory.createAbility(AbilityFactory.Ability.mateEnClase)
+            );
+        }*/
+        if(cont.getCurrentCombat().getMainCharacter().getAbilities().size() > 0){
+            batch.draw(buttonHab1, 15 + auxXConstant, 87.5f + auxYConstant, 192.5f, 67.5f);
         }
-        if(cont.getCurrentCombat().getMainCharacter().getAbilities().contains(cont.getListAbilities().get(1))){
-            batch.draw(buttonHab3, 18, 53, 105, 30);
+        if(cont.getCurrentCombat().getMainCharacter().getAbilities().size() > 1){
+            batch.draw(buttonHab2, 212.5f + auxXConstant, 87.5f + auxYConstant, 192.5f, 67.5f);
         }
-        if(cont.getCurrentCombat().getMainCharacter().getAbilities().contains(cont.getListAbilities().get(2))){
-            batch.draw(buttonHab4, 200, 53, 105, 30);
+        if(cont.getCurrentCombat().getMainCharacter().getAbilities().size() >2){
+            batch.draw(buttonHab3, 15 + auxXConstant, 15 + auxYConstant, 192.5f, 67.5f);
         }
-*/
-
+        if(cont.getCurrentCombat().getMainCharacter().getAbilities().size() > 3){
+            batch.draw(buttonHab4, 212.5f + auxXConstant, 15 + auxYConstant, 192.5f, 67.5f);
+        }
 
         try{
             //System.out.println("Aca entro al if3: index= " + cont.getCurrentCombat().getMainCharacter().getPartyIndex());
 
-            //ButtonHab1 abajo izq
-            if(Gdx.input.getX() >= 18 && Gdx.input.getX() <= 125
-                    && GAME_HEIGHT - Gdx.input.getY() >= 13 && GAME_HEIGHT - Gdx.input.getY() <=  60){
+            //ButtonHab3 abajo izq
+            if(Gdx.input.getX() >= (15 + auxXConstant) && Gdx.input.getX() <= (auxXConstant +192.5f)
+                    && GAME_HEIGHT - Gdx.input.getY() >= (15 + auxYConstant) && GAME_HEIGHT - Gdx.input.getY() <=  (auxYConstant +67.5f)){
                 if(Gdx.input.justTouched()){
-
-                    if (Gdx.input.isKeyJustPressed(Keys.NUM_1) &&
+                    if (Gdx.input.isKeyPressed(Keys.NUM_1) &&
                             !this.cont.getCurrentCombat().getHeadOfChair().isKnockedOut()){
                         batch.draw(attack, 160, 430, 80, 80);
                         ActivateButton(0);
 
                     }
-                    else if(Gdx.input.isKeyJustPressed(Keys.NUM_2) &&
+                    else if(Gdx.input.isKeyPressed(Keys.NUM_2) &&
                             !this.cont.getCurrentCombat().getHeadOfChair().getParty().get(1).isKnockedOut()){
                         batch.draw(attack, 270, 430, 80, 80);
                         ActivateButton(1);
                     }
-                    else if(Gdx.input.isKeyJustPressed(Keys.NUM_3) &&
+                    else if(Gdx.input.isKeyPressed(Keys.NUM_3) &&
                             !this.cont.getCurrentCombat().getHeadOfChair().getParty().get(2).isKnockedOut()){
                         batch.draw(attack, 270, 430, 80, 80);
                         ActivateButton(2);
@@ -168,9 +163,9 @@ public class CombatScreen implements Screen {
                 }
             }
 
-            //ButtonHab3 arriba izq
-            if(Gdx.input.getX() >= 18 && Gdx.input.getX() <= 125
-                    && GAME_HEIGHT - Gdx.input.getY() >= 53 && GAME_HEIGHT - Gdx.input.getY() <=  83){
+            //ButtonHab1 arriba izq
+            if(Gdx.input.getX() >= (15 + auxXConstant) && Gdx.input.getX() <= (auxXConstant + 192.5f)
+                    && GAME_HEIGHT - Gdx.input.getY() >= (auxYConstant + 87.5f) && GAME_HEIGHT - Gdx.input.getY() <= (auxYConstant + 87.5f + 67.5f)){
                 if(Gdx.input.justTouched()){
                     if (Gdx.input.isKeyPressed(Keys.NUM_1) &&
                             !this.cont.getCurrentCombat().getHeadOfChair().isKnockedOut()){
@@ -183,7 +178,7 @@ public class CombatScreen implements Screen {
                         ActivateButton(1);
 
                     }
-                    else if(Gdx.input.isKeyJustPressed(Keys.NUM_3) &&
+                    else if(Gdx.input.isKeyPressed(Keys.NUM_3) &&
                             !this.cont.getCurrentCombat().getHeadOfChair().getParty().get(2).isKnockedOut()){
                         batch.draw(attack, 270, 430, 80, 80);
                         ActivateButton(2);
@@ -191,9 +186,9 @@ public class CombatScreen implements Screen {
                 }
             }
 
-            //ButtonHab2
-            if(Gdx.input.getX() >= 200 && Gdx.input.getX() <= 307
-                    && GAME_HEIGHT - Gdx.input.getY() >= 13 && GAME_HEIGHT - Gdx.input.getY() <=  60){
+            //ButtonHab4 abajo derecha
+            if(Gdx.input.getX() >= (212.5f + auxXConstant) && Gdx.input.getX() <= (212.5f + auxXConstant + 192.5f)
+                    && GAME_HEIGHT - Gdx.input.getY() >= (15 + auxYConstant) && GAME_HEIGHT - Gdx.input.getY() <=  (auxYConstant +67.5f)){
                 if(Gdx.input.justTouched()){
                     if (Gdx.input.isKeyPressed(Keys.NUM_1) &&
                             !this.cont.getCurrentCombat().getHeadOfChair().isKnockedOut()){
@@ -205,16 +200,17 @@ public class CombatScreen implements Screen {
                         batch.draw(attack, 270, 430, 120, 80);
                         ActivateButton(1);
                     }
-                    else if(Gdx.input.isKeyJustPressed(Keys.NUM_3)&&
+                    else if(Gdx.input.isKeyPressed(Keys.NUM_3)&&
                             !this.cont.getCurrentCombat().getHeadOfChair().getParty().get(2).isKnockedOut()){
                         ActivateButton(2);
                     }
                 }
             }
-            //ButtonHab4
-            if(Gdx.input.getX() >= 200 && Gdx.input.getX() <= 307
-                    && GAME_HEIGHT - Gdx.input.getY() >= 53 && GAME_HEIGHT - Gdx.input.getY() <=  83){
+            //ButtonHab2 arriba der
+            if(Gdx.input.getX() >= (212.5f + auxXConstant) && Gdx.input.getX() <= (212.5f + auxXConstant + 192.5f)
+                    && GAME_HEIGHT - Gdx.input.getY() >= (auxYConstant + 87.5f) && GAME_HEIGHT - Gdx.input.getY() <= (auxYConstant + 87.5f + 67.5f)){
                 if(Gdx.input.justTouched()){
+                    System.out.println("touched");
                     if (Gdx.input.isKeyPressed(Keys.NUM_1) &&
                             !this.cont.getCurrentCombat().getHeadOfChair().isKnockedOut()){
                         batch.draw(attack, 160, 430, 80, 80);
@@ -224,7 +220,7 @@ public class CombatScreen implements Screen {
                             !this.cont.getCurrentCombat().getHeadOfChair().getParty().get(1).isKnockedOut()){
                         batch.draw(attack, 270, 430, 120, 80);
                         ActivateButton(1);
-                    }else if(Gdx.input.isKeyJustPressed(Keys.NUM_3) &&
+                    }else if(Gdx.input.isKeyPressed(Keys.NUM_3) &&
                             !this.cont.getCurrentCombat().getHeadOfChair().getParty().get(2).isKnockedOut()){
                         batch.draw(attack, 270, 430, 80, 80);
                         ActivateButton(2);
@@ -246,7 +242,7 @@ public class CombatScreen implements Screen {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        batch.draw(floor, 0,0, GAME_WIDTH, GAME_WIDTH);
+        batch.draw(background, 0,0, GAME_WIDTH, GAME_WIDTH);
         BitmapFont font;
         if(cont.getCurrentCombat().isItFinished()){
             boolean win = cont.getCurrentCombat().winner();
@@ -270,10 +266,20 @@ public class CombatScreen implements Screen {
                 font = new BitmapFont();
                 GlyphLayout layoutHp = new GlyphLayout(font, "HP:" + h.getCurrentHP() +  "/" + h.getHP());
                 GlyphLayout layoutWp = new GlyphLayout(font, "WP:"+ h.getCurrentWillPower() +"/" + h.getWillPower());
-                font.draw(batch, layoutHp, 170+i, 220); // x 165 y 200
-                font.draw(batch, layoutWp, 170+i, 250); // x 165 y 225
-                batch.draw((TextureRegion)(walks[0].getKeyFrame(timepassed, true)),3*WIDTH + i ,8*HEIGHT-200,100,100);
-                i +=100;
+                if(h instanceof MainCharacter){
+                    font.draw(batch, layoutHp, 110+i, 585); // x 165 y 200
+                    font.draw(batch, layoutWp, 110+i, 610); // x 165 y 225
+                    batch.draw( mainCSprite, WIDTH - 30 + i, HEIGHT + 20, 200, 500);
+                }else if( h == this.cont.getCurrentCombat().getMainCharacter().getParty().get(1)){
+                    font.draw(batch, layoutHp, 110+i, 555); // x 165 y 200
+                    font.draw(batch, layoutWp, 110+i, 580); // x 165 y 225
+                    batch.draw( hero1Sprite,   WIDTH - 30 + i, HEIGHT -20 , 200, 500);
+                }else{
+                    font.draw(batch, layoutHp, 110+i, 495); // x 165 y 200
+                    font.draw(batch, layoutWp, 110+i, 520); // x 165 y 225
+                    batch.draw( hero2Sprite, WIDTH - 30 + i, HEIGHT -70  , 200, 500);
+                }
+                i +=135;
             }
         }
         i=0;
@@ -285,30 +291,31 @@ public class CombatScreen implements Screen {
                 //esto es necesario?
                 //GlyphLayout layoutPlayer = new GlyphLayout(font, "Player:" + cont.getCurrentCombat().getHeadOfChair().getParty().indexOf(e));
                 //font.draw(batch, layoutPlayer, 175 + i, 590);
-                font.draw(batch, layoutHp, 650+i, 475); // x 165 y 575
-                font.draw(batch, layoutWp, 650+i, 450); // x 165 y 550
                 if(e instanceof HeadOfChair){
-                    HeadOfChair hoc = cont.getCurrentCombat().getHeadOfChair();
-                    if(hoc.getHP()== 200)
-                        batch.draw(Hoc1, 12  * WIDTH + i, 7 * HEIGHT + 150, 200, 450);
-                    else if(hoc.getHP() == 400)
-                        batch.draw(Hoc2, 12  * WIDTH + i, 7 * HEIGHT + 150, 200, 450);
-                    else
-                        batch.draw(Hoc3, 12  * WIDTH + i, 7 * HEIGHT + 150, 200, 450);
-                }else {
-                    batch.draw((TextureRegion) (walks[1].getKeyFrame(timepassed, true)), 12 * WIDTH + i, 11 * HEIGHT + 150, 100, 100);
-                }i +=200;
+                    font.draw(batch, layoutHp, 450+i, 555); // x 165 y 575
+                    font.draw(batch, layoutWp, 450+i, 530); // x 165 y 550
+                    batch.draw( hocSprite, 8  * WIDTH + i, 7 * HEIGHT + 150 + 50, 200, 450);
+                }else if (e == this.cont.getCurrentCombat().getHeadOfChair().getParty().get(1)){
+                    font.draw(batch, layoutHp, 450+i, 505); // x 165 y 575
+                    font.draw(batch, layoutWp, 450+i, 480); // x 165 y 550
+                    batch.draw( hocSprite, 8  * WIDTH + i, 7 * HEIGHT + 150 , 200, 450);
+                }else{
+                    font.draw(batch, layoutHp, 450+i, 455); // x 165 y 575
+                    font.draw(batch, layoutWp, 450+i, 430); // x 165 y 550
+                    batch.draw( hocSprite, 8  * WIDTH + i, 7 * HEIGHT + 150 - 50, 200, 450);
+                }
+                i +=200;
             }
         }
         if(cont.getCurrentCombat().isPlayerTurn()){
-           // if(turntime > 1)
             drawingHabButtons();
             font = new BitmapFont();
+            font.getData().setScale(2.5f);
             GlyphLayout layoutTurns = new GlyphLayout(font, "Your Turn");
             font.draw(batch, layoutTurns, 170, 950);
             for(Abilities a : cont.getCurrentCombat().getMainCharacter().getAbilities()){
                 font = new BitmapFont();
-                batch.draw(buttonHab1, 20, 12, buttonHab1.getWidth() * i, 30);
+                //batch.draw(buttonHab1, 20, 12, buttonHab1.getWidth() * i, 30);
                 font.draw(batch, a.getName(), i * buttonHab1.getWidth() - 60, 30);
             }
         }
@@ -375,6 +382,6 @@ public class CombatScreen implements Screen {
     @Override
     public void dispose () {
         batch.dispose();
-        floor.dispose();
+        background.dispose();
     }
 }
