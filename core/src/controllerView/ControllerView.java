@@ -16,6 +16,7 @@ import model.map.Position2D;
 import model.persons.Type;
 import controllerView.combat.CombatScreen;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -27,8 +28,8 @@ public class ControllerView extends Game{
         private SpriteBatch batch;
         //public static final int WIDTH = 450;
         //public static final int HEIGHT = 720;
-        public static final int WIDTH = 1000;
-        public static final int HEIGHT = 1000;
+        public static final int WIDTH = 800;
+        public static final int HEIGHT = 800;
         private MainCharacter mc;
         private Combat currentCombat;
         private ExploreScreen explore;
@@ -40,53 +41,36 @@ public class ControllerView extends Game{
             this.game = game;
         }
 
-        @Override
-        public void create () {
-            batch = new SpriteBatch();
-            setScreen(new MainMenuScreen(this));
-            game.setUpControllerView(this);
-            Abilities ab = new Abilities("algo", 10, 10, 1);
-            Type t1 = new Type("dePrueba");
-            mc = new MainCharacter("Agustin", 100, 100, 10, 10, new Position2D(5, 10), t1, ab);
-            /*map = new Map();
-            TerrainType type = new PassingType("Pasadizo");
-            TerrainType type2 = new CombatType("Pelea", new HeadOfChair("Agustin"));
-            map.getMap().put(new Position2D(19,10),new Tile(true,false,type) );
-            map.getMap().put(new Position2D(10,19), new Tile(true,false,type));
-            map.getMap().put(new Position2D(10,0), new Tile(true,false,type));
-            map.getMap().put(new Position2D(0,10), new Tile(true,false,type));
-            map.getMap().put(new Position2D(19,18), new Tile(true,false,type2));
+    @Override
+    public void create () {
+        batch = new SpriteBatch();
+        game.setUpControllerView(this);
+        //Abilities ab = new Abilities("algo", 10, 10, 1);
+        Abilities ab = new Abilities("algo", 10, 10,1);
+        Type t1 = new Type("dePrueba");
+        mc = (MainCharacter)(game.getModel().getPersons().get(0));
+        //mc = new MainCharacter("Agustin", 100, 100, 10, 10, new Position2D(5, 10), t1, ab);
+        setScreen(new MainMenuScreen(this));
 
-            setScreen(new ExploreScreen(this,map,new MainCharacter("Agustin",100,100,10,10,new Position2D(5,10))));
-        */
-        }
+    }
 
         public com.mygdx.game.Game getGame(){
             return game;
         }
 
     public void setExplorerScreen() {
-      //  map = new Map();
-        //TerrainType type = new PassingType("Pasadizo");
-        Abilities ab = new Abilities("algo", 10, 10, 1);
-        Type t1 = new Type("dePrueba");
-        /*HeadOfChair hoc = new HeadOfChair("Agustin", 100, 200, 10, 10, new Position2D(10, 10), t1, 1, 50, ab);
-        TerrainType type2 = new CombatType("Pelea");
-        ((CombatType)type2).setHoc(hoc);
-
-        map.getMap().put(new Position2D(19, 10), new Tile(true, false, type));
-        map.getMap().put(new Position2D(10, 19), new Tile(true, false, type));
-        map.getMap().put(new Position2D(10, 0), new Tile(true, false, type));
-        map.getMap().put(new Position2D(0, 10), new Tile(true, false, type));
-        map.getMap().put(new Position2D(19, 18), new Tile(true, false, type2));
-        */
-        //setScreen(new ExploreScreen(this, map, new MainCharacter("Agustin", 100, 100, 10, 10, new Position2D(5, 10), t1, ab)));
         MapHandler mh = game.getModel().getMapHandler();
-        mh.setCurrentMap("bar");
+        if(mh.getCurrentMap().getName() == "initial") {
+            mh.setCurrentMap("bar");
+            mc.setPosition(new Position2D(2,1));
+        }
+        else
+            mc.setPosition(new Position2D(mc.getPosition().getX(),mc.getPosition().getY()-1));
         GameMap map = mh.getCurrentMap();
         explore = new ExploreScreen(this,map,mc);
         setScreen(explore);
     }
+
         public void changeMap(String mapName, Position2D pos){
             MapHandler mh = game.getModel().getMapHandler();
             mh.setCurrentMap(mapName);
@@ -100,6 +84,13 @@ public class ControllerView extends Game{
         setScreen(new CombatScreen(this));
     }
 
+    public void save(){
+        try {
+            game.saveGame();
+        } catch(IOException e){
+            e.getMessage(); //cambiar
+        }
+    }
     public void setCombat(Combat currentCombat){
            // System.out.println("Aca esta el combate.\n");
         this.currentCombat = currentCombat;
@@ -111,11 +102,10 @@ public class ControllerView extends Game{
     }
 
     public void endCombat(){
-        Boolean flag = false;
+        //Boolean flag = false;
         this.getCurrentCombat().endCombat();
-        HeadOfChair hoc = this.getCurrentCombat().getHeadOfChair();
-        MainCharacter mc = this.getCurrentCombat().getMainCharacter();
-        if(currentCombat.winner()){
+        // HeadOfChair hoc = this.getCurrentCombat().getHeadOfChair();
+        /*if(currentCombat.winner()){
             for(Enemy e : hoc.getParty()){
                 mc.addExp(e.getRewardExperience());
             }
@@ -127,11 +117,11 @@ public class ControllerView extends Game{
 //        		if(!flag){
 //        			mc.addSpecialAbility(hoc.getSpecialAbility());
 //        		}
-        }
-     //	setScreen(explore);
+        }*/
+        setExplorerScreen();
     }
 
-    public void machineTurn(){
+  /*  public void machineTurn(){
         this.getCurrentCombat().machineAttack();
         if(this.getCurrentCombat().getMainCharacter().isKnockedOut()){
             this.getCurrentCombat().nextTurn();
@@ -139,7 +129,7 @@ public class ControllerView extends Game{
         if(currentCombat.isItFinished()){
             this.endCombat();
         }
-    }
+    }*/
 
     @Override
         public void render () {
