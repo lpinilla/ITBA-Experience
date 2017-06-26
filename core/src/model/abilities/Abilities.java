@@ -40,5 +40,18 @@ public class Abilities implements Serializable {
     public void use(Fighter f1) {
         //curarse o regenerar willcost?
     }
+    
+    public boolean equals(Object o){
+        if (o == null || o.getClass() != this.getClass()){
+            return false;
+        }
+        if( o == this){
+            return true;
+        }
+        Abilities a = (Abilities) o;
+        return this.getName().equals(a.getName())
+                && this.getDamage() == a.getDamage()
+                && this.getWillCost() == a.getWillCost();
+    }
 }
 
