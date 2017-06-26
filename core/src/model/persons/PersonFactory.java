@@ -20,11 +20,11 @@ public class PersonFactory {
                         new Position2D(0, 2), new Type("Informatico"),
                         AbilityFactory.createAbility(AbilityFactory.Ability.centrarElEspiritu));
             case h1:
-                return new Hero("Hero 1", 100,100,10,10,
+                return new Hero("Hero Boy", 100,100,10,10,
                         new Position2D(0,0), new Type("Informático"),
                         AbilityFactory.createAbility(AbilityFactory.Ability.hacerEjerciciosDeParcial));
             case h2:
-                return new Hero("Hero 2", 100,100,10,10,
+                return new Hero("Hero Girl", 100,100,10,10,
                         new Position2D(0,0), new Type("Informático"),
                         AbilityFactory.createAbility(AbilityFactory.Ability.mateEnClase));
             case hoC1:
@@ -40,7 +40,7 @@ public class PersonFactory {
                         new Position2D(0,0), new Type("Físico"), 1, 100f,
                         AbilityFactory.createAbility(AbilityFactory.Ability.reglaDeLaCadena));
             case hoC2:
-                return new HeadOfChair("María Laura Noni", 400, 400, 50,50,
+                return new HeadOfChair("Maria Laura Noni", 400, 400, 50,50,
                         new Position2D(1,12), new Type("Informático"), 2, 300f,
                         AbilityFactory.createAbility(AbilityFactory.Ability.aumentarVelocidadDeEscritura));
             case pF3:
