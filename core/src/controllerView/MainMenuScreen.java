@@ -14,8 +14,8 @@ public class MainMenuScreen implements Screen {
     private Texture exitInactive;
     private Texture playActive;
     private Texture playInactive;
-    private Texture loadGameInactive;
-    private Texture loadGameActive;
+    private Texture infoGameInactive;
+    private Texture infoGameActive;
     private Texture title;
     private Texture floor;
     private ControllerView game;
@@ -27,8 +27,8 @@ public class MainMenuScreen implements Screen {
 
     public MainMenuScreen(ControllerView game){
         this.game = game;
-        loadGameActive = new Texture("loadGameActive.png");
-        loadGameInactive = new Texture("loadGameInactive.png");
+        infoGameActive = new Texture("gameInfoActive.png");
+        infoGameInactive = new Texture("gameInfoInactive.png");
         exitActive = new Texture("exitGameActive.png");
         exitInactive = new Texture("exitGameInactive.png");
         playActive = new Texture("newGameActive.png");
@@ -38,11 +38,6 @@ public class MainMenuScreen implements Screen {
         floor = new Texture("floor.jpg");
     }
 
-
-
-    @Override
-    public void show() {
-    }
 
     @Override
     public void render(float delta) {
@@ -72,15 +67,14 @@ public class MainMenuScreen implements Screen {
         
         if(Gdx.input.getX() >= WIDTH/2 - BUTTONWIDTH/2 && Gdx.input.getX() <= WIDTH/2 - BUTTONWIDTH/2 + BUTTONWIDTH
                 && Gdx.input.getY() <=  HEIGHT - 5*(HEIGHT/20) && Gdx.input.getY() >=  HEIGHT - (5*(HEIGHT/20) + BUTTONHEIGHT-HEIGHT/30)){
-            batch.draw(loadGameActive, WIDTH / 2 - BUTTONWIDTH / 2, 5*(HEIGHT/20), BUTTONWIDTH, BUTTONHEIGHT);
+            batch.draw(infoGameActive, WIDTH / 2 - BUTTONWIDTH / 2, 5*(HEIGHT/20), BUTTONWIDTH, BUTTONHEIGHT);
             if(Gdx.input.isTouched()){
                 dispose();
-//                game.setExplorerScreen();//deberia ser load.
-                game.setCombatScreen();
+                game.setInfoScreen();
             }
         }
         else{
-            batch.draw(loadGameInactive, WIDTH / 2 - BUTTONWIDTH / 2, 5*(HEIGHT/20), BUTTONWIDTH, BUTTONHEIGHT);
+            batch.draw(infoGameInactive, WIDTH / 2 - BUTTONWIDTH / 2, 5*(HEIGHT/20), BUTTONWIDTH, BUTTONHEIGHT);
         }
 
         
@@ -99,25 +93,7 @@ public class MainMenuScreen implements Screen {
         batch.end();
     }
 
-    @Override
-    public void resize(int width, int height) {
 
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
 
     @Override
     public void dispose() {
@@ -126,4 +102,39 @@ public class MainMenuScreen implements Screen {
         exitActive.dispose();
         exitInactive.dispose();
     }
+
+
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void resize(int width, int height) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+		
+	}
 }
