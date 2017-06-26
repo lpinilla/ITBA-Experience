@@ -32,6 +32,10 @@ public class Abilities implements Serializable {
         return willCost;
     }
 
+    /*
+        Use an ability to damage a rival, it affects an enemy's hp and the 
+        character's will power  
+    */
     public void use(Fighter f1, Fighter f2) {
         f1.modifyCurrentWillPower(-this.getWillCost());
         f2.receiveDamage(this.getDamage());
@@ -54,4 +58,3 @@ public class Abilities implements Serializable {
                 && this.getWillCost() == a.getWillCost();
     }
 }
-
