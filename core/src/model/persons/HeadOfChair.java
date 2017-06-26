@@ -67,4 +67,13 @@ public class HeadOfChair extends Enemy {
             partyIndex = 0;
         return party.get(partyIndex++);
     }
+    
+     public boolean isAlive(){
+        for(Enemy e:party){
+            if(e.getCurrentHP()>0)
+                return true;
+        }
+        return false;
+    }
+
 }
