@@ -35,7 +35,9 @@ import sun.applet.Main;
 
 import java.util.ArrayList;
 import java.util.IllegalFormatWidthException;
-//public class CombatScreen{
+/*
+    @author lpinilla, mheimann on 17/06/2017
+*/
 public class CombatScreen implements Screen {
     private SpriteBatch batch;
     private Texture background;
@@ -113,7 +115,9 @@ public class CombatScreen implements Screen {
         }
     }
 
-
+    /*
+        Draw the buttons of the abilities the character has
+    */
     public void drawingHabButtons(){
         auxXConstant = 500;
         auxYConstant = 100;
@@ -260,6 +264,9 @@ public class CombatScreen implements Screen {
             layoutCharTurn = new GlyphLayout(characterTurn,
                     this.cont.getCurrentCombat().getMainCharacter().getParty().get(partyIndex).getName());
         }*/
+        /*
+            It draws every hero alive
+        */
         int i = 0;
         for (Hero h : cont.getCurrentCombat().getMainCharacter().getParty()){
             if(!h.isKnockedOut()){
@@ -282,13 +289,15 @@ public class CombatScreen implements Screen {
                 i +=135;
             }
         }
+        /*
+            It draws every enemy alive        
+        */
         i=0;
         for (Enemy e : cont.getCurrentCombat().getHeadOfChair().getParty()){
             if(!e.isKnockedOut()){
                 font = new BitmapFont();
                 GlyphLayout layoutHp = new GlyphLayout(font, "HP: "+ e.getCurrentHP() +"/" + e.getHP());
                 GlyphLayout layoutWp = new GlyphLayout(font, "WP: "+e.getCurrentWillPower()+"/" + e.getWillPower());
-                //esto es necesario?
                 //GlyphLayout layoutPlayer = new GlyphLayout(font, "Player:" + cont.getCurrentCombat().getHeadOfChair().getParty().indexOf(e));
                 //font.draw(batch, layoutPlayer, 175 + i, 590);
                 if(e instanceof HeadOfChair){
@@ -338,7 +347,10 @@ public class CombatScreen implements Screen {
         }
         batch.end();
     }
-
+    /*
+      It increases the wp of every character in the in 10 points, after the Main Character
+      use an ability to attack an enemy   
+    */
     private void ActivateButton(int n){
         Hero h = cont.getCurrentCombat().getMainCharacter().getHero();
         h.modifyCurrentWillPower(10);
