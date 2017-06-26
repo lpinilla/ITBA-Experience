@@ -215,6 +215,11 @@ public ExploreScreen (ControllerView controller, GameMap map, MainCharacter play
 			else if(Gdx.input.isKeyPressed(Input.Keys.S)) {
 				if(m.getMap().get(new Position2D((int) ((x + CHARACTER_WIDTH / 2) / WIDTH), (int) (y / HEIGHT))).isSleepable()) {
 					sleep = true;
+					//heal all and recover willPower by sleeping :D
+					for(Hero h : this.player.getParty()){
+						h.healCharacter(h.getHP());
+						h.modifyCurrentWillPower(h.getWillPower());
+					}
 					controller.save();
 				}
 			}
