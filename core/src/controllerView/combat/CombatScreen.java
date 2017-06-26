@@ -87,26 +87,6 @@ public class CombatScreen implements Screen {
         }
 
 
-        Type t = new Type("Informático");
-        Position2D p = new Position2D(1,1);
-        Abilities ab = new Abilities("dsf", 10, 10,0);
-        Abilities rWp = new Abilities("Recover Will Power", 5, 100,0);
-        MainCharacter mc = new MainCharacter("matigol", 100, 1200, 10, 10, p, t, ab);
-        HeadOfChair hod = new HeadOfChair("name", 100, 120, 10, 10, p, t, 1, 10.0f, ab);
-
-        Combat combat = new Combat(mc, hod);
-        cont.setCombat(combat);
-
-        mc.addHeroToParty(mc);
-        Hero asd = new Hero("dsaf", 80, 90, 10, 10, p, t, ab);
-        mc.addHeroToParty(asd);
-        Professor fd = new Professor("sdf", 100, 120, 10, 10, p, t, 2, 10.0f,ab);
-        hod.addProfessorToParty(hod);
-        hod.addProfessorToParty(fd);
-        mc.addSpecialAbility(ab);
-        mc.addSpecialAbility(rWp);
-
-
         //arriba abajo izquierda derecha
         walks[0] = new Animation(0.1f,walkSheet[0]);
         walks[1] = new Animation(0.1f,walkSheet[2]);
@@ -140,6 +120,7 @@ public class CombatScreen implements Screen {
         batch.draw(buttonHab4, 200, 53, 105, 30);
         //}*/
 
+
         try{
             //System.out.println("Aca entro al if3: index= " + cont.getCurrentCombat().getMainCharacter().getPartyIndex());
 
@@ -149,39 +130,15 @@ public class CombatScreen implements Screen {
                 if(Gdx.input.justTouched()){
                     if (Gdx.input.isKeyJustPressed(Keys.NUM_0)){
                         batch.draw(attack, 160, 430, 80, 80);
-                        Hero h = cont.getCurrentCombat().getMainCharacter().getHero();
-                        Enemy e = cont.getCurrentCombat().getHeadOfChair().getParty().get(0);
-                        h.getAbility().use(h,e);
-                        System.out.println("Aca entro");
-                        if(cont.getCurrentCombat().getMainCharacter().getPartyIndex() >=
-                                cont.getCurrentCombat().getMainCharacter().getPartySize()) {
-                            cont.getCurrentCombat().nextTurn();
-
-                            System.out.println("Aca entro al if: index= " + cont.getCurrentCombat().getMainCharacter().getPartyIndex() + "size = " + cont.getCurrentCombat().getMainCharacter().getPartySize() );
-                        }
+                        ActivateButton(0);
                     }
                     else if(Gdx.input.isKeyJustPressed(Keys.NUM_1)){
                         batch.draw(attack, 270, 430, 80, 80);
-                        Hero h = cont.getCurrentCombat().getMainCharacter().getHero();
-                        Enemy e = cont.getCurrentCombat().getHeadOfChair().getParty().get(1);
-                        h.getAbility().use(h,e);
-                        System.out.println("Aca entro 1 ");
-
-                        if(cont.getCurrentCombat().getMainCharacter().getPartyIndex() >=
-                                cont.getCurrentCombat().getMainCharacter().getPartySize()){
-                            cont.getCurrentCombat().nextTurn();
-
-                            System.out.println("Aca entro al if: index= " + cont.getCurrentCombat().getMainCharacter().getPartyIndex() + "size = " + cont.getCurrentCombat().getMainCharacter().getPartySize() );
-                        }
+                        ActivateButton(1);
                     }
                     else if(Gdx.input.isKeyJustPressed(Keys.NUM_2)){
                         batch.draw(attack, 270, 430, 80, 80);
-                        Hero h = cont.getCurrentCombat().getMainCharacter().getHero();
-                        Enemy e = cont.getCurrentCombat().getHeadOfChair().getParty().get(2);
-                        h.getAbility().use(h,e);
-                        if(cont.getCurrentCombat().getMainCharacter().getPartyIndex() >=
-                                cont.getCurrentCombat().getMainCharacter().getPartySize())
-                            cont.getCurrentCombat().nextTurn();
+                        ActivateButton(2);
                     }
                 }
             }
@@ -192,38 +149,16 @@ public class CombatScreen implements Screen {
                 if(Gdx.input.justTouched()){
                     if (Gdx.input.isKeyPressed(Keys.NUM_0)){
                         batch.draw(attack, 160, 430, 80, 80);
-                        Hero h = cont.getCurrentCombat().getMainCharacter().getHero();
-                        Enemy e = cont.getCurrentCombat().getHeadOfChair().getParty().get(0);
-                        h.getAbility().use(h,e);
-                        System.out.println("Aca entro 3 ");
-                        if(cont.getCurrentCombat().getMainCharacter().getPartyIndex() >=
-                                cont.getCurrentCombat().getMainCharacter().getPartySize()) {
-                            cont.getCurrentCombat().nextTurn();
-                            System.out.println("Aca entro al if 3: index= " + cont.getCurrentCombat().getMainCharacter().getPartyIndex() + "size = " + cont.getCurrentCombat().getMainCharacter().getPartySize() );
-                        }
+                        ActivateButton(0);
                     }
                     else if(Gdx.input.isKeyPressed(Keys.NUM_1)){
                         batch.draw(attack, 270, 430, 120, 80);
-                        Hero h = cont.getCurrentCombat().getMainCharacter().getHero();
-                        Enemy e = cont.getCurrentCombat().getHeadOfChair().getParty().get(1);
-                        h.getAbility().use(h,e);
-                        //System.out.println("Aca entro 3 ");
-                        System.out.println("Aca entro al if3: index= " + cont.getCurrentCombat().getMainCharacter().getPartyIndex());
-                        if(cont.getCurrentCombat().getMainCharacter().getPartyIndex() >=
-                                cont.getCurrentCombat().getMainCharacter().getPartySize()) {
-                            cont.getCurrentCombat().nextTurn();
-                            //System.out.println("Aca entro al if3: index= " + cont.getCurrentCombat().getMainCharacter().getPartyIndex() + "size = " + cont.getCurrentCombat().getMainCharacter().getPartySize() );
-                        }
+                        ActivateButton(1);
 
                     }
                     else if(Gdx.input.isKeyJustPressed(Keys.NUM_2)){
                         batch.draw(attack, 270, 430, 80, 80);
-                        Hero h = cont.getCurrentCombat().getMainCharacter().getHero();
-                        Enemy e = cont.getCurrentCombat().getHeadOfChair().getParty().get(2);
-                        h.getAbility().use(h,e);
-                        if(cont.getCurrentCombat().getMainCharacter().getPartyIndex() >=
-                                cont.getCurrentCombat().getMainCharacter().getPartySize())
-                            cont.getCurrentCombat().nextTurn();
+                        ActivateButton(2);
                     }
                 }
             }
@@ -233,33 +168,15 @@ public class CombatScreen implements Screen {
                     && GAME_HEIGHT - Gdx.input.getY() >= 13 && GAME_HEIGHT - Gdx.input.getY() <=  60){
                 if(Gdx.input.justTouched()){
                     if (Gdx.input.isKeyPressed(Keys.NUM_0)){
-                        System.out.println("Aca entro 2 ");
                         batch.draw(attack, 160, 430, 80, 80);
-                        Hero h = cont.getCurrentCombat().getMainCharacter().getHero();
-                        Enemy e = cont.getCurrentCombat().getHeadOfChair().getParty().get(0);
-                        h.getAbility().use(h,e);
-                        if(cont.getCurrentCombat().getMainCharacter().getPartyIndex() >=
-                                cont.getCurrentCombat().getMainCharacter().getPartySize()) {
-                            cont.getCurrentCombat().nextTurn();
-                            System.out.println("Aca entro al if3: index= " + cont.getCurrentCombat().getMainCharacter().getPartyIndex() + "size = " + cont.getCurrentCombat().getMainCharacter().getPartySize());
-                        }
+                        ActivateButton(0);
                     }
                     else if(Gdx.input.isKeyPressed(Keys.NUM_1)){
                         batch.draw(attack, 270, 430, 120, 80);
-                        Hero h = cont.getCurrentCombat().getMainCharacter().getHero();
-                        Enemy e = cont.getCurrentCombat().getHeadOfChair().getParty().get(1);
-                        h.getAbility().use(h,e);
-                        if(cont.getCurrentCombat().getMainCharacter().getPartyIndex() >=
-                                cont.getCurrentCombat().getMainCharacter().getPartySize())
-                            cont.getCurrentCombat().nextTurn();
+                        ActivateButton(1);
                     }
                     else if(Gdx.input.isKeyJustPressed(Keys.NUM_2)){
-                        Enemy e = cont.getCurrentCombat().getHeadOfChair().getParty().get(2);
-                        Hero h = cont.getCurrentCombat().getMainCharacter().getHero();
-                        h.getAbility().use(h,e);
-                        if(cont.getCurrentCombat().getMainCharacter().getPartyIndex() >=
-                                cont.getCurrentCombat().getMainCharacter().getPartySize())
-                            cont.getCurrentCombat().nextTurn();
+                        ActivateButton(2);
                     }
                 }
             }
@@ -269,29 +186,14 @@ public class CombatScreen implements Screen {
                 if(Gdx.input.justTouched()){
                     if (Gdx.input.isKeyPressed(Keys.NUM_0)){
                         batch.draw(attack, 160, 430, 80, 80);
-                        Hero h = cont.getCurrentCombat().getMainCharacter().getHero();
-                        Enemy e = cont.getCurrentCombat().getHeadOfChair().getParty().get(0);
-                        h.getAbility().use(h,e);
-                        if(cont.getCurrentCombat().getMainCharacter().getPartyIndex() >=
-                                cont.getCurrentCombat().getMainCharacter().getPartySize())
-                            cont.getCurrentCombat().nextTurn();
+                        ActivateButton(0);
                     }
                     else if(Gdx.input.isKeyPressed(Keys.NUM_1)){
                         batch.draw(attack, 270, 430, 120, 80);
-                        Hero h = cont.getCurrentCombat().getMainCharacter().getHero();
-                        Enemy e = cont.getCurrentCombat().getHeadOfChair().getParty().get(1);
-                        h.getAbility().use(h,e);
-                        if(cont.getCurrentCombat().getMainCharacter().getPartyIndex() >=
-                                cont.getCurrentCombat().getMainCharacter().getPartySize())
-                            cont.getCurrentCombat().nextTurn();
+                        ActivateButton(1);
                     }else if(Gdx.input.isKeyJustPressed(Keys.NUM_2)){
                         batch.draw(attack, 270, 430, 80, 80);
-                        Hero h = cont.getCurrentCombat().getMainCharacter().getHero();
-                        Enemy e = cont.getCurrentCombat().getHeadOfChair().getParty().get(2);
-                        h.getAbility().use(h,e);
-                        if(cont.getCurrentCombat().getMainCharacter().getPartyIndex() >=
-                                cont.getCurrentCombat().getMainCharacter().getPartySize())
-                            cont.getCurrentCombat().nextTurn();
+                        ActivateButton(2);
                     }
                 }
             }
@@ -300,8 +202,8 @@ public class CombatScreen implements Screen {
             GlyphLayout layoutHp = new GlyphLayout(font, e.getMessage());
             font.draw(batch, layoutHp, 500 , 500); // x 165 y 200
         }
-        return;
     }
+
 
     @Override
     public void render (float delta) {
@@ -311,6 +213,11 @@ public class CombatScreen implements Screen {
         batch.begin();
         batch.draw(floor, 0,0, GAME_WIDTH, GAME_WIDTH);
         BitmapFont font;
+        if(cont.getCurrentCombat().isItFinished()){
+            if(cont.getCurrentCombat().winner()){
+                cont.endCombat();
+            }
+        }
 
         int i = 0;
         for (Hero h : cont.getCurrentCombat().getMainCharacter().getParty()){
@@ -318,8 +225,8 @@ public class CombatScreen implements Screen {
                 font = new BitmapFont();
                 GlyphLayout layoutHp = new GlyphLayout(font, "HP:" + h.getCurrentHP() +  "/" + h.getHP());
                 GlyphLayout layoutWp = new GlyphLayout(font, "WP:"+ h.getCurrentWillPower() +"/" + h.getWillPower());
-                font.draw(batch, layoutHp, 170+i, 155); // x 165 y 200
-                font.draw(batch, layoutWp, 170+i, 180); // x 165 y 225
+                font.draw(batch, layoutHp, 170+i, 220); // x 165 y 200
+                font.draw(batch, layoutWp, 170+i, 250); // x 165 y 225
                 batch.draw((TextureRegion)(walks[0].getKeyFrame(timepassed, true)),3*WIDTH + i ,8*HEIGHT-200,100,100);
                 i +=100;
             }
@@ -370,8 +277,18 @@ public class CombatScreen implements Screen {
         else{
             batch.draw(buttonFleeInactive, (WIDTH2 / 2 - BUTTONWIDTH / 2) + 100, 10);
         }
-        //batch.draw(floor, 0, 0);
         batch.end();
+    }
+
+    private void ActivateButton(int n){
+        Hero h = cont.getCurrentCombat().getMainCharacter().getHero();
+        Enemy e = cont.getCurrentCombat().getHeadOfChair().getParty().get(n);
+        h.getAbility().use(h,e);
+        if(cont.getCurrentCombat().getMainCharacter().getPartyIndex() >=
+                cont.getCurrentCombat().getMainCharacter().getPartySize()) {
+            cont.getCurrentCombat().nextTurn();
+
+        }
     }
 
     @Override
