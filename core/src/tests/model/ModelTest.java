@@ -1,15 +1,21 @@
 package tests.model;
-import static org.junit.Assert.assertEquals;
 /**
  * @author: ividaurreta
  */
+
+import static org.junit.Assert.assertEquals;
 import model.Model;
 import model.abilities.Abilities;
 import model.abilities.AbilityFactory;
-import model.persons.*;
+import model.persons.HeadOfChair;
+import model.persons.Hero;
+import model.persons.MainCharacter;
+import model.persons.Person;
+import model.persons.PersonFactory;
+import model.persons.Professor;
 import org.junit.Before;
 import org.junit.Test;
-
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -113,18 +119,48 @@ public class ModelTest{
 	}
 
 	@Test
-	public void loadMapsTest(){
+	public void readMapTest() throws IOException {
+		model.loadMaps(fr);
+		model.generateMaps();
+
+		FileReader fr2 = new FileReader("assets/maps2.txt");
+		BufferedReader bf = new BufferedReader(fr2);
+		int mapqnty = Integer.valueOf(bf.readLine());
+		while (mapqnty > 0){
+			String name = bf.readLine();
+			Integer[][] rawData=model.getRawData().get(name);
+			int width = Integer.valueOf(bf.readLine());
+			int height = Integer.valueOf(bf.readLine());
+			for (int i = height-1 ; i>=0 ; i--) {
+				for (int j = 0; j < width; j++) {
+					assertEquals(rawData[i][j], Integer.valueOf((bf.read()) - '0'));
+				}
+				bf.read();
+			}
+			mapqnty--;
+			}
+	}
+
+	@Test (expected= IOException.class)
+	public void readBrokenMapTest() throws IOException {
+		FileReader fr2 = new FileReader(new File("assets/brokenMap.txt"));
+		model.loadMaps(fr2);
+		model.generateMaps();
 
 	}
 
 	@Test
-	public void generateMapsTest(){
+	public void generateMapsTest() throws IOException{
+		model.loadMaps(fr);
+		int oldqnt=model.getMapHandler().getSize();
+		model.generateMaps();
 
-	}
+		//How many maps should've been added
+		FileReader fr2 = new FileReader("assets/maps2.txt");
+		BufferedReader bf = new BufferedReader(fr2);
+		int mapsAdded =Integer.valueOf(bf.readLine());
 
-	@Test
-	public void readMapTest(){
-		//perdón al que tenga que hacer este test, gl m8
+		assertEquals(oldqnt + mapsAdded,model.getMapHandler().getSize());
 	}
 
 

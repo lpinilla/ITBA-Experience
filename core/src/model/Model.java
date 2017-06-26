@@ -180,7 +180,7 @@ public class Model{
     * Method that reads the map from the file and creates
     * the rawData of them and calls the MapHandler to create
     * the maps, finally it stores the rawData in the Map
-    * @param br: BufferredReader given by the method above
+    * @param br: BufferedReader given by the method above
     */
 
     private void readMap(BufferedReader br) throws IOException {
@@ -203,6 +203,11 @@ public class Model{
        mh.createParticularMap(mapName, height, width, mapRawData);
         mapsRawData.put(mapName, mapRawData);
     }
+
+    public HashMap<String, Integer[][]> getRawData(){
+        return this.mapsRawData;
+    }
+
     void printMap(Integer[][]map, int w, int h) {
         for (int i = 0; i < h; i++) {
             for (int j = 0; j < w; j++) {
