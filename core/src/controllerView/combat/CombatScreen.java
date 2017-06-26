@@ -393,6 +393,7 @@ public class CombatScreen implements Screen {
         attackInfo = new GlyphLayout(attackLog, h.getName() + " used " +
                 h.getAbility().getName() + " on " + e.getName());
         timerActive = true;
+        drawAttackInfo = true;
     }
 
     @Override
