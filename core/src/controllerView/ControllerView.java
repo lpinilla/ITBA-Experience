@@ -73,6 +73,16 @@ public class ControllerView extends Game{
         explore = new ExploreScreen(this,map,mc);
         setScreen(explore);
     }
+     
+    public void addAbilities(){
+        for(int i=0; i<3;i++){
+            if(getGame().getModel().getBossWon()[i]==true){
+                if(!mc.getAbilities().contains(listAbilities.get(i))){
+                    mc.addSpecialAbility(listAbilities.get(i));
+                }
+            }
+        }
+    }
 
         public void changeMap(String mapName, Position2D pos){
             MapHandler mh = game.getModel().getMapHandler();
@@ -126,35 +136,33 @@ public class ControllerView extends Game{
             h.modifyCurrentWillPower(h.getWillPower());
         }
     }
-    public void endCombat(boolean win){
-        if(win == true){
+     public void endCombat(boolean win) {
+        Abilities newab = null;
+        if (win == true) {
             float exp = 0;
-            for(Enemy e: currentCombat.getHeadOfChair().getParty()){
+            for (Enemy e : getCurrentCombat().getHeadOfChair().getParty()) {
                 exp += e.getRewardExperience();
             }
-            for(Hero h: mc.getParty()){
+            for (Hero h : mc.getParty()) {
                 System.out.println("Exp = " + exp);
                 h.addExp(exp);
-                System.out.println("Experience to next level = "+ h.getExpToNextLevel() + "level = " + h.getLevel());
+                System.out.println("Experience to next level = " + h.getExpToNextLevel() + "level = " + h.getLevel());
             }
+            //newab = getCurrentCombat().getHeadOfChair().getAbility();
+            if (getCurrentCombat().getHeadOfChair().getName().equals("Alejandro Diaz"))
+                getGame().getModel().getBossWon()[0] = true;
+            else if (getCurrentCombat().getHeadOfChair().getName().equals("Maria Laura Noni"))
+                getGame().getModel().getBossWon()[1] = true;
+            else
+                getGame().getModel().getBossWon()[2] = true;
         }
-
         getCurrentCombat().endCombat();
-        // HeadOfChair hoc = this.getCurrentCombat().getHeadOfChair();
-        /*if(currentCombat.winner()){
-            for(Enemy e : hoc.getParty()){
-                mc.addExp(e.getRewardExperience());
-            }
-//        		for(Abilities a : mc.getAbilities()){
-//        			if(a.getName().equals(hoc.getSpecialAbility())){
-//        				flag=true;
-//        			}
-//        		}
-//        		if(!flag){
-//        			mc.addSpecialAbility(hoc.getSpecialAbility());
-//        		}
-        }*/
+
+
         setExplorerScreen();
+        /*if(newab != null)
+            mc.addSpecialAbility(newab);
+        */
     }
 
 
