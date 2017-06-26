@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 public class MapHandler {
 
-    private HashMap<String,GameMap> maps; //map of maps o.O
+    private HashMap<String,GameMap> maps; //map of maps
     private GameMap currentMap; //user's map
     private int size;
 
