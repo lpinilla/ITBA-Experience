@@ -3,6 +3,7 @@ package model;
 import controllerView.ControllerView;
 import model.abilities.Abilities;
 import model.map.MapHandler;
+import model.map.Position2D;
 import model.persons.Enemy;
 import model.persons.HeadOfChair;
 import model.persons.Hero;
@@ -10,7 +11,7 @@ import model.persons.MainCharacter;
 import model.persons.Person;
 import model.persons.PersonFactory;
 import model.persons.PersonNotFoundException;
-import sun.applet.Main;
+import model.persons.Type;
 
 import java.io.IOException;
 import java.io.FileReader;
