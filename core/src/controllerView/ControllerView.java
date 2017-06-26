@@ -94,6 +94,22 @@ public class ControllerView extends Game{
             e.getMessage(); //cambiar
         }
     }
+       /*public void load(){
+        try {
+
+            game = game.loadGame();
+            //game.setUpControllerView(this);
+            System.out.println("Aca llego");
+            MapHandler mh = game.getModel().getMapHandler();
+            GameMap map = mh.getCurrentMap();
+            System.out.println("map = " + map.getName());
+            explore = new ExploreScreen(this,map,mc);
+           setScreen(explore);
+        } catch(Exception e){
+            e.getMessage(); //cambiar
+        }
+
+    }*/
     public void setCombat(Combat currentCombat){
            // System.out.println("Aca esta el combate.\n");
         this.currentCombat = currentCombat;
