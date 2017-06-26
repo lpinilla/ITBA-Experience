@@ -22,10 +22,8 @@ public class MainMenuScreen implements Screen {
     private SpriteBatch batch;
     private static final int BUTTONWIDTH = 280;
     private static final int BUTTONHEIGHT = 140;
-    private static final int WIDTH = 30*20;
-    private static final int HEIGHT = 30*20;
-    //private static final int WIDTH = 1000;
-    //private static final int HEIGHT = 1000;
+    private static final int WIDTH = 1000;
+    private static final int HEIGHT = 1000;
 
     public MainMenuScreen(ControllerView game){
         this.game = game;
@@ -53,9 +51,9 @@ public class MainMenuScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
 
-        for(int i = 0; i<20 ; i++){
-            for(int j = 0; j<20; j++){
-                batch.draw(floor, i*30, j*30, 40, 40);
+        for(int i = 0; i<35 ; i++){
+            for(int j = 0; j<35; j++){
+                batch.draw(floor, i*30, j*30, 30, 30);
             }
         }
         batch.draw(title, 0, 0, WIDTH,HEIGHT);
