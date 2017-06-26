@@ -161,19 +161,30 @@ public class MapHandler {
         ((PassingType)(t.getType())).setMap("hall");
     }
 
-    public void setUpHocs(){
+   public void setUpHocs(){
         GameMap m = maps.get("SUM");
-        Abilities ab = new Abilities("algo", 10, 10, 1);
+        //Abilities ab = new Abilities("algo", 10, 10, 1);
+        Abilities ab = new Abilities("algo", 10, 10,1);
         Type t1 = new Type("dePrueba");
         HeadOfChair hoc = new HeadOfChair("Agustin", 100, 200, 10, 10, new Position2D(10, 10),
                 t1, 1, 50, ab);
+        setUpHocParty(hoc);
         Tile t = m.get(new Position2D(18,18));
         ((CombatType)(t.getType())).setHoc(hoc);
-        t = m.get(new Position2D(18,1));
+        t = m.get(new Position2D(18,2));
         ((CombatType)(t.getType())).setHoc(hoc);
         t = m.get(new Position2D(1,12));
         ((CombatType)(t.getType())).setHoc(hoc);
 
+    }
+
+    public void setUpHocParty(HeadOfChair hoc){
+        Type t = new Type("Informático");
+        Position2D p = new Position2D(1,1);
+        Abilities ab = new Abilities("dsf", 10, 10,0);
+        Professor fd = new Professor("sdf", 100, 120, 10, 10, p, t, 2, 10.0f,ab);
+        hoc.addProfessorToParty(hoc);
+        hoc.addProfessorToParty(fd);
     }
 
 
