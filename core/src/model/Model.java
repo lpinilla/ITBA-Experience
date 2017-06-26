@@ -131,6 +131,10 @@ public class Model{
         throw new PersonNotFoundException("Person of given class was not found");
     }
 
+   public ArrayList<Person> getPersons(){
+        return persons;
+    }
+
     public boolean[] getBossWon(){
         return this.bossWon;
     }
@@ -197,7 +201,17 @@ public class Model{
             System.out.print("\n");
         }
     }
-
+  
+	public void setUpMainParty(){
+        Type t = new Type("Informático");
+        Position2D p = new Position2D(1,1);
+        Abilities ab = new Abilities("dsf", 10, 10,0);
+        Abilities rWp = new Abilities("Recover Will Power", 5, 100,0);
+        MainCharacter mc = (MainCharacter)(getPersons().get(0));
+        mc.addHeroToParty(mc);
+        Hero asd = new Hero("dsaf", 80, 90, 10, 10, p, t, ab);
+        mc.addHeroToParty(asd);
+    }
     public MapHandler getMapHandler(){
         return this.mh;
     }
