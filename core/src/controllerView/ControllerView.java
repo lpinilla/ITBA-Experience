@@ -1,11 +1,11 @@
 package controllerView;
 
-//import build.tools.javazic.Main;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import controllerView.map.ExploreScreen;
 import model.abilities.Abilities;
+import model.abilities.AbilityFactory;
 import model.persons.Enemy;
 import model.persons.HeadOfChair;
 import model.persons.MainCharacter;
@@ -17,6 +17,8 @@ import model.persons.Type;
 import controllerView.combat.CombatScreen;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
