@@ -96,7 +96,7 @@ public ExploreScreen (ControllerView controller, GameMap map, MainCharacter play
 	}
 
 	@Override
-	public void render (float delta) {
+	public void render (float delta){
 		timepassed += Gdx.graphics.getDeltaTime();
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -120,22 +120,15 @@ public ExploreScreen (ControllerView controller, GameMap map, MainCharacter play
 				*	setCombat(new Combat(player,hoc));
 				*/
 				HeadOfChair hoc = ((CombatType)(m.getMap().get(new Position2D((int) ((x +WIDTH/2) / WIDTH), (int) ((y+HEIGHT/4)/HEIGHT) )).getType())).getHoc();
-				player.addHeroToParty(player);
-				Type t = new Type("asd");
-				Position2D p = new Position2D(1,1);
-				Abilities ab = new Abilities("dsf", 10, 10,0);
-				Hero asd = new Hero("dsaf", 80, 90, 10, 10, p, t, ab);
-				player.addHeroToParty(asd);
-				Professor fd = new Professor("sdf", 100, 120, 10, 10, p, t, 2, 10.0f,ab);
-				hoc.addProfessorToParty(hoc);
-				hoc.addProfessorToParty(fd);
-				controller.setCombat(new Combat(player,hoc));
-				controller.setCombatScreen();
-
-				/*x= 5.0f*WIDTH;
-				y = 5.0f*HEIGHT;
-				m =controller.changeMap();
-				*/
+				if(hoc.isAlive()) {
+					player.setPosition(new Position2D((int) ((x + WIDTH / 2) / WIDTH), (int) ((y + HEIGHT / 4) / HEIGHT)));
+					controller.setCombat(new Combat(player, hoc));
+					controller.setCombatScreen();
+				}
+				else{
+					m.getMap().put(new Position2D((int) ((x +WIDTH/2) / WIDTH), (int) ((y+HEIGHT/4)/HEIGHT) ),
+							new Tile(true,false,new GroundType("Floor")));
+				}
 			}
 
 
@@ -220,8 +213,10 @@ public ExploreScreen (ControllerView controller, GameMap map, MainCharacter play
 				}
 			}
 			else if(Gdx.input.isKeyPressed(Input.Keys.S)) {
-				if(m.getMap().get(new Position2D((int) ((x + CHARACTER_WIDTH / 2) / WIDTH), (int) (y / HEIGHT))).isSleepable())
+				if(m.getMap().get(new Position2D((int) ((x + CHARACTER_WIDTH / 2) / WIDTH), (int) (y / HEIGHT))).isSleepable()) {
 					sleep = true;
+					controller.save();
+				}
 			}
 			if(Gdx.input.isKeyPressed(Input.Keys.UP)||Gdx.input.isKeyPressed(Input.Keys.DOWN)||Gdx.input.isKeyPressed(Input.Keys.LEFT)||Gdx.input.isKeyPressed(Input.Keys.RIGHT))
 				batch.draw((TextureRegion) (walks[walk].getKeyFrame(timepassed, true)), x, y, 52, 52);
@@ -263,3 +258,4 @@ public ExploreScreen (ControllerView controller, GameMap map, MainCharacter play
 		floor.dispose();
 	}
 }
+
