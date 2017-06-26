@@ -34,8 +34,7 @@ public class ControllerView extends Game{
         private Combat currentCombat;
         private ExploreScreen explore;
         private Map map;
-        //private static Game g;
-        //
+        private List<Abilities> listAbilities;
 
         public ControllerView(com.mygdx.game.Game game){
             this.game = game;
@@ -45,11 +44,13 @@ public class ControllerView extends Game{
     public void create () {
         batch = new SpriteBatch();
         game.setUpControllerView(this);
-        //Abilities ab = new Abilities("algo", 10, 10, 1);
         Abilities ab = new Abilities("algo", 10, 10,1);
         Type t1 = new Type("dePrueba");
         mc = (MainCharacter)(game.getModel().getPersons().get(0));
-        //mc = new MainCharacter("Agustin", 100, 100, 10, 10, new Position2D(5, 10), t1, ab);
+        listAbilities = new LinkedList<Abilities>();
+        listAbilities.add(AbilityFactory.createAbility(AbilityFactory.Ability.bolaDeSabiduria));
+        listAbilities.add(AbilityFactory.createAbility(AbilityFactory.Ability.aumentarVelocidadDeEscritura));
+        listAbilities.add(AbilityFactory.createAbility(AbilityFactory.Ability.cadaXHorasDeClase));
         setScreen(new MainMenuScreen(this));
 
     }
