@@ -11,6 +11,7 @@ import controllerView.map.Tile;
 import controllerView.map.Wall;
 import model.abilities.Abilities;
 import model.persons.HeadOfChair;
+import model.persons.Professor;
 import model.persons.Type;
 import java.util.HashMap;
 import java.util.ArrayList;
