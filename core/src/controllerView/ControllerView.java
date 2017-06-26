@@ -14,6 +14,7 @@ import model.map.GameMap;
 import model.map.MapHandler;
 import model.map.Position2D;
 import model.persons.Type;
+import model.persons.Hero;
 import controllerView.combat.CombatScreen;
 
 import java.io.IOException;
