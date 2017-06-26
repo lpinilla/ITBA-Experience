@@ -180,8 +180,10 @@ public ExploreScreen (ControllerView controller, GameMap map, MainCharacter play
 				}
 			}
 
-
-			if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+			if(Gdx.input.isKeyPressed(Input.Keys.Q)){
+				Gdx.app.exit();
+			}
+			else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 				walk = 0;
 				//System.out.println("x = " + (int)(x+CHARACTER_WIDTH/2)/WIDTH + "y = " + (int)((y+HEIGHT/2)/HEIGHT) +"value " + m.getMap().get(new Position2D((int) ((x +WIDTH/2) / WIDTH), (int) ((y/2)/ HEIGHT) + 1)) );
 				//System.out.println("map[10][19]= " + m.getMap().get(new Position2D(19, 10 )));
