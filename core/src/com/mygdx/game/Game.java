@@ -38,6 +38,8 @@ public class Game{
         this.model.loadMaps(new FileReader(mapsFile));
         this.model.generateMaps();
         this.bossWon = new boolean[3];
+        model.activatePersonFactory();
+        model.setUpMainParty();
     }
 
     public void setUpControllerView(ControllerView vc){
