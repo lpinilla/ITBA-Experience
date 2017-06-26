@@ -16,7 +16,7 @@ public class GameMap {
      * @param width number of tiles on a horizontal line
      */
     public GameMap(String name, int height, int width){
-        this.map = new HashMap<>();
+        this.map = new HashMap<Position2D, Tile>();
         this.name = name;
         this.height = height;
         this.width = width;
