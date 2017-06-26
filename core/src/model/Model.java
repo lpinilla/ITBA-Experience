@@ -2,6 +2,7 @@ package model;
 
 import controllerView.ControllerView;
 import model.abilities.Abilities;
+import model.abilities.AbilityFactory;
 import model.map.MapHandler;
 import model.map.Position2D;
 import model.persons.Enemy;
@@ -16,6 +17,7 @@ import model.persons.Type;
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.ArrayList;
 
@@ -84,20 +86,27 @@ public class Model{
 
     /**
      * for testing purpose, to check "activatePersonFactory"'s correct functionality
-     * @return
+     * @return An arrayList of Persons
      */
-    public ArrayList<Person> getCreatedCharacters(){
-        return persons;
-    }
 
     /**
      * Method to start the factory that creates all the Abilities
      */
-/*	public void activateAbilityFactory(){
-		AbilityFactory aFactory = new AbilityFactory();
-		aFactory.generateAbilities(abilities);
+	public void activateAbilityFactory(){
+        int i=0;
+        for(AbilityFactory.Ability a: AbilityFactory.Ability.values()) {
+            abilities.add(i, AbilityFactory.createAbility(a));
+            i += 1;
+        }
 	}
-*/
+
+    /**
+     * for testing purpose, to check "activateAbilityFactory"'s correct functionality
+     * @return an ArrayList of Abilities
+     */
+    public ArrayList<Abilities> getAbilities(){
+	    return abilities;
+    }
     /**
      * This method was created so that the MainCharacter and
      * the HeadOfChair could be added to their own partys

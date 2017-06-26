@@ -184,15 +184,10 @@ public class CombatTest {
 	}
 
 	@Test
-	public void NextTurnEnemyTest(){
-		combat.nextTurn();
-		assertEquals(combat.isPlayerTurn(), false);
-	}
-	@Test
 	public void NextTurnPlayerTest(){
 		combat.nextTurn();
 		combat.nextTurn();
-		assertEquals(combat.isPlayerTurn(), true);
+		assertEquals(true, combat.isPlayerTurn());
 	}
 	@Test
 	public void CombatEndedTest(){
