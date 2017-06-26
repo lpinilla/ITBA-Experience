@@ -85,11 +85,6 @@ public class Model{
     }
 
     /**
-     * for testing purpose, to check "activatePersonFactory"'s correct functionality
-     * @return An arrayList of Persons
-     */
-
-    /**
      * Method to start the factory that creates all the Abilities
      */
 	public void activateAbilityFactory(){
@@ -120,7 +115,7 @@ public class Model{
         }
     }
 
-    /*
+    /**
     * This method is an auxiliary method used by the method above
     * so that it can find a Person given its Class
     * @param objClass: class of the Person
@@ -145,11 +140,31 @@ public class Model{
         return persons;
     }
 
-    public boolean[] getBossWon(){
+   public boolean[] getBossWon(){
         return this.bossWon;
     }
 
-    /*
+   public void setBossWin(String enemyName){
+       if (enemyName.equals("María Laura Noni")){
+           this.getBossWon()[0]=true;
+       }else{
+           if(enemyName.equals("Alejandro Diaz")){
+               this.getBossWon()[1]=true;
+           }
+           else{
+               if(enemyName.equals("Santiago Bermudez")){
+                   this.getBossWon()[2]=true;
+               }else{
+                   throw new BossNotFoundException();
+               }
+
+           }
+       }
+   }
+
+
+
+    /**
     * Method that assigns the file where the Maps are stored
     * @param f, The FileReader given by the Game
     */
@@ -158,7 +173,7 @@ public class Model{
         this.br = new BufferedReader(mapsFile);
     }
 
-    /*
+    /**
     * Method that reads how many maps are in the file and calls
     * that many times a method to read a Map from the file
     */
@@ -176,7 +191,7 @@ public class Model{
         }
     }
 
-    /*
+    /**
     * Method that reads the map from the file and creates
     * the rawData of them and calls the MapHandler to create
     * the maps, finally it stores the rawData in the Map

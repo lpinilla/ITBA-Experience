@@ -13,6 +13,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertSame;
 
 public class GameTest {
     Game ng;
@@ -35,6 +37,11 @@ public class GameTest {
     @Test
     public void loadGameTest() throws IOException, ClassNotFoundException {
         ng.saveGame();
+        System.out.println(ng.getModel().getBossWon()[0]);
+        ng.getModel().setBossWin("María Laura Noni");
+        boolean[] oldBossWon = ng.getModel().getBossWon();
         Game.loadGame();
+        boolean[] newBossWon =ng.getModel().getBossWon();
+        //assertNotEquals(oldBossWon[0],newBossWon[0]);
     }
 }

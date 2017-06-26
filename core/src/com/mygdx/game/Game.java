@@ -32,7 +32,7 @@ public class Game{
         //System.out.println("Aca va la ruta:");
         //System.out.println(new File("").getAbsolutePath());
         //Try catch, no?
-        mapsFile = new File("assets/maps2.txt");
+        mapsFile = new File("maps2.txt");
         if(!mapsFile.exists()){
             throw new IOException("Game File Missing, Game Corrupted");
         }
@@ -43,14 +43,7 @@ public class Game{
         model.setUpMainParty();
     }
 
-    public void setUpControllerView(ControllerView vc){
-        this.vc = vc;
-        model.setUpViewController(vc);
-    }
 
-    public Model getModel(){
-        return model;
-    }
 /*hay que setear el viewcontroller en load
     public Game(MainCharacter mc, boolean[] bossWon, String currentMap) throws IOException{ //from Load game
         this.fw = null;
@@ -68,6 +61,16 @@ public class Game{
         this.model.generateMaps();
     }
 */
+
+    public void setUpControllerView(ControllerView vc){
+        this.vc = vc;
+        model.setUpViewController(vc);
+    }
+
+    public Model getModel(){
+        return model;
+    }
+
     public void saveGame() throws IOException{
         ObjectOutputStream file = null;
         try{
@@ -99,7 +102,7 @@ public class Game{
     public static void loadGame()throws IOException, ClassNotFoundException{
         ObjectInputStream in = new ObjectInputStream(
                 new BufferedInputStream(new FileInputStream(
-                        "./savedGame.txt")));
+                        "savedGame.txt")));
         boolean[] bossWon = new boolean[3];
         String currentMap = null;
         MainCharacter mc = null;
@@ -108,9 +111,10 @@ public class Game{
             mc = aux.readData(in, currentMap);
         }catch(IOException e){
             e.getMessage();
+        }finally {
+            in.close();
         }
-        in.close();
-       // Game g = new Game(mc, bossWon, currentMap); //se retorna?
+    //    Game g = new Game(mc, bossWon, currentMap); //se retorna?
     }
 
     private MainCharacter readData(ObjectInputStream in, String currentMap)
