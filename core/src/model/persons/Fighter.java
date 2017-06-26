@@ -44,7 +44,6 @@ public class Fighter extends Person implements Serializable {
         this.ability = ability;
     }
 
-
     public int getHP() {
         return hp;
     }

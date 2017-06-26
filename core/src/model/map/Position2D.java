@@ -3,9 +3,10 @@ package model.map;
 /**
  *@author: lpinilla
  */
+import java.io.Serializable;
 import java.lang.Math;
 
-public class Position2D {
+public class Position2D implements Serializable {
 
     private int x,y;
 

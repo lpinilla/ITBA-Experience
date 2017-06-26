@@ -1,14 +1,17 @@
 package tests.com.mygdx.game;
 
+/**
+ * @author: ividaurreta
+ */
+
 import com.mygdx.game.Game;
-import org.junit.Assert;
+import model.persons.MainCharacter;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
-
+import java.io.ObjectInputStream;
 import static org.junit.Assert.assertEquals;
 
 public class GameTest {
@@ -19,11 +22,19 @@ public class GameTest {
     }
 
     @Test
-    public void SaveGameTest() throws IOException {
+    public void SaveGameTest() throws IOException, ClassNotFoundException {
        ng.saveGame(); //saves in savedGame.txt
-        FileReader fr = new FileReader("savedGame.txt");
-        BufferedReader br = new BufferedReader(fr);
-    //    assertEquals(ng.getModel().getPersons().get(0).toString(), br.readLine());
+       ObjectInputStream in = new ObjectInputStream(
+               new BufferedInputStream(new FileInputStream(
+                       "savedGame.txt")));
+       assertEquals(ng.getModel().getPersons().get(0).getClass(),
+               ((MainCharacter)in.readObject()).getClass());
 
+    }
+
+    @Test
+    public void loadGameTest() throws IOException, ClassNotFoundException {
+        ng.saveGame();
+        Game.loadGame();
     }
 }
