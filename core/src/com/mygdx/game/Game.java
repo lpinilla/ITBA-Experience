@@ -31,7 +31,8 @@ public class Game{
         //this.vc.setUpModel(model);
         //System.out.println("Aca va la ruta:");
         //System.out.println(new File("").getAbsolutePath());
-        mapsFile = new File("maps2.txt");
+        //Try catch, no?
+        mapsFile = new File("assets/maps2.txt");
         if(!mapsFile.exists()){
             throw new IOException("Game File Missing, Game Corrupted");
         }
@@ -73,14 +74,15 @@ public class Game{
             file = new ObjectOutputStream(
                     new BufferedOutputStream(new FileOutputStream(
                             "./savedGame.txt")));
-            MainCharacter mc = (MainCharacter) this.model.getPersonByClass("MainCharacter",0);
+            MainCharacter mc = (MainCharacter) this.model.getPersonByClass
+                    (MainCharacter.class.toString(),0);
             file.writeObject(mc);
         }catch(IOException e){
             e.getMessage(); //cambiar
-        }
-        if(file != null) {
-            file.flush(); //necesario?
-            file.close();
+        }finally {
+            if (file != null) {
+                file.close();
+            }
         }
     }
 
