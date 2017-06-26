@@ -28,10 +28,8 @@ public class ControllerView extends Game{
 
         private com.mygdx.game.Game game;
         private SpriteBatch batch;
-        //public static final int WIDTH = 450;
-        //public static final int HEIGHT = 720;
-        public static final int WIDTH = 800;
-        public static final int HEIGHT = 800;
+        public static final int WIDTH = 1000;
+        public static final int HEIGHT = 1000;
         private MainCharacter mc;
         private Combat currentCombat;
         private ExploreScreen explore;
