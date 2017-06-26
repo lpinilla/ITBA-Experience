@@ -214,6 +214,7 @@ public ExploreScreen (ControllerView controller, GameMap map, MainCharacter play
 				if(m.getMap().get(new Position2D((int) ((x + CHARACTER_WIDTH / 2) / WIDTH), (int) (y / HEIGHT))).isSleepable()) {
 					sleep = true;
 					controller.healRecover();
+					controller.addAbilities();
 					//controller.save();
 				}
 			}
