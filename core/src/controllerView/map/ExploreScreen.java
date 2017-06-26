@@ -40,8 +40,6 @@ public class ExploreScreen implements Screen {
 	private Game game;
 	private MainCharacter player;
 	private GameMap m;
-	//private static final int GAME_WIDTH = 30*20;
-	//private static final int GAME_HEIGHT = 30*20;
 	private static final int GAME_WIDTH = 1000;
 	private static final int GAME_HEIGHT = 1000;
 	public static final int WIDTH = GAME_WIDTH/20;
