@@ -117,22 +117,18 @@ public class Combat {
     public void endCombat() {
         this.combatActive = false;
     }
-
+  
     public Boolean isItFinished(){
         this.stillAliveHero = false;
         this.stillAliveEnemy = false;
 
         for(Hero h: mc.getParty()){
-            if(h.getHP() > 0){
+            if(h.getCurrentHP() > 0){
                 this.stillAliveHero = true;
             }
         }
-        for(Enemy e: hoc.getParty()){
-            if(e.getHP() > 0){
-                this.stillAliveEnemy = true;
-            }
-        }
-        return (!this.stillAliveEnemy || !this.stillAliveHero);
+        stillAliveEnemy = hoc.isAlive();
+        return (!stillAliveEnemy  || !stillAliveHero);
     }
 
     public void machineAttack(){
