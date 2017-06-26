@@ -162,20 +162,27 @@ public class MapHandler {
         ((PassingType)(t.getType())).setMap("hall");
     }
 
-   public void setUpHocs(){
+     public void setUpHocs(){
         GameMap m = maps.get("SUM");
         //Abilities ab = new Abilities("algo", 10, 10, 1);
         Abilities ab = new Abilities("algo", 10, 10,1);
         Type t1 = new Type("dePrueba");
-        HeadOfChair hoc = new HeadOfChair("Agustin", 100, 200, 10, 10, new Position2D(10, 10),
-                t1, 1, 50, ab);
-        setUpHocParty(hoc);
+        //HeadOfChair hoc = new HeadOfChair("Agustin", 100, 200, 10, 10, new Position2D(10, 10),
+                //t1, 1, 50, ab);
+        HeadOfChair hoc1 = (HeadOfChair) PersonFactory.createPerson(PersonFactory.People.hoC1);
+        setUpHocParty(hoc1);
+
+       HeadOfChair hoc2 = (HeadOfChair) PersonFactory.createPerson(PersonFactory.People.hoC2);
+       setUpHocParty(hoc2);
+
+       HeadOfChair hoc3 = (HeadOfChair) PersonFactory.createPerson(PersonFactory.People.hoC3);
+       setUpHocParty(hoc3);
         Tile t = m.get(new Position2D(18,18));
-        ((CombatType)(t.getType())).setHoc(hoc);
+        ((CombatType)(t.getType())).setHoc(hoc1);
         t = m.get(new Position2D(18,2));
-        ((CombatType)(t.getType())).setHoc(hoc);
+        ((CombatType)(t.getType())).setHoc(hoc2);
         t = m.get(new Position2D(1,12));
-        ((CombatType)(t.getType())).setHoc(hoc);
+        ((CombatType)(t.getType())).setHoc(hoc3);
 
     }
 
