@@ -29,7 +29,6 @@ public class ExploreScreen implements Screen {
 	private Texture woodenfloor;
 	private Texture empty;
 	private Texture chair;
-	private Texture shelf;
 	private Texture table;
 	private Texture passingTile;
 	private Texture combatTile;
@@ -71,13 +70,12 @@ public ExploreScreen (ControllerView controller, GameMap map, MainCharacter play
 		batch = new SpriteBatch();
 		floor = new Texture("floor.jpg");
 		woodenfloor = new Texture("woodenFloor.png");
-		wall = new Texture("wall.jpg");
+		wall = new Texture("wall.png");
 		empty = new Texture("empty.jpg");
-		chair = new Texture("wall.jpg");
-		table = new Texture("wall.jpg");
-		shelf = new Texture("wall.jpg");
+		chair = new Texture("silla.png");
+		table = new Texture("mesa.png");
 		passingTile = new Texture("floor.jpg");
-		combatTile = new Texture("combatTile.jpg");
+		combatTile = new Texture("combatTile.png");
 		spriteSheet = TextureRegion.split(new Texture("character.png"),64,64);
 		walkSheet = new TextureRegion[4][9];
 		walks = new Animation[5];
@@ -174,10 +172,10 @@ public ExploreScreen (ControllerView controller, GameMap map, MainCharacter play
 						batch.draw(empty, i * WIDTH, j * HEIGHT, WIDTH, HEIGHT);
 					}
 					else if(t.getType().getName().equals("Chair")){
-						batch.draw(wall, i * WIDTH, j * HEIGHT, WIDTH, HEIGHT);
+						batch.draw(chair, i * WIDTH, j * HEIGHT, WIDTH, HEIGHT);
 					}
 					else if(t.getType().getName().equals("Table")){
-						batch.draw(wall, i * WIDTH, j * HEIGHT, WIDTH, HEIGHT);
+						batch.draw(table, i * WIDTH, j * HEIGHT, WIDTH, HEIGHT);
 					}
 					else
 						batch.draw(wall, i * WIDTH, j * HEIGHT, WIDTH, HEIGHT);
