@@ -104,9 +104,26 @@ public class ControllerView extends Game{
         return currentCombat;
     }
 
-    public void endCombat(){
-        //Boolean flag = false;
-        this.getCurrentCombat().endCombat();
+   public void healRecover(){
+        for(Hero h : mc.getParty()){
+            h.healCharacter(h.getHP());
+            h.modifyCurrentWillPower(h.getWillPower());
+        }
+    }
+    public void endCombat(boolean win){
+        if(win == true){
+            float exp = 0;
+            for(Enemy e: currentCombat.getHeadOfChair().getParty()){
+                exp += e.getRewardExperience();
+            }
+            for(Hero h: mc.getParty()){
+                System.out.println("Exp = " + exp);
+                h.addExp(exp);
+                System.out.println("Experience to next level = "+ h.getExpToNextLevel() + "level = " + h.getLevel());
+            }
+        }
+
+        getCurrentCombat().endCombat();
         // HeadOfChair hoc = this.getCurrentCombat().getHeadOfChair();
         /*if(currentCombat.winner()){
             for(Enemy e : hoc.getParty()){
@@ -123,6 +140,7 @@ public class ControllerView extends Game{
         }*/
         setExplorerScreen();
     }
+
 
   /*  public void machineTurn(){
         this.getCurrentCombat().machineAttack();
