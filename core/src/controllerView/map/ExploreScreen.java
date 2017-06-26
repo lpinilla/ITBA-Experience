@@ -45,7 +45,7 @@ public class ExploreScreen implements Screen {
 	public static final int WIDTH = GAME_WIDTH/20;
 	public static final int CHARACTER_WIDTH = 52;
 	private static final int HEIGHT = GAME_HEIGHT/20;
-	private static final float SPEED = 105;
+	private static final float SPEED = 705;
 	private float x;
 	private float y;
 	private float sleeptime;

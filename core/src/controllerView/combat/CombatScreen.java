@@ -75,11 +75,21 @@ public class CombatScreen implements Screen {
     private float turntime;
     private int auxXConstant;
     private int auxYConstant;
+    private float timer;
+    private float delay;
+    private GlyphLayout attackInfo;
+    private BitmapFont attackLog;
+    private boolean timerActive;
+    private boolean drawAttackInfo;
 
     public CombatScreen (ControllerView cont){
         this.cont = cont;
         timepassed = 0;
         turntime = 0;
+        timer = 0;
+        delay = 0;
+        attackInfo = null;
+        timerActive =  drawAttackInfo = false;
         batch = new SpriteBatch();
         this.mainCSprite = new Texture(
                 this.cont.getCurrentCombat().getMainCharacter().getName() + ".png");
@@ -214,7 +224,6 @@ public class CombatScreen implements Screen {
             if(Gdx.input.getX() >= (212.5f + auxXConstant) && Gdx.input.getX() <= (212.5f + auxXConstant + 192.5f)
                     && GAME_HEIGHT - Gdx.input.getY() >= (auxYConstant + 87.5f) && GAME_HEIGHT - Gdx.input.getY() <= (auxYConstant + 87.5f + 67.5f)){
                 if(Gdx.input.justTouched()){
-                    System.out.println("touched");
                     if (Gdx.input.isKeyPressed(Keys.NUM_1) &&
                             !this.cont.getCurrentCombat().getHeadOfChair().isKnockedOut()){
                         batch.draw(attack, 160, 430, 80, 80);
@@ -252,6 +261,19 @@ public class CombatScreen implements Screen {
             boolean win = cont.getCurrentCombat().winner();
                 cont.endCombat(win);
         }
+
+        if(timerActive) {
+            if (delay > timer) {
+                if(drawAttackInfo) {
+                    timer += Gdx.graphics.getDeltaTime();
+                    attackLog.draw(batch, attackInfo, 10 + auxXConstant, 3.5f * auxYConstant);
+                }
+            }else{
+                timerActive = false;
+                drawAttackInfo = false;
+            }
+        }
+
         BitmapFont characterTurn = new BitmapFont();
         GlyphLayout layoutCharTurn = null;
         int partyIndex;
@@ -364,6 +386,13 @@ public class CombatScreen implements Screen {
                 en.modifyCurrentWillPower(10);
             }
         }
+        timer = 0;
+        delay = Gdx.graphics.getDeltaTime() + 1.5f;
+        attackLog = new BitmapFont();
+        attackLog.getData().setScale(1f);
+        attackInfo = new GlyphLayout(attackLog, h.getName() + " used " +
+                h.getAbility().getName() + " on " + e.getName());
+        timerActive = true;
     }
 
     @Override
