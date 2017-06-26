@@ -97,6 +97,10 @@ public class Combat {
      */
     public void nextTurn() {
         this.playerTurn = !this.playerTurn;
+        if(!this.playerTurn){
+            this.machineAttack();
+            nextTurn();
+        }
     }
 
     /**
