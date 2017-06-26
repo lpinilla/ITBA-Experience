@@ -119,7 +119,19 @@ public class CombatScreen implements Screen {
         //if(cont.getCurrentCombat().getMainCharacter().getAbilities().contains()){
         batch.draw(buttonHab4, 200, 53, 105, 30);
         //}*/
-
+            /*public void drawingHabButtons(){
+        batch.draw(buttonFondo, 10, 10, 300, 80);
+        batch.draw(buttonHab1, 18, 13, 105, 30);
+        if(cont.getCurrentCombat().getMainCharacter().getAbilities().contains(cont.getListAbilities().get(0))){
+            batch.draw(buttonHab2, 200, 13, 105, 30);
+        }
+        if(cont.getCurrentCombat().getMainCharacter().getAbilities().contains(cont.getListAbilities().get(1))){
+            batch.draw(buttonHab3, 18, 53, 105, 30);
+        }
+        if(cont.getCurrentCombat().getMainCharacter().getAbilities().contains(cont.getListAbilities().get(2))){
+            batch.draw(buttonHab4, 200, 53, 105, 30);
+        }
+*/
 
         try{
             //System.out.println("Aca entro al if3: index= " + cont.getCurrentCombat().getMainCharacter().getPartyIndex());
