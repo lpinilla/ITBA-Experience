@@ -87,14 +87,12 @@ public class Fighter extends Person implements Serializable {
         }
     }
 
-    // TODO: Debería documentarlo?
     public void receiveDamage(int value) {
         if(value < 0)
             throw new InvalidValueException("El damage value no puede tener valor negativo.");
         modifyCurrentHP(-value);
     }
 
-    // TODO: Debería documentarlo?
     public void healCharacter(int value) {
         if(value < 0)
             throw new InvalidValueException("El heal value no puede tener valor negativo.");
