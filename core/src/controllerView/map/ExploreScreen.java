@@ -40,10 +40,10 @@ public class ExploreScreen implements Screen {
 	private Game game;
 	private MainCharacter player;
 	private GameMap m;
-	private static final int GAME_WIDTH = 30*20;
-	private static final int GAME_HEIGHT = 30*20;
-	//private static final int GAME_WIDTH = 1000;
-	//private static final int GAME_HEIGHT = 1000;
+	//private static final int GAME_WIDTH = 30*20;
+	//private static final int GAME_HEIGHT = 30*20;
+	private static final int GAME_WIDTH = 1000;
+	private static final int GAME_HEIGHT = 1000;
 	public static final int WIDTH = GAME_WIDTH/20;
 	public static final int CHARACTER_WIDTH = 52;
 	private static final int HEIGHT = GAME_HEIGHT/20;
@@ -76,12 +76,12 @@ public ExploreScreen (ControllerView controller, GameMap map, MainCharacter play
 		table = new Texture("mesa.png");
 		passingTile = new Texture("floor.jpg");
 		combatTile = new Texture("combatTile.png");
-		spriteSheet = TextureRegion.split(new Texture("character.png"),64,64);
-		walkSheet = new TextureRegion[4][9];
-		walks = new Animation[5];
+		spriteSheet = TextureRegion.split(new Texture("CharacterSpriteSheet.png"),32,32);
+		walkSheet = new TextureRegion[4][3];
+		walks = new Animation[4];
 		for(int i=0;i<4;i++){
-			for(int j=0;j<9;j++){
-				walkSheet[i][j] = spriteSheet[8+i][j];
+			for(int j=0;j<3;j++){
+				walkSheet[i][j] = spriteSheet[i][j];
 
 			}
 		}
