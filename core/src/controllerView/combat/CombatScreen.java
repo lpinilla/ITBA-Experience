@@ -283,8 +283,6 @@ public class CombatScreen implements Screen {
                 font = new BitmapFont();
                 GlyphLayout layoutHp = new GlyphLayout(font, "HP: "+ e.getCurrentHP() +"/" + e.getHP());
                 GlyphLayout layoutWp = new GlyphLayout(font, "WP: "+e.getCurrentWillPower()+"/" + e.getWillPower());
-                //GlyphLayout layoutPlayer = new GlyphLayout(font, "Player:" + cont.getCurrentCombat().getHeadOfChair().getParty().indexOf(e));
-                //font.draw(batch, layoutPlayer, 175 + i, 590);
                 if(e instanceof HeadOfChair){
                     font.draw(batch, layoutHp, 450+i, 555); // x 165 y 575
                     font.draw(batch, layoutWp, 450+i, 530); // x 165 y 550
@@ -309,7 +307,6 @@ public class CombatScreen implements Screen {
             font.draw(batch, layoutTurns, 170, 950);
             for(Abilities a : cont.getCurrentCombat().getMainCharacter().getAbilities()){
                 font = new BitmapFont();
-                //batch.draw(buttonHab1, 20, 12, buttonHab1.getWidth() * i, 30);
                 font.draw(batch, a.getName(), i * buttonHab1.getWidth() - 60, 30);
             }
         }
