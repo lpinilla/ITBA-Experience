@@ -5,7 +5,6 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import controllerView.ControllerView;
 import model.map.Map;
-import com.mygdx.game.Prueba;
 
 import java.io.IOException;
 
