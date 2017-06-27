@@ -220,7 +220,6 @@ public ExploreScreen (ControllerView controller, GameMap map, MainCharacter play
 			else
 				batch.draw(walkSheet[walk][0], x, y, 52, 52);
 		}
-		//batch.draw(floor, 0, 0);
 		batch.end();
 	}
 
