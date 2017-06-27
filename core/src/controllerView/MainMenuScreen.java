@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
- * Created by agustin on 31/05/17.
+ * Created by agustin, tdallas on 31/05/17.
  */
 public class MainMenuScreen implements Screen {
     private Texture exitActive;
