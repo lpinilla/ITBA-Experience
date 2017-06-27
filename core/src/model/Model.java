@@ -236,10 +236,8 @@ public class Model{
         Type t = new Type("Informático");
         Position2D p = new Position2D(1,1);
         Abilities ab = new Abilities("mateEnClase", 10, 10,0);
-        Abilities rWp = new Abilities("reglaDeLaCadena", 5, 100,0);
         MainCharacter mc = (MainCharacter)(getPersons().get(0));
         mc.addSpecialAbility(ab);
-        mc.addSpecialAbility(rWp);
         mc.addHeroToParty(mc);
         Hero asd = new Hero("Hero Boy", 80, 90, 10, 10, p, t, ab);
         mc.addHeroToParty(asd);
