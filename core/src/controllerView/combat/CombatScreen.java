@@ -262,18 +262,6 @@ public class CombatScreen implements Screen {
                 cont.endCombat(win);
         }
 
-        if(timerActive) {
-            if (delay > timer) {
-                if(drawAttackInfo) {
-                    timer += Gdx.graphics.getDeltaTime();
-                    attackLog.draw(batch, attackInfo, 10 + auxXConstant, 3.5f * auxYConstant);
-                }
-            }else{
-                timerActive = false;
-                drawAttackInfo = false;
-            }
-        }
-
         BitmapFont characterTurn = new BitmapFont();
         GlyphLayout layoutCharTurn = null;
         int partyIndex;
@@ -386,14 +374,6 @@ public class CombatScreen implements Screen {
                 en.modifyCurrentWillPower(10);
             }
         }
-        timer = 0;
-        delay = Gdx.graphics.getDeltaTime() + 1.5f;
-        attackLog = new BitmapFont();
-        attackLog.getData().setScale(1f);
-        attackInfo = new GlyphLayout(attackLog, h.getName() + " used " +
-                h.getAbility().getName() + " on " + e.getName());
-        timerActive = true;
-        drawAttackInfo = true;
     }
 
     @Override
