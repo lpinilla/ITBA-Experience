@@ -95,6 +95,14 @@ public class ControllerView extends Game{
     public void setCombatScreen(){
         setScreen(new CombatScreen(this));
     }
+    
+    public void setInfoScreen(){
+    	setScreen(new InfoScreen(this));
+    }
+    
+    public void setMenuScreen(){
+    	setScreen(new MainMenuScreen(this));
+    }
 
     public void save(){
         try {
