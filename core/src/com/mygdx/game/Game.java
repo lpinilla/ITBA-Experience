@@ -27,11 +27,6 @@ public class Game{
         this.fw = null;
         this.fr = null;
         this.model = new Model();
-        //this.model.setUpViewController(vc);
-        //this.vc.setUpModel(model);
-        //System.out.println("Aca va la ruta:");
-        //System.out.println(new File("").getAbsolutePath());
-        //Try catch, no?
         mapsFile = new File("maps2.txt");
         if(!mapsFile.exists()){
             throw new IOException("Game File Missing, Game Corrupted");
@@ -42,25 +37,6 @@ public class Game{
         model.activatePersonFactory();
         model.setUpMainParty();
     }
-
-
-/*hay que setear el viewcontroller en load
-    public Game(MainCharacter mc, boolean[] bossWon, String currentMap) throws IOException{ //from Load game
-        this.fw = null;
-        this.fr = null;
-        this.model = new Model(mc, bossWon, currentMap);
-        //this.vc = new ControllerView();
-        //this.model.setUpViewController(vc);
-        //this.vc.setUpModel(model);
-
-        mapsFile = new File("./maps2.txt");
-        if(!mapsFile.exists()){
-            throw new IOException("Game File Missing, Game Corrupted");
-        }
-        this.model.loadMaps(new FileReader(mapsFile));
-        this.model.generateMaps();
-    }
-*/
 
     public void setUpControllerView(ControllerView vc){
         this.vc = vc;
@@ -81,7 +57,7 @@ public class Game{
                     (MainCharacter.class.toString(),0);
             file.writeObject(mc);
         }catch(IOException e){
-            e.getMessage(); //cambiar
+            e.getMessage(); 
         }finally {
             if (file != null) {
                 file.close();
@@ -114,7 +90,6 @@ public class Game{
         }finally {
             in.close();
         }
-    //    Game g = new Game(mc, bossWon, currentMap); //se retorna?
     }
 
     private MainCharacter readData(ObjectInputStream in, String currentMap)
