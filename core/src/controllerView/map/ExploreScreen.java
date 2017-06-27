@@ -23,6 +23,10 @@ import model.persons.MainCharacter;
 import model.persons.Professor;
 import model.persons.Type;
 
+/**
+ * Created by agustin, tdallas on 31/05/17.
+ */
+
 public class ExploreScreen implements Screen {
 	private SpriteBatch batch;
 	private Texture floor;
