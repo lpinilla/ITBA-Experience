@@ -214,7 +214,6 @@ public class Model{
             }
             c = (char) br.read();
         }
-        //printMap(mapRawData,width,height);
        mh.createParticularMap(mapName, height, width, mapRawData);
         mapsRawData.put(mapName, mapRawData);
     }
@@ -223,15 +222,6 @@ public class Model{
         return this.mapsRawData;
     }
 
-    void printMap(Integer[][]map, int w, int h) {
-        for (int i = 0; i < h; i++) {
-            for (int j = 0; j < w; j++) {
-                System.out.print(map[i][j]);
-            }
-            System.out.print("\n");
-        }
-    }
-  
 	public void setUpMainParty(){
         Type t = new Type("Informático");
         Position2D p = new Position2D(1,1);
@@ -245,7 +235,6 @@ public class Model{
     public MapHandler getMapHandler(){
         return this.mh;
     }
-
 
 
 }
