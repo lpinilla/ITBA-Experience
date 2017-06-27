@@ -108,7 +108,7 @@ public class ControllerView extends Game{
         try {
             game.saveGame();
         } catch(IOException e){
-            e.getMessage(); //cambiar
+            e.getMessage();
         }
     }
 
