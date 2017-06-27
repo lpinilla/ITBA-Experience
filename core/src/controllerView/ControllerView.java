@@ -111,26 +111,9 @@ public class ControllerView extends Game{
             e.getMessage(); //cambiar
         }
     }
-       /*public void load(){
-        try {
 
-            game = game.loadGame();
-            //game.setUpControllerView(this);
-            System.out.println("Aca llego");
-            MapHandler mh = game.getModel().getMapHandler();
-            GameMap map = mh.getCurrentMap();
-            System.out.println("map = " + map.getName());
-            explore = new ExploreScreen(this,map,mc);
-           setScreen(explore);
-        } catch(Exception e){
-            e.getMessage(); //cambiar
-        }
-
-    }*/
     public void setCombat(Combat currentCombat){
-           // System.out.println("Aca esta el combate.\n");
         this.currentCombat = currentCombat;
-       // setScreen(new CombatScreen(this));
     }
 
     public Combat getCurrentCombat(){
@@ -155,7 +138,6 @@ public class ControllerView extends Game{
                 h.addExp(exp);
                 System.out.println("Experience to next level = " + h.getExpToNextLevel() + "level = " + h.getLevel());
             }
-            //newab = getCurrentCombat().getHeadOfChair().getAbility();
             if (getCurrentCombat().getHeadOfChair().getName().equals("Alejandro Diaz"))
                 getGame().getModel().getBossWon()[0] = true;
             else if (getCurrentCombat().getHeadOfChair().getName().equals("Maria Laura Noni"))
@@ -167,21 +149,7 @@ public class ControllerView extends Game{
 
 
         setExplorerScreen();
-        /*if(newab != null)
-            mc.addSpecialAbility(newab);
-        */
     }
-
-
-  /*  public void machineTurn(){
-        this.getCurrentCombat().machineAttack();
-        if(this.getCurrentCombat().getMainCharacter().isKnockedOut()){
-            this.getCurrentCombat().nextTurn();
-        }
-        if(currentCombat.isItFinished()){
-            this.endCombat();
-        }
-    }*/
 
     @Override
         public void render () {
