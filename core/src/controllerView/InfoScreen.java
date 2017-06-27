@@ -6,6 +6,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+
+/**
+ * Created by tdallas on 26/6/2017.
+ */
 public class InfoScreen implements Screen {
 	
 	private Texture info;
