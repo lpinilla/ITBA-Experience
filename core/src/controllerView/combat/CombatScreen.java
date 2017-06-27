@@ -40,17 +40,11 @@ import java.util.IllegalFormatWidthException;
 public class CombatScreen implements Screen {
     private SpriteBatch batch;
     private Texture background;
-    //private Animation walks [];
-    //private TextureRegion spriteSheet[][];
     private Texture buttonFleeInactive;
     private Texture buttonFleeActive;
     private Texture buttonHab1 = new Texture("habButton.png");
-    //private TextureRegion walkSheet[][];
     private float timepassed;
-    //private static final int GAME_WIDTH = 30*20;
-    //private static final int GAME_HEIGHT = 30*20;
     private static final int GAME_WIDTH = 1000;
-   // private static final int GAME_HEIGHT = 1000;
    private static final int GAME_HEIGHT = 1000;
 
     public static final int WIDTH = GAME_WIDTH/20;
@@ -104,21 +98,17 @@ public class CombatScreen implements Screen {
         buttonFleeActive = new Texture("fleeActiv.png");
         buttonFondo = new Texture("recuadro.png");
         if(this.cont.getCurrentCombat().getMainCharacter().getAbilities().size() > 0){
-            //buttonHab1 = new Texture("habButton.png");
             buttonHab1 = new Texture(
                     this.cont.getCurrentCombat().getMainCharacter().getAbilities().get(0).getName() + ".png");
 
         }if(this.cont.getCurrentCombat().getMainCharacter().getAbilities().size() > 1){
-            //buttonHab2 = new Texture("habButton.png");
             buttonHab2 = new Texture(
                     this.cont.getCurrentCombat().getMainCharacter().getAbilities().get(1).getName() + ".png");
         }if(this.cont.getCurrentCombat().getMainCharacter().getAbilities().size() > 2){
-            //buttonHab3 = new Texture("habButton.png");
             buttonHab3 = new Texture(
                     this.cont.getCurrentCombat().getMainCharacter().getAbilities().get(2).getName() + ".png");
         }
         if(this.cont.getCurrentCombat().getMainCharacter().getAbilities().size() > 3) {
-            //buttonHab4 = new Texture("habButton.png");
             buttonHab4 = new Texture(
                     this.cont.getCurrentCombat().getMainCharacter().getAbilities().get(3).getName() + ".png");
         }
@@ -130,13 +120,8 @@ public class CombatScreen implements Screen {
     public void drawingHabButtons(){
         auxXConstant = 500;
         auxYConstant = 100;
-        //System.out.println(cont.getCurrentCombat().getMainCharacter().getAbilities().size());
         batch.draw(buttonFondo, 10 + auxXConstant, 10 + auxYConstant, 400, 150);
-        /*if(Gdx.input.isKeyJustPressed(Keys.T)){
-            this.cont.getCurrentCombat().getMainCharacter().addSpecialAbility(
-                    AbilityFactory.createAbility(AbilityFactory.Ability.mateEnClase)
-            );
-        }*/
+
         if(cont.getCurrentCombat().getMainCharacter().getAbilities().size() > 0){
             batch.draw(buttonHab1, 15 + auxXConstant, 87.5f + auxYConstant, 192.5f, 67.5f);
         }
@@ -151,9 +136,7 @@ public class CombatScreen implements Screen {
         }
 
         try{
-            //System.out.println("Aca entro al if3: index= " + cont.getCurrentCombat().getMainCharacter().getPartyIndex());
 
-            //ButtonHab3 abajo izq
             if(Gdx.input.getX() >= (15 + auxXConstant) && Gdx.input.getX() <= (auxXConstant +192.5f)
                     && GAME_HEIGHT - Gdx.input.getY() >= (15 + auxYConstant) && GAME_HEIGHT - Gdx.input.getY() <=  (auxYConstant +67.5f)){
                 if(Gdx.input.justTouched()){
@@ -268,14 +251,7 @@ public class CombatScreen implements Screen {
             partyIndex = this.cont.getCurrentCombat().getMainCharacter().getPartyIndex();
             layoutCharTurn = new GlyphLayout(characterTurn, "Now Playing: " +
                     this.cont.getCurrentCombat().getMainCharacter().getParty().get(partyIndex).getName());
-        }/*else{
-            partyIndex = this.cont.getCurrentCombat().getHeadOfChar().getPartyIndex();
-            layoutCharTurn = new GlyphLayout(characterTurn,
-                    this.cont.getCurrentCombat().getMainCharacter().getParty().get(partyIndex).getName());
-        }*/
-        /*
-            It draws every hero alive
-        */
+        }
         int i = 0;
         for (Hero h : cont.getCurrentCombat().getMainCharacter().getParty()){
             if(!h.isKnockedOut()){
@@ -346,9 +322,6 @@ public class CombatScreen implements Screen {
             if(Gdx.input.isTouched()){
                 dispose();
                 cont.setExplorerScreen();
-//               	cont.setScreen(new ExploreScreen(this,map,new MainCharacter("Agustin",100,100,10,10,new Position2D(5,10))));
-//               cont.endCombat();
-//               cont.setScreen(new ExploreScreen(cont));
             }
         }
         else{
