@@ -84,8 +84,7 @@ public class MainMenuScreen implements Screen {
             if(Gdx.input.isTouched()){
                 dispose();
                 game.setExplorerScreen();
-              //  game.setCombatScreen();
-            }
+             }
         }
         else{
             batch.draw(playInactive, WIDTH /2 - BUTTONWIDTH / 2, 9*(HEIGHT/20), BUTTONWIDTH, BUTTONHEIGHT);
