@@ -31,7 +31,6 @@ import model.abilities.Abilities;
 import model.combat.Combat;
 import model.map.Position2D;
 import model.persons.*;
-import sun.applet.Main;
 
 import java.util.ArrayList;
 import java.util.IllegalFormatWidthException;
