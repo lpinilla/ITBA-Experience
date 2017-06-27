@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by agustin on 14/06/17.
+ * Created by agustin, tdallas on 14/06/17.
  */
 public class ControllerView extends Game{
 
