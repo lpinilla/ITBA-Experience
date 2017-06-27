@@ -53,7 +53,6 @@ public class ExploreScreen implements Screen {
 	private int walk;
 	private ControllerView controller;
 
-//	public ExploreScreen (ControllerView controller, Map map) {
 public ExploreScreen (ControllerView controller, GameMap map, MainCharacter player) {
 		timepassed = 0;
 		sleeptime = 0;
@@ -83,7 +82,6 @@ public ExploreScreen (ControllerView controller, GameMap map, MainCharacter play
 
 			}
 		}
-		//arriba izquierda abajo derecha
 		walks[0] = new Animation(0.1f,walkSheet[0]);
 		walks[1] = new Animation(0.1f,walkSheet[1]);
 		walks[2] = new Animation(0.1f,walkSheet[2]);
@@ -111,10 +109,7 @@ public ExploreScreen (ControllerView controller, GameMap map, MainCharacter play
 		}
 		else {
 			if(m.getMap().get(new Position2D((int) ((x +WIDTH/2) / WIDTH), (int) ((y+HEIGHT/4)/HEIGHT) )).getType().getName().equals("Pelea")){
-				/*Aca es donde deberian llamar a setCombat y esta tile tiene un Hoc asi
-				*	hoc = m.getMap().get(new Position2D((int) ((x +WIDTH/2) / WIDTH), (int) ((y+HEIGHT/4)/HEIGHT) )).getHoc();
-				*	setCombat(new Combat(player,hoc));
-				*/
+
 				HeadOfChair hoc = ((CombatType)(m.getMap().get(new Position2D((int) ((x +WIDTH/2) / WIDTH), (int) ((y+HEIGHT/4)/HEIGHT) )).getType())).getHoc();
 				if(hoc.isAlive()) {
 					player.setPosition(new Position2D((int) ((x + WIDTH / 2) / WIDTH), (int) ((y + HEIGHT / 4) / HEIGHT)));
@@ -148,10 +143,10 @@ public ExploreScreen (ControllerView controller, GameMap map, MainCharacter play
 				controller.changeMap(mapName,pos);
 			}
 
-			//m2.draw(batch);
+
 			for (int i = 0; i < 20; i++) {
 				for (int j = 0; j < 20; j++) {
-					//Integer value = m.getMap().get(new Position2D(i, j));
+
 					Tile t = m.getMap().get(new Position2D(i, j));
 					if ( t.isWalkable()) {
 						if(t.isSleepable())
@@ -185,8 +180,6 @@ public ExploreScreen (ControllerView controller, GameMap map, MainCharacter play
 			}
 			else if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
 				walk = 0;
-				//System.out.println("x = " + (int)(x+CHARACTER_WIDTH/2)/WIDTH + "y = " + (int)((y+HEIGHT/2)/HEIGHT) +"value " + m.getMap().get(new Position2D((int) ((x +WIDTH/2) / WIDTH), (int) ((y/2)/ HEIGHT) + 1)) );
-				//System.out.println("map[10][19]= " + m.getMap().get(new Position2D(19, 10 )));
 				if(y<GAME_HEIGHT) {
 					if (m.getMap().get(new Position2D((int) ((x + CHARACTER_WIDTH / 2) / WIDTH), (int) (y / HEIGHT) + 1)).isWalkable())
 						y += SPEED * Gdx.graphics.getDeltaTime();
